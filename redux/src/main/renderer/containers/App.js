@@ -7,7 +7,7 @@ class App extends Component {
     render() {
         const { mocks, actions } = this.props;
         return (
-            <div>ho2
+            <div>
             </div>
         )
     }
