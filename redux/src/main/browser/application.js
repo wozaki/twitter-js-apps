@@ -20,6 +20,7 @@ export default class Application {
     onAuthenticationSucceeded({ accessToken, accessTokenSecret }) {
         this.accessToken = accessToken;
         this.accessTokenSecret = accessTokenSecret;
+        this.setTwitterCredentialToGlobal();
         this.openMainWindow();
     }
 
@@ -36,6 +37,16 @@ export default class Application {
 
     openMainWindow() {
         this.mainWindow = new MainWindow();
+    }
+
+    setTwitterCredentialToGlobal() {
+        const twitterCredential = {
+            consumerKey: this.consumerKey,
+            consumerSecret: this.consumerSecret,
+            accessToken: this.accessToken,
+            accessTokenSecret: this.accessTokenSecret
+        };
+        global.twitterCredential = twitterCredential;
     }
 
     registerApplicationCallbacks() {
