@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import account from './account';
+import timeline from './timeline';
 
 const rootReducer = combineReducers({
-  account
+  account,
+  timeline
 });
 
 export default rootReducer;
