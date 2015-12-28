@@ -55,13 +55,10 @@ export default class TwitterClient {
         });
     }
 
-    fetchHomeTimelineTweets({ screenName }) {
+    fetchHomeTimelineTweets() {
         return new Promise((resolve, reject) => {
             this._underlying().get(
                 'statuses/home_timeline',
-                {
-                    screen_name: screenName
-                },
                 (error, tweets, response) => {
                     resolve({tweets: tweets, response: response});
                 }
