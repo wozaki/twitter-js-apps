@@ -1,35 +1,32 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as MockActions from '../actions/mocks'
+import {fetchAccount} from '../actions/account'
+import {twitterClient} from '../registories/registory'
 
-class App extends Component {
+export default class App extends Component {
+    componentDidMount() {
+        const {dispatch} = this.props;
+        dispatch(fetchAccount());
+    }
+
     render() {
-        const { mocks, actions } = this.props;
         return (
-            <div>
+            <div className="application">
             </div>
-        )
+        );
     }
 }
 
 App.propTypes = {
-    actions: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
+    const {account} = state;
     return {
-        mocks: state.mocks
+        account: account
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(MockActions, dispatch)
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App)
+export default connect(mapStateToProps)(App)

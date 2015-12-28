@@ -1,1 +1,1 @@
-export const MOCK = 'MOCK';
+export const RECEIVED_ACCOUNT = 'RECEIVED_ACCUNT';

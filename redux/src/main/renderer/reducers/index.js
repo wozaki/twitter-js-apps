@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import mock from './mock';
+import account from './account';
 
 const rootReducer = combineReducers({
-  mock
+  account
 });
 
 export default rootReducer;
