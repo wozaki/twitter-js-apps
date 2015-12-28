@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {fetchAccount} from '../actions/account'
+import SideMenu from '../components/SideMenu';
 import {twitterClient} from '../registories/registory'
 
 export default class App extends Component {
@@ -13,6 +14,9 @@ export default class App extends Component {
     render() {
         return (
             <div className="application">
+                <SideMenu
+                    account={this.props.account}
+                    />
             </div>
         );
     }
