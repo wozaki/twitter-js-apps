@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tweets from './Tweets'
 import Header from './header'
+import Editor from './Editor'
 
 export default class Main extends Component {
 
@@ -15,6 +16,7 @@ export default class Main extends Component {
         return (
             <main className="main">
                 <Header title={this.title}/>
+                <Editor key="editor" />
                 <Tweets
                     tweets={homeTimeline}
                     />
