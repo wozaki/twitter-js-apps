@@ -1,36 +1,56 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {fetchAccount} from '../actions/account'
-import {fetchHomeTimeline} from '../actions/timeline'
-import SideMenu from '../components/SideMenu';
-import Main from '../components/Main';
+import * as accountActions from '../actions/account';
+import * as timelineActions from '../actions/timeline';
+import * as tweetActions from '../actions/tweet';
+
 import {twitterClient} from '../registories/registory'
+import SideMenu from '../components/SideMenu';
+import Tweets from '../components/Tweets'
+import Header from '../components/Header'
+import Editor from '../components/Editor'
 
 export default class App extends Component {
     componentDidMount() {
-        const {dispatch} = this.props;
-        dispatch(fetchAccount());
-        dispatch(fetchHomeTimeline());
+        const {fetchAccount, fetchHomeTimeline} = this.props.actions;
+
+        fetchAccount();
+        fetchHomeTimeline();
     }
 
     render() {
+        const {account, tweets} = this.props;
+        const {postTweet} = this.props.actions;
+
         return (
             <div className="application">
                 <SideMenu
-                    account={this.props.account}
+                    account={account}
                     />
-                <Main
-                    homeTimeline={this.props.tweets}
-                    />
+                <main className="main">
+                    <Header title={this.title}/>
+                    <Editor key="editor" onTweetSubmitted={postTweet}/>
+                    <Tweets
+                        tweets={tweets}
+                        />
+                </main>
             </div>
         );
     }
 }
 
 App.propTypes = {
-    dispatch: PropTypes.func.isRequired
+    actions: PropTypes.object.isRequired
 };
+
+function mapDispatchToProps(dispatch) {
+    const actions = _.assign({}, accountActions, timelineActions, tweetActions);
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    };
+}
 
 function mapStateToProps(state) {
     const {account, timeline} = state;
@@ -40,4 +60,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

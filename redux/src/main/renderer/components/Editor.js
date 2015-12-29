@@ -23,6 +23,11 @@ export default class Editor extends Component {
         }
     }
 
+    onTweetSubmitted() {
+        const {onTweetSubmitted} = this.props;
+        onTweetSubmitted(this.state.text);
+    }
+
     //TODO: 140字を超えたらviewを変更して伝える
     render() {
         return (
@@ -45,6 +50,4 @@ export default class Editor extends Component {
         );
     }
 
-    onTweetSubmitted() {
-    }
 }
