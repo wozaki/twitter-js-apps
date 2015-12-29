@@ -3,15 +3,13 @@ import {keyStringDetector} from '../registories/registory'
 
 export default class Editor extends Component {
 
-    const TWEET_LIMIT_LENGTH = 140;
-
     constructor(props) {
         super(props);
         this.state = {text: ''};
     }
 
     getRestTextLength() {
-        return this.TWEET_LIMIT_LENGTH - this.state.text.length;
+        return 140 - this.state.text.length;
     }
 
     onTextareaChanged(event) {
