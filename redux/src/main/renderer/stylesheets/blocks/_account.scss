@@ -1,0 +1,37 @@
+.account {
+  &-channel {
+    border-radius: 0 3px 3px 0;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 15px;
+    margin-right: 16px;
+    padding-left: 16px;
+
+    &:hover {
+      background-color: #3f4c5b;
+    }
+
+    &-selected,
+    &-selected:hover {
+      background-color: #6698c8;
+      color: #fff;
+    }
+  }
+
+  &-section {
+    padding-bottom: 16px;
+    padding-top: 16px;
+
+    &-heading {
+      color: #aaa;
+      margin-bottom: 4px;
+      padding-left: 16px;
+    }
+  }
+
+  &-screen-name {
+    color: #fff;
+    font-size: 20px;
+    padding: 16px;
+  }
+}

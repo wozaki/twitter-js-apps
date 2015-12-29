@@ -1,0 +1,18 @@
+@import "qiita-coat/scss/variables";
+
+body,
+html {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+body {
+  font-family: $font-family-sans-serif;
+  height: 100%;
+  line-height: 1.5;
+}
+
+img {
+  -webkit-user-drag: none;
+}

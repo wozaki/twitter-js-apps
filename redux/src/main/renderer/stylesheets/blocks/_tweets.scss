@@ -1,0 +1,112 @@
+@import "qiita-coat/scss/avatars";
+@import "../variables";
+
+.tweet {
+  display: flex;
+
+  & + & {
+    margin-top: 16px;
+  }
+
+  &-anchor {
+    color: $color-link;
+  }
+
+  &-avatar {
+    @include avatar;
+
+    &-child {
+      @include avatar-child;
+    }
+
+    &-parent {
+      @include avatar-parent;
+    }
+  }
+
+  &-body {
+    flex: 1;
+
+    &-container {
+      display: flex;
+    }
+  }
+
+  &-button {
+    &-favorite,
+    &-reply,
+    &-unfavorite {
+      color: #ddd;
+      cursor: pointer;
+      margin-left: 2px;
+      visibility: hidden;
+
+      .tweet:hover & {
+        visibility: inherit;
+      }
+    }
+
+    &-unfavorite {
+      color: orange;
+    }
+  }
+
+  &-datetime {
+    color: #aaa;
+    padding-left: 8px;
+
+    &-anchor {
+      text-decoration: none;
+    }
+  }
+
+  &-display-name {
+    font-weight: bold;
+  }
+
+  &-header {
+    display: flex;
+  }
+
+  &-image {
+    @include avatar;
+
+    &-container {
+      margin-top: 12px;
+      max-height: 300px;
+      overflow: hidden;
+    }
+  }
+
+  &-main {
+    flex: 1;
+  }
+
+  &-names {
+    margin-right: auto;
+  }
+
+  &-retweeter-display-name {
+    color: #aaa;
+    margin-left: 4px;
+  }
+
+  &-screen-name {
+    color: #aaa;
+    margin-left: 4px;
+  }
+
+  &-sub {
+    margin-right: 12px;
+  }
+}
+
+.tweets {
+  flex: 1;
+  margin-top: 16px;
+  overflow-y: scroll;
+
+  &-hidden {
+    display: none;
+  }
+}

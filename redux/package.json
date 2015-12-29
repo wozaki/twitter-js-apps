@@ -29,6 +29,8 @@
     "moment": "^2.10.6",
     "classnames": "^2.1.2",
     "eventemitter2": "^0.4.14",
+    "HTML5-Reset": "git://github.com/r7kamura/HTML5-Reset.git",
+    "qiita-coat": "git://github.com/increments/qiita-coat.git#d751df7df60d0dcd0c97b9dc05c8ab5da3db22e3",
     "react": "^0.14.3",
     "react-dom": "^0.14.0",
     "react-hot-loader": "^1.3.0",

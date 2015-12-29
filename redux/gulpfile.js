@@ -10,7 +10,7 @@ gulp.task(
   [
     'compile-es6',
     'compile-html',
-    //'compile-scss',
+    'compile-scss',
     'compile-symlink'
   ]
 );
