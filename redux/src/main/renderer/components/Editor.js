@@ -10,7 +10,7 @@ export default class Editor extends Component {
     }
 
     initialState() {
-        return {text: ''};
+        return {text: '', isExceededLimitCharLength: false};
     }
 
     getRestTextLength() {
@@ -18,7 +18,11 @@ export default class Editor extends Component {
     }
 
     onTextareaChanged(event) {
-        this.setState({text: event.target.value});
+        const text = event.target.value;
+        this.setState({text: text}, () => {
+            const isExceededLimitCharLength = this.getRestTextLength() < 0;
+            this.setState({isExceededLimitCharLength: isExceededLimitCharLength});
+        });
     }
 
     onTextareaKeyDown(event) {
@@ -33,6 +37,12 @@ export default class Editor extends Component {
 
         onTweetSubmitted(this.state.text);
         this.setState(this.initialState()); //TODO: tweetが成功したらテキストを初期化する
+    }
+
+    get editorCounterClassName() {
+        return this.state.isExceededLimitCharLength
+            ? "editor-counter-exceeded"
+            : "editor-counter";
     }
 
     //TODO: 140字を超えたらviewを変更して伝える
@@ -50,7 +60,7 @@ export default class Editor extends Component {
                     value={this.state.text}>
                 </textarea>
 
-                <div className="editor-counter">
+                <div className={this.editorCounterClassName}>
                     {this.getRestTextLength()}
                 </div>
             </div>
