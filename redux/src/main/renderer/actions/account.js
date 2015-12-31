@@ -6,12 +6,12 @@ export function fetchAccount() {
         twitterClient
             .fetchUser()
             .then(({ user }) => {
-                dispatch(receivedUser(user))
+                dispatch(receivedAccount(user));
             });
     }
 }
 
-function receivedUser(user) {
+function receivedAccount(user) {
     return {
         type: types.RECEIVED_ACCOUNT,
         user
