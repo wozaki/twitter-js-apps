@@ -14,10 +14,14 @@ import Editor from '../components/Editor'
 
 export default class App extends Component {
     componentDidMount() {
-        const {fetchAccount, fetchHomeTimeline} = this.props.actions;
+        const {fetchAccount, fetchHomeTimeline, receivedHomeTimeline} = this.props.actions;
 
         fetchAccount();
         fetchHomeTimeline();
+        twitterClient.subscribeUserStream({user:1}) //FIXME: apply user
+            .on('tweet', (data) => {
+                receivedHomeTimeline([data]);
+            })
     }
 
     render() {

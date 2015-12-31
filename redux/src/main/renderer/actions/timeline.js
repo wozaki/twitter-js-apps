@@ -12,7 +12,7 @@ export function fetchHomeTimeline() {
     }
 }
 
-function receivedHomeTimeline(tweets) {
+export function receivedHomeTimeline(tweets) {
     return {
         type: types.RECEIVED_HOME_TIMELINE,
         tweets
