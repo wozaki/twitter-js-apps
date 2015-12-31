@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as accountActions from '../actions/account';
+import * as appActions from '../actions/app';
 import * as timelineActions from '../actions/timeline';
 import * as tweetActions from '../actions/tweet';
 
@@ -14,14 +15,9 @@ import Editor from '../components/Editor'
 
 export default class App extends Component {
     componentDidMount() {
-        const {fetchAccount, fetchHomeTimeline, receivedHomeTimeline} = this.props.actions;
+        const {setUp} = this.props.actions;
 
-        fetchAccount();
-        fetchHomeTimeline();
-        twitterClient.subscribeUserStream({user:1}) //FIXME: apply user
-            .on('tweet', (data) => {
-                receivedHomeTimeline([data]);
-            })
+        setUp();
     }
 
     render() {
@@ -50,7 +46,7 @@ App.propTypes = {
 };
 
 function mapDispatchToProps(dispatch) {
-    const actions = _.assign({}, accountActions, timelineActions, tweetActions);
+    const actions = _.assign({}, appActions, tweetActions);
     return {
         actions: bindActionCreators(actions, dispatch)
     };

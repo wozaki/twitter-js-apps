@@ -11,7 +11,7 @@ export function fetchAccount() {
     }
 }
 
-function receivedAccount(user) {
+export function receivedAccount(user) {
     return {
         type: types.RECEIVED_ACCOUNT,
         user
