@@ -127,11 +127,11 @@ export default class TwitterClient {
         return eventEmitter;
     }
 
-    /*
-     * @param {Object} user User is used to detect retweet event
-     * @return {EventEmitter}
+    /**
+     * @param userId {string}
+     * @returns {EventEmitter}
      */
-    subscribeUserStream({ user }) {
+    subscribeUserStream(userId) {
         const eventEmitter = new EventEmitter();
         this._underlying().stream(
             'user',
@@ -143,7 +143,7 @@ export default class TwitterClient {
                     eventEmitter.emit('block', data);
                 });
                 stream.on('favorite', (data) => {
-                    if (data.source.id_str !== user.id_str) {
+                    if (data.source.id_str !== userId) {
                         eventEmitter.emit('favorite', data);
                     }
                 });
@@ -184,7 +184,7 @@ export default class TwitterClient {
                     } else if (data.delete) {
                         eventEmitter.emit('delete', data);
                     } else if (data.created_at) {
-                        if (data.retweeted_status && data.retweeted_status.user.id_str == user.id_str) {
+                        if (data.retweeted_status && data.retweeted_status.user.id_str == userId) {
                             eventEmitter.emit('retweet', data);
                         }
                         eventEmitter.emit('tweet', data);
