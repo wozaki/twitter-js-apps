@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {keyStringDetector} from '../registories/registory'
+import Tweet from '../../domain/models/Tweet'
 
 export default class Editor extends Component {
 
@@ -13,7 +14,7 @@ export default class Editor extends Component {
     }
 
     getRestTextLength() {
-        return 140 - this.state.text.length;
+        return Tweet.LIMIT_CHARA_LENGTH - this.state.text.length;
     }
 
     onTextareaChanged(event) {
