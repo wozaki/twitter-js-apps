@@ -5,7 +5,11 @@ export default class Editor extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {text: ''};
+        this.state = this.initialState();
+    }
+
+    initialState() {
+        return {text: ''};
     }
 
     getRestTextLength() {
@@ -25,7 +29,9 @@ export default class Editor extends Component {
 
     onTweetSubmitted() {
         const {onTweetSubmitted} = this.props;
+
         onTweetSubmitted(this.state.text);
+        this.setState(this.initialState()); //TODO: tweetが成功したらテキストを初期化する
     }
 
     //TODO: 140字を超えたらviewを変更して伝える
