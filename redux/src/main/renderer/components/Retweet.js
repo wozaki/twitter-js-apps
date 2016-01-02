@@ -1,18 +1,8 @@
 import React,{Component} from 'react'
-import FavoriteButton from './FavoriteButton'
 import Time from './Time'
 import TweetBody from './TweetBody'
-import UnfavoriteButton from './UnfavoriteButton'
 
 export default class Retweet extends Component {
-    get favoriteButton() {
-        const {tweet} = this.props;
-        if (tweet.favorited) {
-            return <UnfavoriteButton tweet={tweet.retweeted_status}/>;
-        } else {
-            return <FavoriteButton tweet={tweet.retweeted_status}/>;
-        }
-    }
 
     get url() {
         const {tweet} = this.props;

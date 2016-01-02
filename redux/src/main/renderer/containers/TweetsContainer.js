@@ -36,7 +36,9 @@ export default class TweetsContainer extends Component {
             return tweets.map((tweet) => {
                 if (tweet.retweeted_status) {
                     return <Retweet key={tweet.id_str}
-                                    tweet={tweet}/>
+                                    tweet={tweet}
+                                    favoriteButton={this.favoriteButton(tweet)}
+                        />
                 } else {
                     return <Tweet key={tweet.id_str}
                                   tweet={tweet}
