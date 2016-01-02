@@ -9,9 +9,9 @@ import * as tweetActions from '../actions/tweet';
 
 import {twitterClient} from '../registories/registory'
 import SideMenu from '../components/SideMenu';
-import Tweets from '../components/Tweets'
 import Header from '../components/Header'
 import Editor from '../components/Editor'
+import TweetsContainer from '../containers/TweetsContainer'
 
 export default class App extends Component {
     componentDidMount() {
@@ -21,7 +21,7 @@ export default class App extends Component {
     }
 
     render() {
-        const {account, tweets} = this.props;
+        const {account} = this.props;
         const {postTweet} = this.props.actions;
 
         return (
@@ -32,9 +32,7 @@ export default class App extends Component {
                 <main className="main">
                     <Header title={this.title}/>
                     <Editor key="editor" onTweetSubmitted={postTweet}/>
-                    <Tweets
-                        tweets={tweets}
-                        />
+                    <TweetsContainer />
                 </main>
             </div>
         );
@@ -53,10 +51,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const {account, timeline} = state;
+    const {account} = state;
     return {
-        account: account,
-        tweets: timeline
+        account: account
     }
 }
 
