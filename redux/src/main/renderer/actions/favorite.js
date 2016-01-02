@@ -1,6 +1,16 @@
 import * as types from '../constants/ActionTypes'
 import {twitterClient} from '../registories/registory.js'
 
+export function toggleFavorite(isFavoritedNow, tweetId) {
+    return dispatch => {
+        if (isFavoritedNow) {
+            dispatch(createFavorite(tweetId));
+        } else {
+            dispatch(destroyFavorite(tweetId));
+        }
+    }
+}
+
 export function createFavorite(tweetId) {
     return dispatch => {
         twitterClient
