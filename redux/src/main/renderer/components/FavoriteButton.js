@@ -2,7 +2,10 @@ import React,{Component} from 'react'
 
 export default class FavoriteButton extends Component {
     onFavoriteButtonClicked(event) {
+        const { onFavoriteButtonClicked } = this.props;
+
         event.preventDefault();
+        onFavoriteButtonClicked();
     }
 
     render() {
