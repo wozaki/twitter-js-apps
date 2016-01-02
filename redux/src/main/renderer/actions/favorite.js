@@ -23,7 +23,7 @@ export function destroyFavorite(tweetId) {
 
 function createdFavorite(tweet) {
     return {
-        type: types.CREATED_FAVORITED,
+        type: types.CREATED_FAVORITE,
         tweet
     };
 }
