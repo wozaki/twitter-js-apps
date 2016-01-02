@@ -11,7 +11,7 @@ export function toggleFavorite(isFavoritedNow, tweetId) {
     }
 }
 
-export function createFavorite(tweetId) {
+function createFavorite(tweetId) {
     return dispatch => {
         twitterClient
             .favorite({tweetId: tweetId})
@@ -21,7 +21,7 @@ export function createFavorite(tweetId) {
     }
 }
 
-export function destroyFavorite(tweetId) {
+function destroyFavorite(tweetId) {
     return dispatch => {
         twitterClient
             .unfavorite({tweetId: tweetId})
