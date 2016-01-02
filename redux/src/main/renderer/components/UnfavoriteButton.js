@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export default class UnfavoriteButton extends Component {
   onUnfavoriteButtonClicked(event) {
+    const { onUnfavoriteButtonClicked } = this.props;
+
+    event.preventDefault();
+    onUnfavoriteButtonClicked();
   }
 
   render() {

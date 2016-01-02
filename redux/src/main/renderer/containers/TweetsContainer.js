@@ -20,10 +20,10 @@ export default class TweetsContainer extends Component {
     }
 
     favoriteButton(tweet) {
-        const { createFavorite } = this.props.actions;
+        const { createFavorite, destroyFavorite } = this.props.actions;
 
         if (tweet.favorited) {
-            return <UnfavoriteButton/>;
+            return <UnfavoriteButton onUnfavoriteButtonClicked={() => destroyFavorite(tweet.id_str)}/>;
         } else {
             return <FavoriteButton onFavoriteButtonClicked={() => createFavorite(tweet.id_str)}/>;
         }
