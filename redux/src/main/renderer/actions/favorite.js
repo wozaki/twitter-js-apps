@@ -4,9 +4,9 @@ import {twitterClient} from '../registories/registory.js'
 export function toggleFavorite(isFavoritedNow, tweetId) {
     return dispatch => {
         if (isFavoritedNow) {
-            dispatch(createFavorite(tweetId));
-        } else {
             dispatch(destroyFavorite(tweetId));
+        } else {
+            dispatch(createFavorite(tweetId));
         }
     }
 }
