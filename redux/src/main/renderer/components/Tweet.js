@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
-import FavoriteButton from './FavoriteButton.js'
 import TweetBody from './TweetBody'
 import Time from './Time'
-import UnfavoriteButton from './UnfavoriteButton.js'
 
 export default class Tweet extends Component {
-    get favoriteButton() {
-        if (this.props.tweet.favorited) {
-            return <UnfavoriteButton tweet={this.props.tweet}/>;
-        } else {
-            return <FavoriteButton tweet={this.props.tweet}/>;
-        }
-    }
-
     get url() {
         return `https://twitter.com/${this.props.tweet.user.screen_name}/status/${this.props.tweet.id_str}`;
     }
@@ -21,7 +11,7 @@ export default class Tweet extends Component {
     }
 
     render() {
-        const {tweet} = this.props;
+        const {tweet, favoriteButton} = this.props;
 
         return (
             <li className="tweet">
@@ -43,7 +33,7 @@ export default class Tweet extends Component {
                         <TweetBody tweet={tweet}/>
 
                         <div className="tweet-buttons">
-                            {this.favoriteButton}
+                            {favoriteButton}
                             <i className="fa fa-reply tweet-button-reply"/>
                         </div>
                     </div>

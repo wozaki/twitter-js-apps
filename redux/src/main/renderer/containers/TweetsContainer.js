@@ -3,9 +3,11 @@ import React, {Component, PropTypes} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as favoriteActions from '../actions/favorite';
+import FavoriteButton from '../components/FavoriteButton'
+import Retweet from '../components/Retweet'
 import Tweets from '../components/Tweets'
 import Tweet from '../components/Tweet'
-import Retweet from '../components/Retweet'
+import UnfavoriteButton from '../components/UnfavoriteButton'
 
 export default class TweetsContainer extends Component {
 
@@ -17,9 +19,18 @@ export default class TweetsContainer extends Component {
         )
     }
 
+    favoriteButton(tweet) {
+        const { createFavorite } = this.props.actions;
+
+        if (tweet.favorited) {
+            return <UnfavoriteButton/>;
+        } else {
+            return <FavoriteButton onFavoriteButtonClicked={() => createFavorite(tweet.id_str)}/>;
+        }
+    }
+
     renderTweets() {
         const {tweets} = this.props.tweets;
-        const { createFavorite } = this.props.actions;
 
         if (!_.isEmpty(tweets)) {
             return tweets.map((tweet) => {
@@ -29,7 +40,8 @@ export default class TweetsContainer extends Component {
                 } else {
                     return <Tweet key={tweet.id_str}
                                   tweet={tweet}
-                                  onFavoriteButtonClicked={() => createFavorite(tweet.id_str)}/>
+                                  favoriteButton={this.favoriteButton(tweet)}
+                        />
                 }
             });
         }
