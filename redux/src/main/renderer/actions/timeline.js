@@ -16,13 +16,10 @@ export function fetchHomeTimeline() {
  * @param {string} tweetId
  */
 export function fetchOldHomeTimeline(tweetId) {
-    console.log("fetchOldHomeTimeline");
-
     return dispatch => {
         twitterClient
             .fetchOldHomeTimelineTweets({maxId:tweetId})
             .then(({ tweets }) => {
-                console.log("fetchOldHomeTimeline", tweets);
                 dispatch(receivedOldHomeTimeline(tweets))
             });
     }
