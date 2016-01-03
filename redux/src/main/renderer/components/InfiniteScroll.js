@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 
-export default class Tweets extends Component {
+export default class InfiniteScroll extends Component {
 
     constructor(props) {
         super(props);
@@ -22,11 +22,11 @@ export default class Tweets extends Component {
     }
 
     render() {
-        const {children} = this.props;
+        const {children, className} = this.props;
 
         return (
             <div
-                className="tweets"
+                className={className}
                 onScroll={this.onScrolled.bind(this)}
                 >
                 {children}
@@ -47,6 +47,16 @@ export default class Tweets extends Component {
 
 }
 
-Tweets.propTypes = {
-    children: PropTypes.node
+InfiniteScroll.defaultProps = {
+    className: "infiniteScroll",
+    loadCompleted: false,
+    thresholdInPx: 200
+};
+
+InfiniteScroll.PropTypes = {
+    onLoad: React.PropTypes.func.isRequired,
+    children: PropTypes.node,
+    className: React.PropTypes.string,
+    loadCompleted: React.PropTypes.bool,
+    thresholdInPx: React.PropTypes.number
 };

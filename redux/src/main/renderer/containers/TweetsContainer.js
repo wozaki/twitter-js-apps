@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as favoriteActions from '../actions/favorite';
 import * as timelineActions from '../actions/timeline';
+import InfiniteScroll from '../components/InfiniteScroll'
 import Retweet from '../components/Retweet'
 import ToggleFavoriteButton from '../components/ToggleFavoriteButton'
-import Tweets from '../components/Tweets'
 import Tweet from '../components/Tweet'
 
 export default class TweetsContainer extends Component {
@@ -15,12 +15,12 @@ export default class TweetsContainer extends Component {
         const {isOldTimeline} = this.props.tweets;
 
         return (
-            <Tweets
+            <InfiniteScroll
+                className={"tweets"}
                 onLoad={this.onLoad.bind(this)}
-                loadCompleted={isOldTimeline}
-                thresholdInPx={100}>
+                loadCompleted={isOldTimeline}>
                 {this.renderTweets()}
-            </Tweets>
+            </InfiniteScroll>
         )
     }
 
