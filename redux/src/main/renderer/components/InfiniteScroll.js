@@ -27,7 +27,7 @@ export default class InfiniteScroll extends Component {
         return (
             <div
                 className={className}
-                onScroll={this.onScrolled.bind(this)}
+                onScroll={_.throttle(this.onScrolled.bind(this), 200)}
                 >
                 {children}
             </div>
