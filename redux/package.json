@@ -25,12 +25,14 @@
   "author": "Shun Ozaki <ozaki.shun5@gmail.com> (https://github.com/wozaki)",
   "license": "MIT",
   "dependencies": {
-    "font-awesome": "^4.4.0",
-    "lodash": "^3.10.1",
-    "moment": "^2.10.6",
+    "HTML5-Reset": "git://github.com/r7kamura/HTML5-Reset.git",
     "classnames": "^2.1.2",
     "eventemitter2": "^0.4.14",
-    "HTML5-Reset": "git://github.com/r7kamura/HTML5-Reset.git",
+    "font-awesome": "^4.4.0",
+    "lodash": "^3.10.1",
+    "material-ui": "^0.13.1",
+    "moment": "^2.10.6",
+    "node-twitter-api": "^1.6.0",
     "qiita-coat": "git://github.com/increments/qiita-coat.git#d751df7df60d0dcd0c97b9dc05c8ab5da3db22e3",
     "react": "^0.14.3",
     "react-dom": "^0.14.0",
@@ -38,10 +40,8 @@
     "react-redux": "^4.0.0",
     "redux": "^3.0.0",
     "redux-thunk": "^1.0.0",
-    "material-ui": "^0.13.1",
     "twitter": "^1.2.5",
-    "twitter-text": "^1.13.0",
-    "node-twitter-api": "^1.6.0"
+    "twitter-text": "^1.13.0"
   },
   "devDependencies": {
     "babel-core": "^5.6.18",
