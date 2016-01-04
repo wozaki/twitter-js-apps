@@ -20,7 +20,8 @@ export function fetchOldHomeTimeline(tweetId) {
         twitterClient
             .fetchOldHomeTimelineTweets({maxId:tweetId})
             .then(({ tweets }) => {
-                dispatch(receivedOldHomeTimeline(tweets))
+                const filteredOffsetTweet = tweets.filter(t => t.id_str != tweetId);
+                dispatch(receivedOldHomeTimeline(filteredOffsetTweet))
             });
     }
 }
