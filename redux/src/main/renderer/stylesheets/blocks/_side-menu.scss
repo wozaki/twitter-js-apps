@@ -3,4 +3,17 @@
   height: 100vh;
   overflow-y: scroll;
   width: 64px;
+
+  //TODO:centering
+  &-item {
+    margin-top: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
+
+    &-icon {
+      color: #ccc;
+      font-size: 2.5em;
+    }
+
+  }
 }

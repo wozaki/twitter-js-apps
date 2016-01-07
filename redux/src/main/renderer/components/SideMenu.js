@@ -11,6 +11,9 @@ export default class SideMenu extends Component {
                         <img className="accounts-item-avatar" src={account.profile_image_url}/>
                     </li>
                 </ul>
+                    <div className="sideMenu-item">
+                        <i className="fa fa-user sideMenu-item-icon"></i>
+                    </div>
             </div>
         );
     }
