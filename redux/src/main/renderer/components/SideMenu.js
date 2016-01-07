@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 
 export default class SideMenu extends Component {
     render() {
@@ -11,9 +12,17 @@ export default class SideMenu extends Component {
                         <img className="accounts-item-avatar" src={account.profile_image_url}/>
                     </li>
                 </ul>
+                <Link to="/">
+                    <div className="sideMenu-item">
+                        <i className="fa fa-home sideMenu-item-icon"></i>
+                    </div>
+                </Link>
+
+                <Link to="/account-info">
                     <div className="sideMenu-item">
                         <i className="fa fa-user sideMenu-item-icon"></i>
                     </div>
+                </Link>
             </div>
         );
     }
