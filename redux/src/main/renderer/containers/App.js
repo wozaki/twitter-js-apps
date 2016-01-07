@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react'
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as accountActions from '../actions/account';
@@ -9,9 +10,6 @@ import * as tweetActions from '../actions/tweet';
 
 import {twitterClient} from '../registories/registory'
 import SideMenu from '../components/SideMenu';
-import Header from '../components/Header'
-import Editor from '../components/Editor'
-import TweetsContainer from '../containers/TweetsContainer'
 
 export default class App extends Component {
     componentDidMount() {
@@ -21,26 +19,22 @@ export default class App extends Component {
     }
 
     render() {
-        const {account} = this.props;
-        const {postTweet} = this.props.actions;
+        const {account, children} = this.props;
 
         return (
             <div className="application">
                 <SideMenu
                     account={account}
                     />
-                <main className="main">
-                    <Header title={this.title}/>
-                    <Editor key="editor" onTweetSubmitted={postTweet}/>
-                    <TweetsContainer />
-                </main>
+                {children}
             </div>
         );
     }
 }
 
 App.propTypes = {
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    children: PropTypes.element.isRequired
 };
 
 function mapDispatchToProps(dispatch) {
