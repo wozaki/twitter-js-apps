@@ -1,5 +1,6 @@
 import { openExternal } from 'shell'
 import app from 'app'
+import {ipcMain} from 'electron'
 import ApplicationMenu from './application-menu'
 import AuthenticationWindow from './authentication-window'
 import BrowserWindow from 'browser-window'
@@ -28,6 +29,7 @@ export default class Application {
     onReady() {
         this.openAuthenticationWindow();
         this.setApplicationMenu();
+        this.subscribeRendererEvent();
     }
 
     openAuthenticationWindow() {
@@ -42,6 +44,12 @@ export default class Application {
 
     openNewTweetWindow() {
         new NewTweetWindow();
+    }
+
+    subscribeRendererEvent() {
+        ipcMain.on('open-new-tweet-window', () => {
+            this.openNewTweetWindow();
+        });
     }
 
     setTwitterCredentialToGlobal() {

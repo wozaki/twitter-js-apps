@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
+import {BrowserWindow} from 'remote'
+import {ipcRenderer} from 'electron'
 
 export default class SideMenu extends Component {
     render() {
@@ -22,7 +24,16 @@ export default class SideMenu extends Component {
                         <i className="fa fa-user sideMenu-item-icon"></i>
                     </div>
                 </Link>
+
+                <div className="sideMenu-item" onClick={this.onClickedNewTweet.bind(this)}>
+                    <i className="fa fa-pencil-square-o sideMenu-item-icon"></i>
+                </div>
             </div>
         );
     }
+
+    onClickedNewTweet() {
+        ipcRenderer.send('open-new-tweet-window');
+    }
+
 }
