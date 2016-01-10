@@ -30,6 +30,18 @@ export default class ApplicationMenu extends EventEmitter {
                         ]
                     },
                     {
+                        label: 'Tweet', //TODO: disable until login
+                        submenu: [
+                            {
+                                label: 'New Tweet',
+                                accelerator: 'Command+N',
+                                click() {
+                                    self.emit('new-tweet')
+                                }
+                            }
+                        ]
+                    },
+                    {
                         label: 'Edit',
                         submenu: [
                             {

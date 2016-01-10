@@ -5,6 +5,7 @@ import AuthenticationWindow from './authentication-window'
 import BrowserWindow from 'browser-window'
 import crashReporter from 'crash-reporter'
 import MainWindow from './main-window'
+import NewTweetWindow from './new-tweet-window'
 
 export default class Application {
 
@@ -39,6 +40,10 @@ export default class Application {
         this.mainWindow = new MainWindow();
     }
 
+    openNewTweetWindow() {
+        new NewTweetWindow();
+    }
+
     setTwitterCredentialToGlobal() {
         const twitterCredential = {
             consumerKey: this.consumerKey,
@@ -67,6 +72,8 @@ export default class Application {
             app.quit();
         }).on('reload', () => {
             this.mainWindow.window.reloadIgnoringCache();
+        }).on('new-tweet', () => {
+            this.openNewTweetWindow();
         }).on('search', () => {
             this.mainWindow.send('select-search-box');
         }).on('select-next-channel', () => {
