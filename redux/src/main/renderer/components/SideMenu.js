@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router'
-import {BrowserWindow} from 'remote'
 import {ipcRenderer} from 'electron'
+import {BrowserWindow} from 'remote'
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router'
 
 export default class SideMenu extends Component {
     render() {
-        const {account} = this.props;
+        const {account, onClickedNewTweet} = this.props;
 
         return (
             <div className="sideMenu">
@@ -25,15 +25,16 @@ export default class SideMenu extends Component {
                     </div>
                 </Link>
 
-                <div className="sideMenu-item" onClick={this.onClickedNewTweet.bind(this)}>
+                <div className="sideMenu-item" onClick={onClickedNewTweet}>
                     <i className="fa fa-pencil-square-o sideMenu-item-icon"></i>
                 </div>
             </div>
         );
     }
 
-    onClickedNewTweet() {
-        ipcRenderer.send('open-new-tweet-window');
-    }
-
 }
+
+SideMenu.propTypes = {
+    account: PropTypes.object.isRequired,
+    onClickedNewTweet: PropTypes.func.isRequired
+};
