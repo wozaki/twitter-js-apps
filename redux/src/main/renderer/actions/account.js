@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import twitterClient from '../registories/twitterClient'
+import twitterClient from '../registries/twitterClient'
 
 export function fetchAccount() {
     return dispatch => {

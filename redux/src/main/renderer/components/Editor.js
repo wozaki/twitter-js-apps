@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import keyStringDetector from '../registories/keyStringDetector'
+import keyStringDetector from '../registries/keyStringDetector'
 import Tweet from '../../domain/models/Tweet'
 
 export default class Editor extends Component {
