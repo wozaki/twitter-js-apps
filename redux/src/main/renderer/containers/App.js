@@ -7,8 +7,6 @@ import * as accountActions from '../actions/account';
 import * as appActions from '../actions/app';
 import * as timelineActions from '../actions/timeline';
 import * as tweetActions from '../actions/tweet';
-
-import {twitterClient} from '../registories/registory'
 import SideMenuContainer from '../containers/SideMenuContainer';
 
 export default class App extends Component {

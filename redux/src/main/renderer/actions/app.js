@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import {twitterClient} from '../registories/registory.js'
+import twitterClient from '../registories/twitterClient'
 import {receivedAccount} from './account'
 import {fetchHomeTimeline, receivedHomeTimeline} from './timeline'
 

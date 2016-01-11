@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import {twitterClient} from '../registories/registory.js'
+import twitterClient from '../registories/twitterClient'
 
 export function fetchHomeTimeline() {
     return dispatch => {
