@@ -3,19 +3,14 @@ import React, { Component, PropTypes } from 'react'
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as tweetActions from '../actions/tweet';
 import Header from '../components/Header'
-import Editor from '../components/Editor'
 import TweetsContainer from '../containers/TweetsContainer'
 
 export default class Home extends Component {
     render() {
-        const {postTweet} = this.props.actions;
-
         return (
             <main className="main">
                 <Header title={this.title}/>
-                <Editor key="editor" onTweetSubmitted={postTweet}/>
                 <TweetsContainer />
             </main>
         );
@@ -23,15 +18,8 @@ export default class Home extends Component {
 }
 
 Home.propTypes = {
-    actions: PropTypes.object.isRequired
+    account: PropTypes.object.isRequired
 };
-
-function mapDispatchToProps(dispatch) {
-    const actions = _.assign({}, tweetActions);
-    return {
-        actions: bindActionCreators(actions, dispatch)
-    };
-}
 
 function mapStateToProps(state) {
     const {account} = state;
@@ -40,4 +28,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps)(Home)

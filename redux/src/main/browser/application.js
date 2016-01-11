@@ -1,10 +1,12 @@
 import { openExternal } from 'shell'
 import app from 'app'
+import {ipcMain} from 'electron'
 import ApplicationMenu from './application-menu'
 import AuthenticationWindow from './authentication-window'
 import BrowserWindow from 'browser-window'
 import crashReporter from 'crash-reporter'
 import MainWindow from './main-window'
+import NewTweetWindow from './new-tweet-window'
 
 export default class Application {
 
@@ -27,6 +29,7 @@ export default class Application {
     onReady() {
         this.openAuthenticationWindow();
         this.setApplicationMenu();
+        this.subscribeRendererEvent();
     }
 
     openAuthenticationWindow() {
@@ -37,6 +40,16 @@ export default class Application {
 
     openMainWindow() {
         this.mainWindow = new MainWindow();
+    }
+
+    openNewTweetWindow() {
+        new NewTweetWindow();
+    }
+
+    subscribeRendererEvent() {
+        ipcMain.on('open-new-tweet-window', () => {
+            this.openNewTweetWindow();
+        });
     }
 
     setTwitterCredentialToGlobal() {
@@ -67,6 +80,8 @@ export default class Application {
             app.quit();
         }).on('reload', () => {
             this.mainWindow.window.reloadIgnoringCache();
+        }).on('new-tweet', () => {
+            this.openNewTweetWindow();
         }).on('search', () => {
             this.mainWindow.send('select-search-box');
         }).on('select-next-channel', () => {

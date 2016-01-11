@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import {ipcRenderer} from 'electron'
+import {BrowserWindow} from 'remote'
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router'
 
 export default class SideMenu extends Component {
     render() {
-        const {account} = this.props;
+        const {account, onClickedNewTweet} = this.props;
 
         return (
             <div className="sideMenu">
@@ -22,7 +24,17 @@ export default class SideMenu extends Component {
                         <i className="fa fa-user sideMenu-item-icon"></i>
                     </div>
                 </Link>
+
+                <div className="sideMenu-item" onClick={onClickedNewTweet}>
+                    <i className="fa fa-pencil-square-o sideMenu-item-icon"></i>
+                </div>
             </div>
         );
     }
+
 }
+
+SideMenu.propTypes = {
+    account: PropTypes.object.isRequired,
+    onClickedNewTweet: PropTypes.func.isRequired
+};

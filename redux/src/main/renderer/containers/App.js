@@ -9,7 +9,7 @@ import * as timelineActions from '../actions/timeline';
 import * as tweetActions from '../actions/tweet';
 
 import {twitterClient} from '../registories/registory'
-import SideMenu from '../components/SideMenu';
+import SideMenuContainer from '../containers/SideMenuContainer';
 
 export default class App extends Component {
     componentDidMount() {
@@ -19,13 +19,11 @@ export default class App extends Component {
     }
 
     render() {
-        const {account, children} = this.props;
+        const {children} = this.props;
 
         return (
             <div className="application">
-                <SideMenu
-                    account={account}
-                    />
+                <SideMenuContainer />
                 {children}
             </div>
         );
