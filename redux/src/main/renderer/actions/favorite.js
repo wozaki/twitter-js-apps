@@ -26,7 +26,7 @@ function destroyFavorite(tweetId) {
         twitterClient
             .unfavorite({tweetId: tweetId})
             .then(({ tweet }) => {
-                dispatch(createdFavorite(tweet));
+                dispatch(destroyedFavorite(tweet));
             });
     }
 }
