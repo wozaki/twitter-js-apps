@@ -1,5 +1,4 @@
 import {ipcRenderer} from 'electron'
-import {BrowserWindow} from 'remote'
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router'
 
