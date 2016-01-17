@@ -1,0 +1,8 @@
+sudo: false
+language: node_js
+node_js:
+  - "4"
+before_install: cd redux
+install: npm install
+script: npm test
+# TODO: use shell script
