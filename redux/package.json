@@ -49,6 +49,7 @@
     "babel-core": "^5.6.18",
     "babel-loader": "^5.1.4",
     "babel-plugin-react-transform": "^1.1.0",
+    "babel-plugin-rewire": "^0.1.22",
     "electron-prebuilt": "^0.36.1",
     "expect": "^1.13.4",
     "expect-jsx": "^2.2.2",
