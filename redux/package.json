@@ -32,6 +32,7 @@
     "font-awesome": "^4.4.0",
     "lodash": "^3.10.1",
     "material-ui": "^0.13.1",
+    "history": "^1.17.0",
     "moment": "^2.10.6",
     "node-twitter-api": "^1.6.0",
     "qiita-coat": "git://github.com/increments/qiita-coat.git#d751df7df60d0dcd0c97b9dc05c8ab5da3db22e3",
