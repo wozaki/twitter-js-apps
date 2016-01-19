@@ -33,6 +33,10 @@ export default class Editor extends Component {
     }
 
     onTweetSubmitted() {
+        if (this.state.isExceededLimitCharLength) {
+            return;
+        }
+
         const {onTweetSubmitted} = this.props;
 
         onTweetSubmitted(this.state.text);
