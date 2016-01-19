@@ -1,46 +1,46 @@
-import * as types from '../constants/ActionTypes'
-import twitterClient from '../registries/twitterClient'
+import * as types from '../constants/ActionTypes';
+import twitterClient from '../registries/twitterClient';
 
 export function toggleFavorite(isFavoritedNow, tweetId) {
-    return dispatch => {
-        if (isFavoritedNow) {
-            dispatch(destroyFavorite(tweetId));
-        } else {
-            dispatch(createFavorite(tweetId));
-        }
+  return dispatch => {
+    if (isFavoritedNow) {
+      dispatch(destroyFavorite(tweetId));
+    } else {
+      dispatch(createFavorite(tweetId));
     }
+  };
 }
 
 function createFavorite(tweetId) {
-    return dispatch => {
-        twitterClient
-            .favorite({tweetId: tweetId})
-            .then(({ tweet }) => {
-                dispatch(createdFavorite(tweet));
-            });
-    }
+  return dispatch => {
+    twitterClient
+      .favorite({ tweetId })
+      .then(({ tweet }) => {
+        dispatch(createdFavorite(tweet));
+      });
+  };
 }
 
 function destroyFavorite(tweetId) {
-    return dispatch => {
-        twitterClient
-            .unfavorite({tweetId: tweetId})
-            .then(({ tweet }) => {
-                dispatch(destroyedFavorite(tweet));
-            });
-    }
+  return dispatch => {
+    twitterClient
+      .unfavorite({ tweetId })
+      .then(({ tweet }) => {
+        dispatch(destroyedFavorite(tweet));
+      });
+  };
 }
 
 function createdFavorite(tweet) {
-    return {
-        type: types.CREATED_FAVORITE,
-        tweet
-    };
+  return {
+    type: types.CREATED_FAVORITE,
+    tweet
+  };
 }
 
 function destroyedFavorite(tweet) {
-    return {
-        type: types.DESTROYED_FAVORITE,
-        tweet
-    };
+  return {
+    type: types.DESTROYED_FAVORITE,
+    tweet
+  };
 }
