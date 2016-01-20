@@ -1,10 +1,10 @@
 import * as types from '../constants/ActionTypes';
-import twitterClient from '../registries/twitterClient';
+import {timelineUsecase} from '../registries/usecases';
 
 export function fetchHomeTimeline() {
   return dispatch => {
-    twitterClient
-      .fetchHomeTimelineTweets()
+    timelineUsecase
+      .fetchHomeTweets()
       .then(({ tweets }) => {
         dispatch(receivedHomeTimeline(tweets));
       });
@@ -16,8 +16,8 @@ export function fetchHomeTimeline() {
  */
 export function fetchOldHomeTimeline(tweetId) {
   return dispatch => {
-    twitterClient
-      .fetchOldHomeTimelineTweets({ maxId: tweetId })
+    timelineUsecase
+      .fetchHomeTweetsOlderThan(tweetId)
       .then(({ tweets }) => {
         const filteredOffsetTweet = tweets.filter(t => t.id_str !== tweetId);
         dispatch(receivedOldHomeTimeline(filteredOffsetTweet));

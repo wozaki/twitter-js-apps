@@ -55,38 +55,6 @@ export default class TwitterClient {
     });
   }
 
-  fetchHomeTimelineTweets() {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'statuses/home_timeline',
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
-  }
-
-  //TODO: domain層に移動した方がいいかも
-  fetchOldHomeTimelineTweets({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'statuses/home_timeline',
-        {
-          count: count,
-          since_id: sinceId,
-          max_id: maxId,
-          trim_user: trimUser,
-          exclude_replies: excludeReplies,
-          contributor_details: contributorDetails,
-          include_entities: includeEntities
-        },
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
-  }
-
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
     return new Promise((resolve, reject) => {
       this._underlying().get(
