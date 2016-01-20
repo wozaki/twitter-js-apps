@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "compile": "gulp compile",
-    "test": "NODE_ENV=test mocha src/test/**/*.spec.js --compilers js:babel-core/register --recursive",
+    "test": "NODE_ENV=test mocha src/test/ --compilers js:babel-core/register --recursive",
     "clean": "rm -rf packages/v0.0.1/twitter-redux-{darwin,linux,win32}-x64",
     "package": "electron-packager . twitter-redux --arch=x64 --out=packages/ --platform=darwin,linux,win32 --version=0.30.6 --ignore=packages/*",
     "release": "npm run package && npm run zip && npm run clean && npm run upload",
