@@ -19,8 +19,7 @@ export function fetchOldHomeTimeline(tweetId) {
     timelineUsecase
       .fetchHomeTweetsOlderThan(tweetId)
       .then(({ tweets }) => {
-        const filteredOffsetTweet = tweets.filter(t => t.id_str !== tweetId);
-        dispatch(receivedOldHomeTimeline(filteredOffsetTweet));
+        dispatch(receivedOldHomeTimeline(tweets));
       });
   };
 }
