@@ -21,10 +21,22 @@ export default class TwitterClient {
     return this.underlying;
   }
 
-  favorite({ tweetId }) {
+  favoritesCreate({ tweetId }) {
     return new Promise((resolve, reject) => {
       this._underlying().post(
         'favorites/create',
+        { id: tweetId },
+        (error, tweet, response) => {
+          resolve({ response, tweet });
+        }
+      );
+    });
+  }
+
+  favoritesDestroy({ tweetId }) {
+    return new Promise((resolve, reject) => {
+      this._underlying().post(
+        'favorites/destroy',
         { id: tweetId },
         (error, tweet, response) => {
           resolve({ response, tweet });
@@ -204,15 +216,4 @@ export default class TwitterClient {
     return eventEmitter;
   }
 
-  unfavorite({ tweetId }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().post(
-        'favorites/destroy',
-        { id: tweetId },
-        (error, tweet, response) => {
-          resolve({ response, tweet });
-        }
-      );
-    });
-  }
 }
