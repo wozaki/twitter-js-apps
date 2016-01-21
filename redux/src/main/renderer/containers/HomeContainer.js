@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import Header from '../components/Header'
 import TweetsContainer from '../containers/TweetsContainer'
 
-export default class Home extends Component {
+export default class HomeContainer extends Component {
     render() {
         return (
             <main className="main">
@@ -17,7 +17,7 @@ export default class Home extends Component {
     }
 }
 
-Home.propTypes = {
+HomeContainer.propTypes = {
     account: PropTypes.object.isRequired
 };
 
@@ -28,4 +28,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(HomeContainer)

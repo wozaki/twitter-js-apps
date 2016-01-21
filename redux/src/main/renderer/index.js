@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import AccountInfo from './containers/AccountInfo'
 import App from './containers/App'
-import Home from './containers/Home'
+import HomeContainer from './containers/HomeContainer.js'
 import configureStore from './store/configureStore'
 
 const store = configureStore();
@@ -14,7 +14,7 @@ render(
     <Provider store={store}>
         <Router>
             <Route path="/" component={App}>
-                <IndexRoute component={Home}/>
+                <IndexRoute component={HomeContainer}/>
                 <Route path='/account-info' component={AccountInfo}/>
             </Route>
         </Router>
