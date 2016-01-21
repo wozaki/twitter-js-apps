@@ -7,6 +7,11 @@ import Header from '../components/Header'
 import TweetsContainer from '../containers/TweetsContainer'
 
 export default class HomeContainer extends Component {
+
+    get title() {
+        return 'Home';
+    }
+
     render() {
         return (
             <main className="main">
