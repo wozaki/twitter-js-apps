@@ -3,37 +3,44 @@ import rewire from 'rewire'
 import sinon from 'sinon'
 import * as types from '../../main/renderer/constants/ActionTypes'
 import mockStore from '../action-helper'
+import FavoriteUsecase from '../../main/domain/usecases/FavoriteUsecase'
 
 let favoriteActions = rewire('../../main/renderer/actions/favorite');
 
 describe('favorite actions', () => {
-    function stubTwitterClient(stub) {
-        favoriteActions.__set__('twitterClient', stub);
-    }
+  function stubUsecase(stub) {
+    favoriteActions.__set__('favoriteUsecase', stub);
+  }
 
-    it('toggleFavorite should create DESTROYED_FAVORITE action if current status is favorite', (done) => {
-        const tweetClientStub = {
-            unfavorite: () => new Promise((resolve) => resolve({tweet: "123"}))
-        };
-        stubTwitterClient(tweetClientStub);
+  const fixtureTweet = { id_str: "123", text: "hoge" };
 
-        const expectedActions = [
-            {type: types.DESTROYED_FAVORITE, tweet: "123"}
-        ];
-        const store = mockStore({tweet: 0}, expectedActions, done);
-        store.dispatch(favoriteActions.toggleFavorite(true, "123"));
-    });
+  it('toggleFavorite should create DESTROYED_FAVORITE action if current status is favorite', (done) => {
+    const stubFavoriteUsecase = sinon.createStubInstance(FavoriteUsecase);
+    stubFavoriteUsecase
+      .remove
+      .withArgs(fixtureTweet.id_str)
+      .returns(new Promise((resolve) => resolve({ tweet: fixtureTweet })));
+    stubUsecase(stubFavoriteUsecase);
 
-    it('toggleFavorite should create DESTROYED_FAVORITE action if current status is unfavorite', (done) => {
-        const tweetClientStub = {
-            favorite: () => new Promise((resolve) => resolve({tweet: "123"}))
-        };
-        stubTwitterClient(tweetClientStub);
+    const expectedActions = [
+      { type: types.DESTROYED_FAVORITE, tweet: fixtureTweet }
+    ];
+    const store = mockStore({}, expectedActions, done);
+    store.dispatch(favoriteActions.toggleFavorite(true, fixtureTweet.id_str));
+  });
 
-        const expectedActions = [
-            {type: types.CREATED_FAVORITE, tweet: "123"}
-        ];
-        const store = mockStore({tweet: 0}, expectedActions, done);
-        store.dispatch(favoriteActions.toggleFavorite(false, "123"));
-    });
+  it('toggleFavorite should create DESTROYED_FAVORITE action if current status is unfavorite', (done) => {
+    const stubFavoriteUsecase = sinon.createStubInstance(FavoriteUsecase);
+    stubFavoriteUsecase
+      .add
+      .withArgs(fixtureTweet.id_str)
+      .returns(new Promise((resolve) => resolve({ tweet: fixtureTweet })));
+    stubUsecase(stubFavoriteUsecase);
+
+    const expectedActions = [
+      { type: types.CREATED_FAVORITE, tweet: fixtureTweet }
+    ];
+    const store = mockStore({ tweet: 0 }, expectedActions, done);
+    store.dispatch(favoriteActions.toggleFavorite(false, fixtureTweet.id_str));
+  });
 });

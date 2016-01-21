@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import twitterClient from '../registries/twitterClient';
+import {favoriteUsecase} from '../registries/usecases';
 
 export function toggleFavorite(isFavoritedNow, tweetId) {
   return dispatch => {
@@ -13,8 +13,8 @@ export function toggleFavorite(isFavoritedNow, tweetId) {
 
 function createFavorite(tweetId) {
   return dispatch => {
-    twitterClient
-      .favorite({ tweetId })
+    favoriteUsecase
+      .add(tweetId)
       .then(({ tweet }) => {
         dispatch(createdFavorite(tweet));
       });
@@ -23,8 +23,8 @@ function createFavorite(tweetId) {
 
 function destroyFavorite(tweetId) {
   return dispatch => {
-    twitterClient
-      .unfavorite({ tweetId })
+    favoriteUsecase
+      .remove(tweetId)
       .then(({ tweet }) => {
         dispatch(destroyedFavorite(tweet));
       });
