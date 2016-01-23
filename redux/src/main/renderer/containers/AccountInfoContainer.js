@@ -1,19 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import LinkItem from '../components/LinkItem';
 
 export default class AccountInfoContainer extends Component {
   render() {
     const { account } = this.props;
 
-    //TODO: to component
+    // TODO: to component
     return (
       <div className="main">
         <Header title={account.name}/>
-        <ul class="lists">
-          <li>Tweets {account.tweet_count}</li>
-          <li>Followers {account.followers_count}</li>
-          <li>Following {account.following_count}</li>
+        <ul className="lists">
+          <LinkItem label="Tweets" count={account.tweet_count} />
+          <LinkItem label="Followers" count={account.followers_count} />
+          <LinkItem label="Following" count={account.following_count} />
         </ul>
       </div>
     );
