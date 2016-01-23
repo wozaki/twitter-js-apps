@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class Header extends Component {
   render() {
@@ -14,3 +14,8 @@ export default class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  searchBox: PropTypes.element
+};
