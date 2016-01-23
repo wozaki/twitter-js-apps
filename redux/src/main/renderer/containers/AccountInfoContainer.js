@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import * as accountActions from '../actions/account';
 
 //TODO:
-export default class AccountInfo extends Component {
+export default class AccountInfoContainer extends Component {
     componentDidMount() {
     }
 
@@ -20,7 +20,7 @@ export default class AccountInfo extends Component {
     }
 }
 
-AccountInfo.propTypes = {
+AccountInfoContainer.propTypes = {
     actions: PropTypes.object.isRequired
 };
 
@@ -38,4 +38,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(AccountInfoContainer)
