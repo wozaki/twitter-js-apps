@@ -18,6 +18,11 @@ export default class SideMenu extends Component {
                         <i className="fa fa-home sideMenu-item-icon"></i>
                     </div>
                 </Link>
+                <Link to="/favorites">
+                    <div className="sideMenu-item">
+                        <i className="fa fa-star sideMenu-item-icon"></i>
+                    </div>
+                </Link>
                 <Link to="/account-info">
                     <div className="sideMenu-item">
                         <i className="fa fa-user sideMenu-item-icon"></i>

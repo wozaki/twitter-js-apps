@@ -45,6 +45,25 @@ export default class TwitterClient {
     });
   }
 
+  favoriteList({ userId, screenName, count, sinceTweetId, maxTweetId, includeEntities }) {
+    return new Promise((resolve, reject) => {
+      this._underlying().get(
+        'favorites/list',
+        {
+          user_id: userId,
+          screen_name: screenName,
+          count: count,
+          since_id: sinceTweetId,
+          max_id: maxTweetId,
+          include_entities: includeEntities
+        },
+        (error, tweets, response) => {
+          resolve({ response, tweets });
+        }
+      );
+    });
+  }
+
   fetchUser() {
     return new Promise((resolve, reject) => {
       this._underlying().get(

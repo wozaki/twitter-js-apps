@@ -1,19 +1,19 @@
 import {RECEIVED_HOME_TIMELINE, RECEIVED_OLD_HOME_TIMELINE, CREATED_FAVORITE, DESTROYED_FAVORITE} from '../constants/ActionTypes'
 
-const initialState = {tweets: [], isOldTimeline: false};
+const initialState = {tweets: [], isOld: false};
 
 export default function timeline(state = initialState, action) {
     switch (action.type) {
         case RECEIVED_HOME_TIMELINE:
             return {
                 tweets: action.tweets.concat(state.tweets),
-                isOldTimeline: false
+                isOld: false
             };
 
         case RECEIVED_OLD_HOME_TIMELINE:
             return {
                 tweets: state.tweets.concat(action.tweets),
-                isOldTimeline: true
+                isOld: true
             };
 
         case CREATED_FAVORITE:
@@ -30,7 +30,7 @@ export default function timeline(state = initialState, action) {
 
             return {
                 tweets: replacedTweets,
-                isOldTimeline: false
+                isOld: false
             };
 
         default:
