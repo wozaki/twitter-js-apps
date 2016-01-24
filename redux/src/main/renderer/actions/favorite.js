@@ -11,6 +11,16 @@ export function fetchMyFavorites(myId) {
   };
 }
 
+export function fetchMyFavoritesOlderThan(myId, tweetId) {
+  return dispatch => {
+    favoriteUsecase
+      .getListOlderThan(myId, tweetId)
+      .then(({ tweets }) => {
+        dispatch(receivedMyOldFavorites(tweets));
+      });
+  };
+}
+
 export function toggleFavorite(isFavoritedNow, tweetId) {
   return dispatch => {
     if (isFavoritedNow) {
@@ -58,6 +68,13 @@ function destroyedFavorite(tweet) {
 function receivedMyFavorites(tweets) {
   return {
     type: types.RECEIVED_MY_FAVORITES,
+    tweets
+  };
+}
+
+function receivedMyOldFavorites(tweets) {
+  return {
+    type: types.RECEIVED_MY_OLD_FAVORITES,
     tweets
   };
 }
