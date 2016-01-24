@@ -19,4 +19,13 @@ export default class FavoriteUsecase {
     return this.twitterClient.favoriteList({ userId: myId });
   }
 
+  getListOlderThan(myId, maxTweetId) {
+    return this.twitterClient
+      .favoriteList({ userId: myId, maxTweetId: maxTweetId })
+      .then(({ tweets }) => {
+        const filteredOffsetTweet = tweets.filter(t => t.id_str !== maxTweetId);
+        return { tweets: filteredOffsetTweet };
+      });
+  }
+
 }
