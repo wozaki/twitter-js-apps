@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import AccountInfo from './containers/AccountInfoContainer'
+import FavoritesContainer from './containers/FavoritesContainer'
 import App from './containers/App'
 import HomeContainer from './containers/HomeContainer.js'
 import configureStore from './store/configureStore'
@@ -16,6 +17,7 @@ render(
             <Route path="/" component={App}>
                 <IndexRoute component={HomeContainer}/>
                 <Route path='/account-info' component={AccountInfo}/>
+                <Route path='/favorites' component={FavoritesContainer}/>
             </Route>
         </Router>
     </Provider>,
