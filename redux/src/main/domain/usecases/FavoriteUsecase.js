@@ -15,4 +15,8 @@ export default class FavoriteUsecase {
     return this.twitterClient.favoritesDestroy({tweetId});
   }
 
+  getList(myId) {
+    return this.twitterClient.favoriteList({ userId: myId });
+  }
+
 }
