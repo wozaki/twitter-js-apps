@@ -1,7 +1,10 @@
+import _ from 'lodash'
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import Header from '../components/Header';
 import TweetsContainer from '../containers/TweetsContainer';
+import * as timelineActions from '../actions/timeline';
 
 export default class HomeContainer extends Component {
 
@@ -10,10 +13,16 @@ export default class HomeContainer extends Component {
   }
 
   render() {
+    const { fetchOldHomeTimeline } = this.props.actions;
+    const { tweets } = this.props;
+
     return (
       <main className="main">
         <Header title={this.title}/>
-        <TweetsContainer />
+        <TweetsContainer
+          tweets={tweets}
+          fetchOldTweet={(offsetTweetId) => fetchOldHomeTimeline(offsetTweetId)}
+          />
       </main>
     );
   }
@@ -24,10 +33,18 @@ HomeContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { account } = state;
+  const { account, timeline } = state;
   return {
-    account: account
+    account: account,
+    tweets: timeline
   };
 }
 
-export default connect(mapStateToProps)(HomeContainer);
+function mapDispatchToProps(dispatch) {
+  const actions = _.assign({}, timelineActions);
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
