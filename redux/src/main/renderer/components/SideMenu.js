@@ -7,30 +7,29 @@ export default class SideMenu extends Component {
 
     return (
       <div className="SideMenu">
-        <ul className="Accounts">
-          <li className="Accounts-item Accounts-item-selected">
-            <img className="Accounts-item-avatar" src={account.profile_image_url}/>
+        <ul className="SideMenu-items">
+          <li className="SideMenu-item">
+            <img className="SideMenu-item-avatar" src={account.profile_image_url}/>
+          </li>
+          <li className="SideMenu-item">
+            <Link to="/">
+              <i className="fa fa-home SideMenu-item-icon"></i>
+            </Link>
+          </li>
+          <li className="SideMenu-item">
+            <Link to="/favorites">
+              <i className="fa fa-star SideMenu-item-icon"></i>
+            </Link>
+          </li>
+          <li className="SideMenu-item">
+            <Link to="/account-info">
+              <i className="fa fa-user SideMenu-item-icon"></i>
+            </Link>
+          </li>
+          <li className="SideMenu-item" onClick={onClickedNewTweet}>
+            <i className="fa fa-pencil-square-o SideMenu-item-icon"></i>
           </li>
         </ul>
-        <Link to="/">
-          <div className="SideMenu-item">
-            <i className="fa fa-home SideMenu-item-icon"></i>
-          </div>
-        </Link>
-        <Link to="/favorites">
-          <div className="SideMenu-item">
-            <i className="fa fa-star SideMenu-item-icon"></i>
-          </div>
-        </Link>
-        <Link to="/account-info">
-          <div className="SideMenu-item">
-            <i className="fa fa-user SideMenu-item-icon"></i>
-          </div>
-        </Link>
-
-        <div className="SideMenu-item" onClick={onClickedNewTweet}>
-          <i className="fa fa-pencil-square-o SideMenu-item-icon"></i>
-        </div>
       </div>
     );
   }

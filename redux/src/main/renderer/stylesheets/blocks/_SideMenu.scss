@@ -2,17 +2,21 @@
   background-color: #202a33;
   height: 100vh;
   overflow-y: scroll;
-  width: 64px;
+  width: 70px;
 
-  //TODO:centering
+  &-items {
+    text-align: center;
+  }
+
   &-item {
-    margin-top: 16px;
-    padding-left: 12px;
-    padding-right: 12px;
-
+    padding: 12px 0;
     &-icon {
       color: #ccc;
-      font-size: 2.5em;
+      font-size: 2em;
+      max-width: 30px;
+    }
+    &-avatar {
+      border-radius: 3px;
     }
   }
 }
