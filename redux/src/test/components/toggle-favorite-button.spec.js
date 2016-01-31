@@ -53,7 +53,7 @@ describe('ToggleFavoriteButton', () => {
         const { element } = render(isFavorite, toggleFavorite);
 
         const expectedElement = (
-            <i className="fa fa-star tweet-button-unfavorite"
+            <i className="fa fa-star Tweet-button-unfavorite"
                onClick={toggleFavorite}/>
         );
 
@@ -67,7 +67,7 @@ describe('ToggleFavoriteButton', () => {
         const { element } = render(isFavorite, toggleFavorite);
 
         const expectedElement = (
-            <i className="fa fa-star tweet-button-favorite"
+            <i className="fa fa-star Tweet-button-favorite"
                onClick={toggleFavorite}/>
         );
 

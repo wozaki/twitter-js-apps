@@ -20,7 +20,7 @@ export default class App extends Component {
         const {children} = this.props;
 
         return (
-            <div className="application">
+            <div className="Application">
                 <SideMenuContainer />
                 {children}
             </div>

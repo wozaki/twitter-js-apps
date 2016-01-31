@@ -9,7 +9,7 @@ class Anchor extends React.Component {
 
     render() {
         return <a
-            className="tweet-anchor"
+            className="Tweet-anchor"
             dangerouslySetInnerHTML={{__html: this.props.text}}
             href={this.props.url}
             onClick={this.onClicked.bind(this)}
@@ -120,9 +120,9 @@ class Image extends React.Component {
 
     render() {
         return (
-            <div className="tweet-image-container">
+            <div className="Tweet-image-container">
                 <a href={this.props.tweetUrl} onClick={this.onClicked.bind(this)} tabIndex="-1">
-                    <img className="tweet-image" src={this.props.imageUrl}/>
+                    <img className="Tweet-image" src={this.props.imageUrl}/>
                 </a>
             </div>
         );
@@ -210,7 +210,7 @@ export default class TweetBody extends React.Component {
 
     render() {
         return (
-            <div className="tweet-body">
+            <div className="Tweet-body">
                 {this.getComponents()}
             </div>
         );

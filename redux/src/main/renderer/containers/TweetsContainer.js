@@ -15,7 +15,7 @@ export default class TweetsContainer extends Component {
 
     return (
       <InfiniteScroll
-        className={"tweets"}
+        className={"Tweets"}
         onLoad={this.onLoad.bind(this)}
         loadCompleted={isOld}>
         {this.renderTweets()}

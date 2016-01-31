@@ -27,7 +27,7 @@ export default class FavoritesContainer extends Component {
     const { fetchMyFavoritesOlderThan } = this.props.actions;
 
     return (
-      <div className="main">
+      <div className="Main">
         <Header title={this.title}/>
         <TweetsContainer
           tweets={favorites}

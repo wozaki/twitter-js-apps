@@ -29,8 +29,8 @@ export default class ToggleFavoriteButton extends Component {
     get buttonClassName() {
         const defaultNames = ["fa", "fa-star"];
         const appendName = this.isFavorited()
-            ? "tweet-button-unfavorite"
-            : "tweet-button-favorite";
+            ? "Tweet-button-unfavorite"
+            : "Tweet-button-favorite";
 
         return defaultNames.concat(appendName).join(" ");
     }
