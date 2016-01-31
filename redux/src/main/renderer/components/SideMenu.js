@@ -1,44 +1,42 @@
-import {ipcRenderer} from 'electron'
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 export default class SideMenu extends Component {
-    render() {
-        const {account, onClickedNewTweet} = this.props;
+  render() {
+    const { account, onClickedNewTweet } = this.props;
 
-        return (
-            <div className="sideMenu">
-                <ul className="accounts">
-                    <li className="accounts-item accounts-item-selected">
-                        <img className="accounts-item-avatar" src={account.profile_image_url}/>
-                    </li>
-                </ul>
-                <Link to="/">
-                    <div className="sideMenu-item">
-                        <i className="fa fa-home sideMenu-item-icon"></i>
-                    </div>
-                </Link>
-                <Link to="/favorites">
-                    <div className="sideMenu-item">
-                        <i className="fa fa-star sideMenu-item-icon"></i>
-                    </div>
-                </Link>
-                <Link to="/account-info">
-                    <div className="sideMenu-item">
-                        <i className="fa fa-user sideMenu-item-icon"></i>
-                    </div>
-                </Link>
-
-                <div className="sideMenu-item" onClick={onClickedNewTweet}>
-                    <i className="fa fa-pencil-square-o sideMenu-item-icon"></i>
-                </div>
-            </div>
-        );
-    }
+    return (
+      <div className="SideMenu">
+        <ul className="SideMenu-items">
+          <li className="SideMenu-item">
+            <img className="SideMenu-item-avatar" src={account.profile_image_url}/>
+          </li>
+          <li className="SideMenu-item">
+            <Link to="/">
+              <i className="fa fa-home SideMenu-item-icon"></i>
+            </Link>
+          </li>
+          <li className="SideMenu-item">
+            <Link to="/favorites">
+              <i className="fa fa-star SideMenu-item-icon"></i>
+            </Link>
+          </li>
+          <li className="SideMenu-item">
+            <Link to="/account-info">
+              <i className="fa fa-user SideMenu-item-icon"></i>
+            </Link>
+          </li>
+          <li className="SideMenu-item" onClick={onClickedNewTweet}>
+            <i className="fa fa-pencil-square-o SideMenu-item-icon"></i>
+          </li>
+        </ul>
+      </div>
+    );
+  }
 
 }
 
 SideMenu.propTypes = {
-    account: PropTypes.object.isRequired,
-    onClickedNewTweet: PropTypes.func.isRequired
+  account: PropTypes.object.isRequired,
+  onClickedNewTweet: PropTypes.func.isRequired
 };

@@ -1,12 +1,10 @@
 @import "qiita-coat/scss/avatars";
 @import "../variables";
 
-.tweet {
+.Tweet {
+  background-color: $color-component-background;
   display: flex;
-
-  & + & {
-    margin-top: 16px;
-  }
+  padding: 10px;
 
   &-anchor {
     color: $color-link;
@@ -101,9 +99,8 @@
   }
 }
 
-.tweets {
+.Tweets {
   flex: 1;
-  margin-top: 16px;
   overflow-y: scroll;
 
   &-hidden {

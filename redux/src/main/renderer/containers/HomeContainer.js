@@ -17,7 +17,7 @@ export default class HomeContainer extends Component {
     const { tweets } = this.props;
 
     return (
-      <main className="main">
+      <main className="Main">
         <Header title={this.title}/>
         <TweetsContainer
           tweets={tweets}

@@ -8,7 +8,16 @@ export default class LinkItem extends Component {
     // TODO: use LINK in react-router
     // TODO: separate label and count by element
     return (
-      <li>{label} {count}</li>
+      <li className="LinkItem">
+        <p className="LinkItem-label">
+          {label}
+        </p>
+
+        <div className="LinkItem-rightContents">
+          <span className="LinkItem-count">{count}</span>
+          <i className="fa fa-chevron-right"></i>
+        </div>
+      </li>
     );
   }
 }

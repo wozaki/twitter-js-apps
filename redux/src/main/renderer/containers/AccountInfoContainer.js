@@ -9,7 +9,7 @@ export default class AccountInfoContainer extends Component {
 
     // TODO: to component
     return (
-      <div className="main">
+      <div className="Main">
         <Header title={account.screen_name}/>
         <ul className="lists">
           <LinkItem label="Tweets" count={account.tweet_count} />

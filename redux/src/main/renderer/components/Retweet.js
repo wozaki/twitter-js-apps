@@ -17,38 +17,38 @@ export default class Retweet extends Component {
         const {tweet} = this.props;
 
         return (
-            <li className="tweet" key={tweet.id_str}>
-                <div className="tweet-sub">
-                    <div className="tweet-avatar-parent">
-                        <img className="tweet-avatar" src={tweet.retweeted_status.user.profile_image_url}
+            <li className="Tweet" key={tweet.id_str}>
+                <div className="Tweet-sub">
+                    <div className="Tweet-avatar-parent">
+                        <img className="Tweet-avatar" src={tweet.retweeted_status.user.profile_image_url}
                              height="48" width="48"/>
-                        <img className="tweet-avatar-child" src={tweet.user.profile_image_url} height="24"
+                        <img className="Tweet-avatar-child" src={tweet.user.profile_image_url} height="24"
                              width="24"/>
                     </div>
                 </div>
-                <div className="tweet-main">
-                    <div className="tweet-header">
-                        <div className="tweet-names">
-                            <span className="tweet-display-name">{tweet.retweeted_status.user.name}</span>
+                <div className="Tweet-main">
+                    <div className="Tweet-header">
+                        <div className="Tweet-names">
+                            <span className="Tweet-display-name">{tweet.retweeted_status.user.name}</span>
                             <span
-                                className="tweet-screen-name">@{tweet.retweeted_status.user.screen_name}</span>
-                            <span className="tweet-retweeter-display-name">
+                                className="Tweet-screen-name">@{tweet.retweeted_status.user.screen_name}</span>
+                            <span className="Tweet-retweeter-display-name">
                                 <i className="fa fa-retweet"></i>
                                 {' '}
                                 {tweet.user.name}
                             </span>
                         </div>
-                        <a className="tweet-datetime-anchor" href={this.url} onClick={this.onAnchorClicked.bind(this)}
+                        <a className="Tweet-datetime-anchor" href={this.url} onClick={this.onAnchorClicked.bind(this)}
                            tabIndex="-1">
-                            <Time className="tweet-datetime" time={tweet.retweeted_status.created_at}/>
+                            <Time className="Tweet-datetime" time={tweet.retweeted_status.created_at}/>
                         </a>
                     </div>
-                    <div className="tweet-body-container">
+                    <div className="Tweet-body-container">
                         <TweetBody tweet={tweet.retweeted_status}/>
 
-                        <div className="tweet-buttons">
+                        <div className="Tweet-buttons">
                             {this.favoriteButton}
-                            <i className="fa fa-reply tweet-button-reply"/>
+                            <i className="fa fa-reply Tweet-button-reply"/>
                         </div>
                     </div>
                 </div>

@@ -14,7 +14,7 @@ export default class Main extends Component {
         const {homeTimeline} = this.props;
 
         return (
-            <main className="main">
+            <main className="Main">
                 <Header title={this.title}/>
                 <Editor key="editor" />
                 <Tweets

@@ -45,19 +45,19 @@ export default class Editor extends Component {
 
     get editorCounterClassName() {
         return this.state.isExceededLimitCharLength
-            ? "editor-counter-exceeded"
-            : "editor-counter";
+            ? "Editor-counter-exceeded"
+            : "Editor-counter";
     }
 
     //TODO: 140字を超えたらviewを変更して伝える
     render() {
         return (
-            <div className="editor">
+            <div className="Editor">
                 <textarea
                     name="name"
                     rows="2"
                     cols="40"
-                    className="editor-textarea"
+                    className="Editor-textarea"
                     onChange={this.onTextareaChanged.bind(this)}
                     onKeyDown={this.onTextareaKeyDown.bind(this)}
                     placeholder="What's happening?"

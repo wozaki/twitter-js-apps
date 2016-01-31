@@ -14,10 +14,10 @@ export default class SearchBox extends Component {
 
   render() {
     return (
-      <form className="header-search-box" onSubmit={this.onSubmitted.bind(this)}>
-        <i className="fa fa-search header-search-icon "/>
+      <form className="Header-search-box" onSubmit={this.onSubmitted.bind(this)}>
+        <i className="fa fa-search Header-search-icon "/>
         <input
-          className="header-search-text-field"
+          className="Header-search-text-field"
           id="search-text-field"
           onChange={this.onSearchQueryStringChanged.bind(this)}
           placeholder="Search"

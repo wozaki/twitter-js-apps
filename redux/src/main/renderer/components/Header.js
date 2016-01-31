@@ -5,8 +5,8 @@ export default class Header extends Component {
     const { searchBox } = this.props;
 
     return (
-      <header className="header">
-        <h1 className="header-title">
+      <header className="Header">
+        <h1 className="Header-title">
           {this.props.title}
         </h1>
         {searchBox}
