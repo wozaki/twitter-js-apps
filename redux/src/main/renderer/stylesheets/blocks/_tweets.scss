@@ -2,11 +2,9 @@
 @import "../variables";
 
 .tweet {
+  background-color: $color-component-background;
   display: flex;
-
-  & + & {
-    margin-top: 16px;
-  }
+  padding: 10px;
 
   &-anchor {
     color: $color-link;
