@@ -19,9 +19,24 @@ export default class NewTweetContainer extends Component {
 
     // TODO: render account image and place
     // TODO: post image
+    // TODO: post by click TweetButton
 
     return (
-      <Editor key="editor" onTweetSubmitted={postTweet}/>
+      <div className="NewTweet">
+        <main className="NewTweet-main">
+          <aside className="NewTweet-main-left">
+            <img className="Tweet-avatar" src={account.profile_image_url}/>
+          </aside>
+          <div className="NewTweet-main-center">
+            <Editor key="editor" onTweetSubmitted={postTweet}/>
+          </div>
+        </main>
+        <footer className="NewTweet-footer">
+          <div className="NewTweet-footer-tweetButton">
+            Tweet
+          </div>
+        </footer>
+      </div>
     );
   }
 }

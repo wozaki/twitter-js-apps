@@ -1,10 +1,7 @@
 @import "../variables";
 
 .Editor {
-  border-radius: 3px;
-  border: solid 1px #ddd;
   display: flex;
-  padding: 4px 8px;
 
   &-counter {
     color: #aaa;
