@@ -4,22 +4,63 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as appActions from '../actions/app';
 import * as tweetActions from '../actions/tweet';
-import Editor from '../components/Editor';
+import keyStringDetector from '../registries/keyStringDetector';
+import Tweet from '../../domain/models/Tweet';
 
 export default class NewTweetContainer extends Component {
 
   componentWillMount() {
-    const {setUp} = this.props.actions;
+    const { setUp } = this.props.actions;
     setUp();
+
+    this.state = this.initialState();
+  }
+
+  onTextareaChanged(event) {
+    const text = event.target.value;
+    this.setState({ text: text }, () => {
+      const isExceededLimitCharLength = this.getRestTextLength() < 0;
+      this.setState({ isExceededLimitCharLength: isExceededLimitCharLength });
+    });
+  }
+
+  onTextareaKeyDown(event) {
+    if (keyStringDetector.detect(event) === 'Return') {
+      event.preventDefault();
+      this.onTweetSubmitted();
+    }
+  }
+
+  onTweetSubmitted() {
+    if (this.state.isExceededLimitCharLength) {
+      return;
+    }
+
+    const { postTweet } = this.props.actions;
+
+    postTweet(this.state.text);
+    this.setState(this.initialState()); // TODO: init text area if succeed to tweet
+  }
+
+  getRestTextLength() {
+    return Tweet.LIMIT_CHARA_LENGTH - this.state.text.length;
+  }
+
+  initialState() {
+    return { text: '', isExceededLimitCharLength: false };
+  }
+
+  get editorCounterClassName() {
+    return this.state.isExceededLimitCharLength
+      ? 'Editor-counter-exceeded'
+      : 'Editor-counter';
   }
 
   render() {
     const { account } = this.props;
-    const { postTweet } = this.props.actions;
 
-    // TODO: render account image and place
+    // TODO: render place
     // TODO: post image
-    // TODO: post by click TweetButton
 
     return (
       <div className="NewTweet">
@@ -28,11 +69,25 @@ export default class NewTweetContainer extends Component {
             <img className="Tweet-avatar" src={account.profile_image_url}/>
           </aside>
           <div className="NewTweet-main-center">
-            <Editor key="editor" onTweetSubmitted={postTweet}/>
+            <div className="Editor">
+              <textarea
+                name="name"
+                rows="2"
+                cols="40"
+                className="Editor-textarea"
+                onChange={this.onTextareaChanged.bind(this)}
+                onKeyDown={this.onTextareaKeyDown.bind(this)}
+                placeholder="What's happening?"
+                value={this.state.text}>
+              </textarea>
+              <div className={this.editorCounterClassName}>
+                {this.getRestTextLength()}
+              </div>
+            </div>
           </div>
         </main>
         <footer className="NewTweet-footer">
-          <div className="NewTweet-footer-tweetButton">
+          <div className="NewTweet-footer-tweetButton" onClick={this.onTweetSubmitted.bind(this)}>
             Tweet
           </div>
         </footer>
