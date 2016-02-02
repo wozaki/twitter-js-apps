@@ -51,10 +51,11 @@ export default class NewTweetContainer extends Component {
     return { text: '', isExceededLimitCharLength: false };
   }
 
-  get editorCounterClassName() {
-    return this.state.isExceededLimitCharLength
-      ? 'Editor-counter-exceeded'
-      : 'Editor-counter';
+  get tweetCounterClassName() {
+    return classNames({
+      'NewTweet-main-tweetCounter': true,
+      'is-overLimit': this.state.isExceededLimitCharLength
+    });
   }
 
   get tweetLabelClassName() {
@@ -74,25 +75,20 @@ export default class NewTweetContainer extends Component {
     return (
       <div className="NewTweet">
         <main className="NewTweet-main">
-          <aside className="NewTweet-main-left">
+          <div className="NewTweet-main-left">
             <img className="Tweet-avatar" src={account.profile_image_url}/>
-          </aside>
+          </div>
           <div className="NewTweet-main-center">
-            <div className="Editor">
-              <textarea
-                name="name"
-                rows="2"
-                cols="40"
-                className="Editor-textarea"
-                onChange={this.onTextareaChanged.bind(this)}
-                onKeyDown={this.onTextareaKeyDown.bind(this)}
-                placeholder="What's happening?"
-                value={this.state.text}>
-              </textarea>
-              <div className={this.editorCounterClassName}>
-                {this.getRestTextLength()}
-              </div>
-            </div>
+            <textarea
+              className="Editor-textarea"
+              onChange={this.onTextareaChanged.bind(this)}
+              onKeyDown={this.onTextareaKeyDown.bind(this)}
+              placeholder="What's happening?"
+              value={this.state.text}>
+            </textarea>
+          </div>
+          <div className={this.tweetCounterClassName}>
+            {this.getRestTextLength()}
           </div>
         </main>
         <footer className="NewTweet-footer">

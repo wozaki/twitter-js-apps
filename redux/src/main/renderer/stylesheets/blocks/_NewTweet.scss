@@ -11,11 +11,17 @@
     display: flex;
     flex: 1;
     padding: 10px;
-    &-left {
-      margin-right: 12px;
-    }
     &-center {
       flex: 1;
+      display: flex;
+      margin: 0 10px;
+    }
+
+    &-tweetCounter {
+      color: #aaa;
+      &.is-overLimit {
+        color: $color-caution;
+      }
     }
   }
 

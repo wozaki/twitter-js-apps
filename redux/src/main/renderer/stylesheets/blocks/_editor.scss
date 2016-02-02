@@ -3,13 +3,6 @@
 .Editor {
   display: flex;
 
-  &-counter {
-    color: #aaa;
-    &-exceeded {
-      color: $color-caution;
-    }
-  }
-
   &-textarea {
     border: 0;
     display: block;
