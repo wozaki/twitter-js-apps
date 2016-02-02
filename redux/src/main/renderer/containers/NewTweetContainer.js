@@ -87,7 +87,7 @@ export default class NewTweetContainer extends Component {
           </div>
         </main>
         <footer className="NewTweet-footer">
-          <div className="NewTweet-footer-tweetButton" onClick={this.onTweetSubmitted.bind(this)}>
+          <div className="NewTweet-footer-tweetLabel" onClick={this.onTweetSubmitted.bind(this)}>
             Tweet
           </div>
         </footer>
