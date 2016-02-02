@@ -30,6 +30,9 @@
       &.is-active {
         color: #6281FF;
       }
+      &.is-overLimit {
+        color: #FF4C4C;
+      }
     }
   }
 }

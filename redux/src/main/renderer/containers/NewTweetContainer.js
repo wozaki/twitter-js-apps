@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import classNames from 'classNames';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -56,6 +57,14 @@ export default class NewTweetContainer extends Component {
       : 'Editor-counter';
   }
 
+  get tweetLabelClassName() {
+    return classNames({
+      'NewTweet-footer-tweetLabel': true,
+      'is-active': this.state.text.length > 0,
+      'is-overLimit': this.state.isExceededLimitCharLength
+    });
+  }
+
   render() {
     const { account } = this.props;
 
@@ -87,7 +96,7 @@ export default class NewTweetContainer extends Component {
           </div>
         </main>
         <footer className="NewTweet-footer">
-          <div className="NewTweet-footer-tweetLabel" onClick={this.onTweetSubmitted.bind(this)}>
+          <div className={this.tweetLabelClassName} onClick={this.onTweetSubmitted.bind(this)}>
             Tweet
           </div>
         </footer>
