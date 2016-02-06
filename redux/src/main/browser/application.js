@@ -79,7 +79,7 @@ export default class Application {
         }).on('quit', () => {
             app.quit();
         }).on('reload', () => {
-            this.mainWindow.window.reloadIgnoringCache();
+            this.mainWindow.window.webContents.reloadIgnoringCache();
         }).on('new-tweet', () => {
             this.openNewTweetWindow();
         }).on('search', () => {
