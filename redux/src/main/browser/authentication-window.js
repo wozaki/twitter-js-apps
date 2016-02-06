@@ -22,15 +22,18 @@ export default class AuthenticationWindow extends EventEmitter {
     this.window.webContents.on('will-navigate', (event, authedUrl) => {
       let matched;
       if (matched = authedUrl.match(/\?oauth_token=([^&]*)&oauth_verifier=([^&]*)/)) {
-        twitter.getAccessToken(requestToken, requestTokenSecret, matched[2], (error, accessToken, accessTokenSecret) => {
-          this.emit(
-            'authentication-succeeded',
-            {
-              accessToken: accessToken,
-              accessTokenSecret: accessTokenSecret
-            }
-          );
-        });
+        twitter.getAccessToken(requestToken, requestTokenSecret, matched[2],
+          (error, accessToken, accessTokenSecret, { user_id, screen_name }) => {
+            this.emit(
+              'authentication-succeeded',
+              {
+                accessToken: accessToken,
+                accessTokenSecret: accessTokenSecret,
+                userId: user_id,
+                screenName: screen_name
+              }
+            );
+          });
         event.preventDefault();
         setImmediate(() => {
           this.window.close();
