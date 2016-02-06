@@ -5,17 +5,13 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import TweetsContainer from '../containers/TweetsContainer';
 import * as favoriteActions from '../actions/favorite';
+import my from '../registries/my';
 
 export default class FavoritesContainer extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    const { account } = this.props;
-    const nextAccount = nextProps.account;
-
-    if (account.id_str !== nextAccount.id_str) {
-      const { fetchMyFavorites } = this.props.actions;
-      fetchMyFavorites(nextAccount.id_str);
-    }
+  componentWillMount() {
+    const { fetchMyFavorites } = this.props.actions;
+    fetchMyFavorites(my.userId);
   }
 
   get title() {
@@ -23,7 +19,7 @@ export default class FavoritesContainer extends Component {
   }
 
   render() {
-    const { account, favorites } = this.props;
+    const { favorites } = this.props;
     const { fetchMyFavoritesOlderThan } = this.props.actions;
 
     return (
@@ -31,7 +27,7 @@ export default class FavoritesContainer extends Component {
         <Header title={this.title}/>
         <TweetsContainer
           tweets={favorites}
-          fetchOldTweet={(offsetTweetId) => fetchMyFavoritesOlderThan(account.id_str, offsetTweetId)}
+          fetchOldTweet={(offsetTweetId) => fetchMyFavoritesOlderThan(my.userId, offsetTweetId)}
         />
       </div>
     );
@@ -40,15 +36,13 @@ export default class FavoritesContainer extends Component {
 }
 
 FavoritesContainer.propTypes = {
-  account: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   favorites: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-  const { account, favorites } = state;
+  const { favorites } = state;
   return {
-    account: account,
     favorites: favorites
   };
 }

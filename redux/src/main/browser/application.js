@@ -19,10 +19,11 @@ export default class Application {
         this.mainWindow = null;
     }
 
-    onAuthenticationSucceeded({ accessToken, accessTokenSecret }) {
+    onAuthenticationSucceeded({ accessToken, accessTokenSecret, userId, screenName }) {
         this.accessToken = accessToken;
         this.accessTokenSecret = accessTokenSecret;
         this.setTwitterCredentialToGlobal();
+        this.setMyAccountToGlobal(userId, screenName);
         this.openMainWindow();
     }
 
@@ -52,6 +53,14 @@ export default class Application {
         });
     }
 
+    setMyAccountToGlobal(userId, screenName) {
+        const myAccount = {
+            userId: userId,
+            screenName: screenName
+        };
+        global.myAccount = myAccount;
+    }
+
     setTwitterCredentialToGlobal() {
         const twitterCredential = {
             consumerKey: this.consumerKey,
@@ -79,7 +88,7 @@ export default class Application {
         }).on('quit', () => {
             app.quit();
         }).on('reload', () => {
-            this.mainWindow.window.reloadIgnoringCache();
+            this.mainWindow.window.webContents.reloadIgnoringCache();
         }).on('new-tweet', () => {
             this.openNewTweetWindow();
         }).on('search', () => {
