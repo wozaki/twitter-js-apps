@@ -1,3 +1,3 @@
-import KeyStringDetector from '../../infrastructure/KeyStringDetector'
+import KeyStringDetector from 'key-string'
 
 export default new KeyStringDetector();
