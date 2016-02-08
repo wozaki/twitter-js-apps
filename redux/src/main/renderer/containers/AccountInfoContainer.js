@@ -8,11 +8,12 @@ export default class AccountInfoContainer extends Component {
     const { account } = this.props;
 
     // TODO: to component
+    // TODO: title, use my
     return (
       <div className="Main">
         <Header title={account.screen_name}/>
         <ul className="lists">
-          <LinkItem label="Tweets" count={account.tweet_count} />
+          <LinkItem label="Tweets" path={"/my-timeline"} count={account.tweet_count} />
           <LinkItem label="Followers" count={account.followers_count} />
           <LinkItem label="Following" count={account.following_count} />
         </ul>
