@@ -106,6 +106,28 @@ export default class TwitterClient {
     });
   }
 
+  statusesUserTimeline({ userId, screenName, sinceId, count, maxId, trimUser, excludeReplies, contributorDetails, includeRts }) {
+    return new Promise((resolve, reject) => {
+      this._underlying().get(
+        'statuses/user_timeline',
+        {
+          user_id: userId,
+          screen_name: screenName,
+          since_id: sinceId,
+          count: count,
+          max_id: maxId,
+          trim_user: trimUser,
+          exclude_replies: excludeReplies,
+          contributor_details: contributorDetails,
+          include_rts: includeRts
+        },
+        (error, tweets, response) => {
+          resolve({ tweets, response });
+        }
+      );
+    });
+  }
+
   fetchListTweets({ listId }) {
     return new Promise((resolve, reject) => {
       this._underlying().get(
