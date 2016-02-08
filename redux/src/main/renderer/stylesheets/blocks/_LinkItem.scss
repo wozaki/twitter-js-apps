@@ -3,8 +3,10 @@
 .LinkItem {
   background-color: $color-component-background;
   border-bottom: 1px solid #d8d8d8;
+  color: $color-font-base;
   display: table;
   height: 55px;
+  text-decoration: none;
   padding: 10px;
   width: 100%;
 
@@ -24,8 +26,4 @@
     margin: 0 10px;
   }
 
-}
-
-.LinkItem:last-child {
-  border-bottom: none;
 }
