@@ -21,6 +21,27 @@ export default class TwitterClient {
     return this.underlying;
   }
 
+  _requestWith(method) {
+    return new Promise((resolve, reject) => {
+      method((error, entities) => {
+          if (error !== null) {
+            reject(error);
+          } else {
+            resolve(entities);
+          }
+        }
+      );
+    });
+  }
+
+  _get(path, params) {
+    return this._requestWith((callback) => this._underlying().get(path, params, callback));
+  }
+
+  _post(path, params) {
+    return this._requestWith((callback) => this._underlying().post(path, params, callback));
+  }
+
   favoritesCreate({ tweetId }) {
     return new Promise((resolve, reject) => {
       this._underlying().post(
