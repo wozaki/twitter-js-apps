@@ -75,17 +75,6 @@ export default class TwitterClient {
     );
   }
 
-  fetchLists() {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'lists/list',
-        (error, lists, response) => {
-          resolve({ lists, response });
-        }
-      );
-    });
-  }
-
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
     return this._get(
       'statuses/home_timeline',
@@ -116,20 +105,6 @@ export default class TwitterClient {
       });
   }
 
-  fetchListTweets({ listId }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'lists/statuses',
-        {
-          list_id: listId
-        },
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
-  }
-
   statusesUpdate({ text }) {
     return this._post(
       'statuses/update',
@@ -137,39 +112,6 @@ export default class TwitterClient {
         status: text
       }
     );
-  }
-
-  searchTweets({ queryString }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'search/tweets',
-        {
-          q: queryString
-        },
-        (error, data, response) => {
-          resolve({ tweets: data.statuses, response });
-        }
-      );
-    });
-  }
-
-  /*
-   * @return {EventEmitter}
-   */
-  subscribeFilteredStream({ queryString }) {
-    const eventEmitter = new EventEmitter();
-    this._underlying().stream(
-      'statuses/filter',
-      {
-        track: queryString
-      },
-      (stream) => {
-        stream.on('data', (data) => {
-          eventEmitter.emit('tweet', data);
-        });
-      }
-    );
-    return eventEmitter;
   }
 
   /**
