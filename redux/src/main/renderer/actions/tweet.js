@@ -4,7 +4,7 @@ import twitterClient from '../registries/twitterClient';
 export function postTweet(text) {
   return dispatch => {
     twitterClient
-      .postTweet({ text })
+      .statusesUpdate({ text })
       .then(tweet => {
         dispatch(posted(tweet));
       });

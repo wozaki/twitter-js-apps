@@ -135,7 +135,7 @@ export default class TwitterClient {
     });
   }
 
-  postTweet({ text }) {
+  statusesUpdate({ text }) {
     return this._post(
       'statuses/update',
       {
