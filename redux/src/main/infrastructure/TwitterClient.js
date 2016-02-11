@@ -34,7 +34,7 @@ export default class TwitterClient {
     });
   }
 
-  _get(path, params) {
+  _get(path, params = {}) {
     return this._requestWith((callback) => this._underlying().get(path, params, callback));
   }
 
@@ -71,8 +71,7 @@ export default class TwitterClient {
 
   fetchUser() {
     return this._get(
-      'account/verify_credentials',
-      {}
+      'account/verify_credentials'
     );
   }
 
