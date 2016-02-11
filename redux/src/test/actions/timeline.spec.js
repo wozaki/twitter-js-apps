@@ -17,7 +17,7 @@ describe('timeline actions', () => {
     const stubTimelineUsecase = sinon.createStubInstance(TimelineUsecase);
     stubTimelineUsecase.fetchHomeTweets
       .withArgs()
-      .returns(new Promise((resolve) => resolve({ tweets: fixtureTweets })));
+      .returns(new Promise((resolve) => resolve(fixtureTweets)));
     stubUsecase(stubTimelineUsecase);
 
     const expectedActions = [
@@ -33,7 +33,7 @@ describe('timeline actions', () => {
     const stubTimelineUsecase = sinon.createStubInstance(TimelineUsecase);
     stubTimelineUsecase.fetchHomeTweetsOlderThan
       .withArgs(maxTweetId)
-      .returns(new Promise((resolve) => resolve({ tweets: fixtureTweets })));
+      .returns(new Promise((resolve) => resolve(fixtureTweets)));
     stubUsecase(stubTimelineUsecase);
 
     const expectedActions = [

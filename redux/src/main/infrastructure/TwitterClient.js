@@ -21,172 +21,97 @@ export default class TwitterClient {
     return this.underlying;
   }
 
-  favoritesCreate({ tweetId }) {
+  _requestWith(method) {
     return new Promise((resolve, reject) => {
-      this._underlying().post(
-        'favorites/create',
-        { id: tweetId },
-        (error, tweet, response) => {
-          resolve({ response, tweet });
+      method((error, entities) => {
+          if (error !== null) {
+            reject(error);
+          } else {
+            resolve(entities);
+          }
         }
       );
     });
+  }
+
+  _get(path, params = {}) {
+    return this._requestWith((callback) => this._underlying().get(path, params, callback));
+  }
+
+  _post(path, params) {
+    return this._requestWith((callback) => this._underlying().post(path, params, callback));
+  }
+
+  favoritesCreate({ tweetId }) {
+    return this._post(
+      'favorites/create',
+      { id: tweetId }
+    );
   }
 
   favoritesDestroy({ tweetId }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().post(
-        'favorites/destroy',
-        { id: tweetId },
-        (error, tweet, response) => {
-          resolve({ response, tweet });
-        }
-      );
-    });
+    return this._post(
+      'favorites/destroy',
+      { id: tweetId }
+    );
   }
 
   favoriteList({ userId, screenName, count, sinceTweetId, maxTweetId, includeEntities }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'favorites/list',
-        {
-          user_id: userId,
-          screen_name: screenName,
-          count: count,
-          since_id: sinceTweetId,
-          max_id: maxTweetId,
-          include_entities: includeEntities
-        },
-        (error, tweets, response) => {
-          resolve({ response, tweets });
-        }
-      );
-    });
+    return this._get(
+      'favorites/list',
+      {
+        user_id: userId,
+        screen_name: screenName,
+        count: count,
+        since_id: sinceTweetId,
+        max_id: maxTweetId,
+        include_entities: includeEntities
+      });
   }
 
   fetchUser() {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'account/verify_credentials',
-        (error, user, response) => {
-          resolve({ user, response });
-        }
-      );
-    });
-  }
-
-  fetchLists() {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'lists/list',
-        (error, lists, response) => {
-          resolve({ lists, response });
-        }
-      );
-    });
+    return this._get(
+      'account/verify_credentials'
+    );
   }
 
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'statuses/home_timeline',
-        {
-          count: count,
-          since_id: sinceId,
-          max_id: maxId,
-          trim_user: trimUser,
-          exclude_replies: excludeReplies,
-          contributor_details: contributorDetails,
-          include_entities: includeEntities
-        },
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
+    return this._get(
+      'statuses/home_timeline',
+      {
+        count: count,
+        since_id: sinceId,
+        max_id: maxId,
+        trim_user: trimUser,
+        exclude_replies: excludeReplies,
+        contributor_details: contributorDetails,
+        include_entities: includeEntities
+      });
   }
 
   statusesUserTimeline({ userId, screenName, sinceId, count, maxId, trimUser, excludeReplies, contributorDetails, includeRts }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'statuses/user_timeline',
-        {
-          user_id: userId,
-          screen_name: screenName,
-          since_id: sinceId,
-          count: count,
-          max_id: maxId,
-          trim_user: trimUser,
-          exclude_replies: excludeReplies,
-          contributor_details: contributorDetails,
-          include_rts: includeRts
-        },
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
-  }
-
-  fetchListTweets({ listId }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'lists/statuses',
-        {
-          list_id: listId
-        },
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
-  }
-
-  postTweet({ text }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().post(
-        'statuses/update',
-        {
-          status: text
-        },
-        (error, tweet, response) => {
-          resolve({ tweet, response });
-        }
-      );
-    });
-  }
-
-  searchTweets({ queryString }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'search/tweets',
-        {
-          q: queryString
-        },
-        (error, data, response) => {
-          resolve({ tweets: data.statuses, response });
-        }
-      );
-    });
-  }
-
-  /*
-   * @return {EventEmitter}
-   */
-  subscribeFilteredStream({ queryString }) {
-    const eventEmitter = new EventEmitter();
-    this._underlying().stream(
-      'statuses/filter',
+    return this._get(
+      'statuses/user_timeline',
       {
-        track: queryString
-      },
-      (stream) => {
-        stream.on('data', (data) => {
-          eventEmitter.emit('tweet', data);
-        });
+        user_id: userId,
+        screen_name: screenName,
+        since_id: sinceId,
+        count: count,
+        max_id: maxId,
+        trim_user: trimUser,
+        exclude_replies: excludeReplies,
+        contributor_details: contributorDetails,
+        include_rts: includeRts
+      });
+  }
+
+  statusesUpdate({ text }) {
+    return this._post(
+      'statuses/update',
+      {
+        status: text
       }
     );
-    return eventEmitter;
   }
 
   /**

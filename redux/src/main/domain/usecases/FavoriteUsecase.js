@@ -22,9 +22,8 @@ export default class FavoriteUsecase {
   getListOlderThan(myId, maxTweetId) {
     return this.twitterClient
       .favoriteList({ userId: myId, maxTweetId: maxTweetId })
-      .then(({ tweets }) => {
-        const filteredOffsetTweet = tweets.filter(t => t.id_str !== maxTweetId);
-        return { tweets: filteredOffsetTweet };
+      .then(tweets => {
+        return tweets.filter(t => t.id_str !== maxTweetId);
       });
   }
 

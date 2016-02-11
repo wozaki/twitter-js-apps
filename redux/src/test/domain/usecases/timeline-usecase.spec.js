@@ -16,12 +16,12 @@ describe('TimelineUsecase', () => {
     const stubTwitterClient = sinon.createStubInstance(TwitterClient);
     stubTwitterClient.statusesHomeTimeline
       .withArgs({ maxId: maxTweetId })
-      .returns(new Promise((resolve) => resolve({ tweets: fixtureTweets })));
+      .returns(new Promise((resolve) => resolve(fixtureTweets)));
 
     const timelineUsecase = new TimelineUsecase(stubTwitterClient);
     timelineUsecase
       .fetchHomeTweetsOlderThan(maxTweetId)
-      .then(({tweets}) => {
+      .then(tweets => {
         expect(tweets.length).toEqual(2);
         expect(tweets[0].id_str).toEqual(fixtureTweets[1].id_str);
         expect(tweets[1].id_str).toEqual(fixtureTweets[2].id_str);
