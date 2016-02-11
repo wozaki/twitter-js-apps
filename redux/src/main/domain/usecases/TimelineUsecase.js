@@ -16,9 +16,8 @@ export default class TimelineUsecase {
   fetchHomeTweetsOlderThan(maxTweetId) {
     return this.twitterClient
       .statusesHomeTimeline({ maxId: maxTweetId })
-      .then(({ tweets }) => {
-        const filteredOffsetTweet = tweets.filter(t => t.id_str !== maxTweetId);
-        return { tweets: filteredOffsetTweet };
+      .then(tweets => {
+        return tweets.filter(t => t.id_str !== maxTweetId);
       });
   }
 
@@ -29,9 +28,8 @@ export default class TimelineUsecase {
   getMyTweetsOlderThan(maxTweetId) {
     return this.twitterClient
       .statusesUserTimeline({ maxId: maxTweetId })
-      .then(({ tweets }) => {
-        const filteredOffsetTweet = tweets.filter(t => t.id_str !== maxTweetId);
-        return { tweets: filteredOffsetTweet };
+      .then(tweets => {
+        return tweets.filter(t => t.id_str !== maxTweetId);
       });
   }
 

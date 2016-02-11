@@ -108,45 +108,33 @@ export default class TwitterClient {
   }
 
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'statuses/home_timeline',
-        {
-          count: count,
-          since_id: sinceId,
-          max_id: maxId,
-          trim_user: trimUser,
-          exclude_replies: excludeReplies,
-          contributor_details: contributorDetails,
-          include_entities: includeEntities
-        },
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
+    return this._get(
+      'statuses/home_timeline',
+      {
+        count: count,
+        since_id: sinceId,
+        max_id: maxId,
+        trim_user: trimUser,
+        exclude_replies: excludeReplies,
+        contributor_details: contributorDetails,
+        include_entities: includeEntities
+      });
   }
 
   statusesUserTimeline({ userId, screenName, sinceId, count, maxId, trimUser, excludeReplies, contributorDetails, includeRts }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'statuses/user_timeline',
-        {
-          user_id: userId,
-          screen_name: screenName,
-          since_id: sinceId,
-          count: count,
-          max_id: maxId,
-          trim_user: trimUser,
-          exclude_replies: excludeReplies,
-          contributor_details: contributorDetails,
-          include_rts: includeRts
-        },
-        (error, tweets, response) => {
-          resolve({ tweets, response });
-        }
-      );
-    });
+    return this._get(
+      'statuses/user_timeline',
+      {
+        user_id: userId,
+        screen_name: screenName,
+        since_id: sinceId,
+        count: count,
+        max_id: maxId,
+        trim_user: trimUser,
+        exclude_replies: excludeReplies,
+        contributor_details: contributorDetails,
+        include_rts: includeRts
+      });
   }
 
   fetchListTweets({ listId }) {

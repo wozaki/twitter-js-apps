@@ -5,7 +5,7 @@ export function fetchHomeTimeline() {
   return dispatch => {
     timelineUsecase
       .fetchHomeTweets()
-      .then(({ tweets }) => {
+      .then(tweets => {
         dispatch(receivedHomeTimeline(tweets));
       });
   };
@@ -18,7 +18,7 @@ export function fetchOldHomeTimeline(tweetId) {
   return dispatch => {
     timelineUsecase
       .fetchHomeTweetsOlderThan(tweetId)
-      .then(({ tweets }) => {
+      .then(tweets => {
         dispatch(receivedOldHomeTimeline(tweets));
       });
   };
