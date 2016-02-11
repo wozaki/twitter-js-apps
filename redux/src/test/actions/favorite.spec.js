@@ -19,7 +19,7 @@ describe('favorite actions', () => {
     stubFavoriteUsecase
       .remove
       .withArgs(fixtureTweet.id_str)
-      .returns(new Promise((resolve) => resolve({ tweet: fixtureTweet })));
+      .returns(new Promise((resolve) => resolve(fixtureTweet)));
     stubUsecase(stubFavoriteUsecase);
 
     const expectedActions = [
@@ -34,7 +34,7 @@ describe('favorite actions', () => {
     stubFavoriteUsecase
       .add
       .withArgs(fixtureTweet.id_str)
-      .returns(new Promise((resolve) => resolve({ tweet: fixtureTweet })));
+      .returns(new Promise((resolve) => resolve(fixtureTweet)));
     stubUsecase(stubFavoriteUsecase);
 
     const expectedActions = [

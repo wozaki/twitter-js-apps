@@ -43,46 +43,30 @@ export default class TwitterClient {
   }
 
   favoritesCreate({ tweetId }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().post(
-        'favorites/create',
-        { id: tweetId },
-        (error, tweet, response) => {
-          resolve({ response, tweet });
-        }
-      );
-    });
+    return this._post(
+      'favorites/create',
+      { id: tweetId }
+    );
   }
 
   favoritesDestroy({ tweetId }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().post(
-        'favorites/destroy',
-        { id: tweetId },
-        (error, tweet, response) => {
-          resolve({ response, tweet });
-        }
-      );
-    });
+    return this._post(
+      'favorites/destroy',
+      { id: tweetId }
+    );
   }
 
   favoriteList({ userId, screenName, count, sinceTweetId, maxTweetId, includeEntities }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'favorites/list',
-        {
-          user_id: userId,
-          screen_name: screenName,
-          count: count,
-          since_id: sinceTweetId,
-          max_id: maxTweetId,
-          include_entities: includeEntities
-        },
-        (error, tweets, response) => {
-          resolve({ response, tweets });
-        }
-      );
-    });
+    return this._get(
+      'favorites/list',
+      {
+        user_id: userId,
+        screen_name: screenName,
+        count: count,
+        since_id: sinceTweetId,
+        max_id: maxTweetId,
+        include_entities: includeEntities
+      });
   }
 
   fetchUser() {
