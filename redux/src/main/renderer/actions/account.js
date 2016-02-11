@@ -5,7 +5,7 @@ export function fetchAccount() {
   return dispatch => {
     twitterClient
       .fetchUser()
-      .then(({ user }) => {
+      .then(user => {
         dispatch(receivedAccount(user));
       });
   };

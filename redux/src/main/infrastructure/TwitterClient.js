@@ -70,14 +70,10 @@ export default class TwitterClient {
   }
 
   fetchUser() {
-    return new Promise((resolve, reject) => {
-      this._underlying().get(
-        'account/verify_credentials',
-        (error, user, response) => {
-          resolve({ user, response });
-        }
-      );
-    });
+    return this._get(
+      'account/verify_credentials',
+      {}
+    );
   }
 
   fetchLists() {
