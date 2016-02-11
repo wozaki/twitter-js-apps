@@ -136,17 +136,12 @@ export default class TwitterClient {
   }
 
   postTweet({ text }) {
-    return new Promise((resolve, reject) => {
-      this._underlying().post(
-        'statuses/update',
-        {
-          status: text
-        },
-        (error, tweet, response) => {
-          resolve({ tweet, response });
-        }
-      );
-    });
+    return this._post(
+      'statuses/update',
+      {
+        status: text
+      }
+    );
   }
 
   searchTweets({ queryString }) {

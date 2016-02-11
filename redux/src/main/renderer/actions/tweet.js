@@ -5,7 +5,7 @@ export function postTweet(text) {
   return dispatch => {
     twitterClient
       .postTweet({ text })
-      .then(({ tweet }) => {
+      .then(tweet => {
         dispatch(posted(tweet));
       });
   };
