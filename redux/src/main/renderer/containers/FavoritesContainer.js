@@ -37,7 +37,8 @@ function mapStateToProps(state) {
   const { favorites } = state;
   return {
     favorites: favorites,
-    title: 'Favorites'
+    title: 'Favorites',
+    isLoading: favorites.tweets.length == 0
   };
 }
 
