@@ -2,28 +2,21 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import Header from '../components/Header';
+import MainContainerWrapper from '../containers/MainContainerWrapper';
 import TweetsContainer from '../containers/TweetsContainer';
 import * as timelineActions from '../actions/timeline';
 
 class HomeContainer extends Component {
-
-  get title() {
-    return 'Home';
-  }
 
   render() {
     const { fetchOldHomeTimeline } = this.props.actions;
     const { tweets } = this.props;
 
     return (
-      <main className="Main">
-        <Header title={this.title}/>
-        <TweetsContainer
-          tweets={tweets}
-          fetchOldTweet={(offsetTweetId) => fetchOldHomeTimeline(offsetTweetId)}
-          />
-      </main>
+      <TweetsContainer
+        tweets={tweets}
+        fetchOldTweet={(offsetTweetId) => fetchOldHomeTimeline(offsetTweetId)}
+        />
     );
   }
 }
@@ -36,7 +29,9 @@ function mapStateToProps(state) {
   const { account, timeline } = state;
   return {
     account: account,
-    tweets: timeline
+    tweets: timeline,
+    title: 'Home',
+    isLoading: timeline.tweets.length == 0
   };
 }
 
@@ -47,4 +42,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainerWrapper(HomeContainer));

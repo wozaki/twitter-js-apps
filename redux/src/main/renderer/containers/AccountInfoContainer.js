@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
 import LinkItem from '../components/LinkItem';
+import MainContainerWrapper from '../containers/MainContainerWrapper';
 
 class AccountInfoContainer extends Component {
   render() {
@@ -10,14 +10,11 @@ class AccountInfoContainer extends Component {
     // TODO: to component
     // TODO: title, use my
     return (
-      <div className="Main">
-        <Header title={account.screen_name}/>
         <ul className="lists">
           <LinkItem label="Tweets" path={"/my-timeline"} count={account.tweet_count} />
           <LinkItem label="Followers" count={account.followers_count} />
           <LinkItem label="Following" count={account.following_count} />
         </ul>
-      </div>
     );
   }
 }
@@ -29,8 +26,9 @@ AccountInfoContainer.propTypes = {
 function mapStateToProps(state) {
   const { account } = state;
   return {
-    account: account
+    account: account,
+    title: account.screen_name || ''
   };
 }
 
-export default connect(mapStateToProps)(AccountInfoContainer);
+export default connect(mapStateToProps)(MainContainerWrapper(AccountInfoContainer));
