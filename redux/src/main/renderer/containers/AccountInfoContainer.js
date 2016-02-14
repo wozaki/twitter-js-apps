@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import LinkItem from '../components/LinkItem';
 
-export default class AccountInfoContainer extends Component {
+class AccountInfoContainer extends Component {
   render() {
     const { account } = this.props;
 

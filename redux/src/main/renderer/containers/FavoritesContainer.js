@@ -7,7 +7,7 @@ import TweetsContainer from '../containers/TweetsContainer';
 import * as favoriteActions from '../actions/favorite';
 import my from '../registries/my';
 
-export default class FavoritesContainer extends Component {
+class FavoritesContainer extends Component {
 
   componentWillMount() {
     const { fetchMyFavorites } = this.props.actions;

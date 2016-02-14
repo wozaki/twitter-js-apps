@@ -8,7 +8,7 @@ import * as tweetActions from '../actions/tweet';
 import keyStringDetector from '../registries/keyStringDetector';
 import Tweet from '../../domain/models/Tweet';
 
-export default class NewTweetContainer extends Component {
+class NewTweetContainer extends Component {
 
   componentWillMount() {
     const { setUp } = this.props.actions;
