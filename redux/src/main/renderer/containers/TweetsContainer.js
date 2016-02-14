@@ -8,7 +8,7 @@ import Retweet from '../components/Retweet'
 import ToggleFavoriteButton from '../components/ToggleFavoriteButton'
 import Tweet from '../components/Tweet'
 
-export default class TweetsContainer extends Component {
+class TweetsContainer extends Component {
 
   render() {
     const {isOld} = this.props.tweets;

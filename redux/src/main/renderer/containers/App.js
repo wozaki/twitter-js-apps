@@ -9,7 +9,7 @@ import * as timelineActions from '../actions/timeline';
 import * as tweetActions from '../actions/tweet';
 import SideMenuContainer from '../containers/SideMenuContainer';
 
-export default class App extends Component {
+class App extends Component {
     componentDidMount() {
         const {setUp} = this.props.actions;
 

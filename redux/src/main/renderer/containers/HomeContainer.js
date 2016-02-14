@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import TweetsContainer from '../containers/TweetsContainer';
 import * as timelineActions from '../actions/timeline';
 
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
 
   get title() {
     return 'Home';

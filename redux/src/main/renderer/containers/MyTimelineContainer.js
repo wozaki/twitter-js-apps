@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import TweetsContainer from '../containers/TweetsContainer';
 import * as myTimelineActions from '../actions/my-timeline';
 
-export default class MyTimelineContainer extends Component {
+class MyTimelineContainer extends Component {
 
   componentWillMount() {
     const { fetchMyTimeline } = this.props.actions;

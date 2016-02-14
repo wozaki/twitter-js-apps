@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import SideMenu from '../components/SideMenu'
 
-export default class SideMenuContainer extends Component {
+class SideMenuContainer extends Component {
     render() {
         const {account} = this.props;
 
