@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import Header from '../components/Header';
+import MainContainerWrapper from '../containers/MainContainerWrapper';
 import TweetsContainer from '../containers/TweetsContainer';
 import * as myTimelineActions from '../actions/my-timeline';
 
@@ -13,22 +13,15 @@ class MyTimelineContainer extends Component {
     fetchMyTimeline();
   }
 
-  get title() {
-    return 'Tweets';
-  }
-
   render() {
     const { fetchOldMyTimeline } = this.props.actions;
     const { tweets } = this.props;
 
     return (
-      <main className="Main">
-        <Header title={this.title}/>
-        <TweetsContainer
-          tweets={tweets}
-          fetchOldTweet={(offsetTweetId) => fetchOldMyTimeline(offsetTweetId)}
-          />
-      </main>
+      <TweetsContainer
+        tweets={tweets}
+        fetchOldTweet={(offsetTweetId) => fetchOldMyTimeline(offsetTweetId)}
+        />
     );
   }
 }
@@ -41,7 +34,9 @@ MyTimelineContainer.propTypes = {
 function mapStateToProps(state) {
   const { myTimeline } = state;
   return {
-    tweets: myTimeline
+    tweets: myTimeline,
+    title: 'Tweets',
+    isLoading: myTimeline.tweets.length == 0
   };
 }
 
@@ -52,4 +47,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyTimelineContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainerWrapper(MyTimelineContainer));

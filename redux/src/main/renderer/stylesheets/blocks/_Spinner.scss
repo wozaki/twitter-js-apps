@@ -1,0 +1,11 @@
+$spinkit-spinner-margin: 40px auto;
+$spinkit-size: 40px;
+$spinkit-spinner-color: #C2C3C3;
+
+@import '../../../../../node_modules/spinkit/scss/spinners/3-wave';
+
+.Spinner {
+  .sk-rect {
+    margin: 0 3px 0 0;
+  }
+}
