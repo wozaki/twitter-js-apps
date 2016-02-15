@@ -1,0 +1,15 @@
+@import "../variables";
+
+.Editor {
+  display: flex;
+
+  &-textarea {
+    border: 0;
+    display: block;
+    flex: 1;
+    line-height: 1.5;
+    outline: none;
+    resize: none;
+    width: 100%;
+  }
+}
