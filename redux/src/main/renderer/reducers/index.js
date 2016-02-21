@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import account from './account';
 import favorites from './favorites';
+import following from './following';
 import timeline from './timeline';
 import myTimeline from './my-timeline';
 
 const rootReducer = combineReducers({
   account,
   favorites,
+  following,
   timeline,
   myTimeline
 });
