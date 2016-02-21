@@ -23,10 +23,10 @@ export default class TwitterClient {
 
   _requestWith(method) {
     return new Promise((resolve, reject) => {
-      method((error, entities) => {
-          if (error !== null) {
-            console.error(error.message);
-            reject(error);
+      method((errors, entities) => {
+          if (errors !== null) {
+            errors.forEach(e => console.error(`message: ${e.message}, code: ${e.code}`));
+            reject(errors);
           } else {
             resolve(entities);
           }
