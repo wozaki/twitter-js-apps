@@ -18,12 +18,12 @@ export default function (InnerComponent) {
     }
   }
 
-  InnerComponent.propTypes = {
+  MainContainerWrapper.propTypes = {
     title: PropTypes.string.isRequired,
     isLoading: PropTypes.bool
   };
 
-  InnerComponent.defaultProps = {
+  MainContainerWrapper.defaultProps = {
     isLoading: false
   };
 
