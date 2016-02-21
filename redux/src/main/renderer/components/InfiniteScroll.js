@@ -53,7 +53,7 @@ InfiniteScroll.defaultProps = {
     thresholdInPx: 200
 };
 
-InfiniteScroll.PropTypes = {
+InfiniteScroll.propTypes = {
     onLoad: React.PropTypes.func.isRequired,
     children: PropTypes.node,
     className: React.PropTypes.string,
