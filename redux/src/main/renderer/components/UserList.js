@@ -27,7 +27,7 @@ export default class UserList extends Component {
 
   render() {
     return (
-      <ul className="UserList">
+      <ul>
         {this.renderItems}
       </ul>
     );

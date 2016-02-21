@@ -6,6 +6,7 @@ import MainContainerWrapper from '../containers/MainContainerWrapper';
 import UserList from '../components/UserList';
 import * as followingActions from '../actions/following';
 import my from '../registries/my';
+import InfiniteScroll from '../components/InfiniteScroll'
 
 class FollowingContainer extends Component {
 
@@ -14,11 +15,23 @@ class FollowingContainer extends Component {
     fetchFollowing(my.userId);
   }
 
+  onLoad() {
+    const { fetchFollowingOlderThan } = this.props.actions;
+    const { nextCursor } = this.props;
+
+    fetchFollowingOlderThan(my.userId, nextCursor);
+  }
+
   render() {
-    const { users } = this.props;
+    const { users, isOld } = this.props;
 
     return (
-      <UserList users={users}/>
+      <InfiniteScroll
+        className={"UserList"}
+        onLoad={this.onLoad.bind(this)}
+        loadCompleted={isOld}>
+        <UserList users={users}/>
+      </InfiniteScroll>
     );
   }
 
@@ -33,6 +46,8 @@ function mapStateToProps(state) {
   const { following } = state;
   return {
     users: following.users,
+    nextCursor: following.nextCursor,
+    isOld: following.isOld,
     title: 'Following',
     isLoading: following.users.length == 0
   };
