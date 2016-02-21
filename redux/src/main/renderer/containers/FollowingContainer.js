@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
+import UserList from '../components/UserList';
 import * as followingActions from '../actions/following';
 import my from '../registries/my';
 
@@ -16,10 +17,8 @@ class FollowingContainer extends Component {
   render() {
     const { users } = this.props;
 
-    //FIXME: apply following to Component
-    console.log("FollowingContainer", users);
     return (
-      <div>followers_count</div>
+      <UserList users={users}/>
     );
   }
 
