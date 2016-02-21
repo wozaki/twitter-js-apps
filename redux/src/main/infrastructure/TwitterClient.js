@@ -25,6 +25,7 @@ export default class TwitterClient {
     return new Promise((resolve, reject) => {
       method((error, entities) => {
           if (error !== null) {
+            console.error(error.message);
             reject(error);
           } else {
             resolve(entities);
