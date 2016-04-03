@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { dialog } from 'remote'
 import * as appActions from '../actions/app';
 import SideMenuContainer from '../containers/SideMenuContainer';
 
@@ -12,8 +13,18 @@ class AppContainer extends Component {
     setUp();
   }
 
+  showErrorDialogIfNeeded() {
+    const { errorMessage } = this.props;
+
+    if (errorMessage.content) {
+      dialog.showErrorBox(errorMessage.title, errorMessage.content);
+    }
+  }
+
   render() {
     const { children } = this.props;
+
+    this.showErrorDialogIfNeeded();
 
     return (
       <div className="Application">
@@ -37,9 +48,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const { account } = state;
+  const { errorMessage } = state;
   return {
-    account: account
+    errorMessage: errorMessage
   };
 }
 
