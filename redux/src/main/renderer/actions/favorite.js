@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {favoriteUsecase} from '../registries/usecases';
+import { onError } from './error-handler';
 
 export function fetchMyFavorites(myId) {
   return dispatch => {
@@ -7,7 +8,8 @@ export function fetchMyFavorites(myId) {
       .getList(myId)
       .then(tweets => {
         dispatch(receivedMyFavorites(tweets));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 
@@ -17,7 +19,8 @@ export function fetchMyFavoritesOlderThan(myId, tweetId) {
       .getListOlderThan(myId, tweetId)
       .then(tweets => {
         dispatch(receivedMyOldFavorites(tweets));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 
@@ -37,7 +40,8 @@ function createFavorite(tweetId) {
       .add(tweetId)
       .then(tweet => {
         dispatch(createdFavorite(tweet));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 
@@ -47,7 +51,8 @@ function destroyFavorite(tweetId) {
       .remove(tweetId)
       .then(tweet => {
         dispatch(destroyedFavorite(tweet));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 

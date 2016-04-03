@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import {timelineUsecase} from '../registries/usecases';
+import { onError } from './error-handler';
 
 export function fetchMyTimeline() {
   return dispatch => {
@@ -7,7 +8,8 @@ export function fetchMyTimeline() {
       .getMyTweets()
       .then(tweets => {
         dispatch(receivedMyTimeline(tweets));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 
@@ -17,7 +19,8 @@ export function fetchOldMyTimeline(tweetId) {
       .getMyTweetsOlderThan(tweetId)
       .then(tweets => {
         dispatch(receivedOldMyTimeline(tweets));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 
