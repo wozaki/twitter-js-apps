@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import twitterClient from '../registries/twitterClient';
+import { onError } from './error-handler';
 
 export function postTweet(text) {
   return dispatch => {
@@ -7,7 +8,8 @@ export function postTweet(text) {
       .statusesUpdate({ text })
       .then(tweet => {
         dispatch(posted(tweet));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 

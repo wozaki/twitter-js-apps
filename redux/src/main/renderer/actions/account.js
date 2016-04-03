@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import twitterClient from '../registries/twitterClient';
+import { onError } from './error-handler';
 
 export function fetchAccount() {
   return dispatch => {
@@ -7,7 +8,8 @@ export function fetchAccount() {
       .fetchUser()
       .then(user => {
         dispatch(receivedAccount(user));
-      });
+      })
+      .catch(error => dispatch(onError(error)));
   };
 }
 
