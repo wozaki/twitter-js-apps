@@ -1,4 +1,4 @@
-export default class FollowingUsecase {
+export default class FollowUsecase {
 
   /**
    * @param {TwitterClient} twitterClient

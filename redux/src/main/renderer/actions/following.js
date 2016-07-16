@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import {followingUsecase} from '../registries/usecases';
+import {followUsecase} from '../registries/usecases';
 import {isLastCursor} from '../../infrastructure/cursor';
 import { onError } from './error-handler';
 
@@ -9,7 +9,7 @@ import { onError } from './error-handler';
  */
 export function fetchFollowing(myId) {
   return dispatch => {
-    followingUsecase
+    followUsecase
       .getFollowing(myId)
       .then(following => {
         dispatch(receivedFollowing(following));
@@ -28,7 +28,7 @@ export function fetchFollowingOlderThan(myId, nextCursor) {
     if (isLastCursor(nextCursor)) {
       dispatch(receivedFollowingCompleted())
     } else {
-      followingUsecase
+      followUsecase
         .getFollowingOlderThan(myId, nextCursor)
         .then(following => {
           dispatch(receivedOldFollowing(following));
