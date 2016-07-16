@@ -7,6 +7,7 @@ import AccountInfo from './containers/AccountInfoContainer'
 import FavoritesContainer from './containers/FavoritesContainer'
 import MyTimelineContainer from './containers/MyTimelineContainer'
 import App from './containers/AppContainer'
+import Followers from './containers/FollowersContainer'
 import Following from './containers/FollowingContainer'
 import HomeContainer from './containers/HomeContainer.js'
 import configureStore from './store/configureStore'
@@ -21,6 +22,7 @@ render(
                 <Route path='/account-info' component={AccountInfo}/>
                 <Route path='/favorites' component={FavoritesContainer}/>
                 <Route path='/my-timeline' component={MyTimelineContainer}/>
+                <Route path='/followers' component={Followers}/>
                 <Route path='/followings' component={Following}/>
             </Route>
         </Router>
