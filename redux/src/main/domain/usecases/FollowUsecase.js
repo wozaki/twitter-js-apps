@@ -30,4 +30,23 @@ export default class FollowUsecase {
     return this.twitterClient.friendsList({ userId: myId, cursor: nextCursor, count: count });
   }
 
+  /**
+   * @param {string} myId
+   * @param {number} count
+   * @returns {Promise<Object>}
+   */
+  getFollowers(myId, count = this.defaultCount) {
+    return this.twitterClient.followersList({ userId: myId, count: count });
+  }
+
+  /**
+   * @param {string} myId
+   * @param {string} nextCursor
+   * @param {number} count
+   * @returns {Promise.<Object>}
+   */
+  getFollowersOlderThan(myId, nextCursor, count = this.defaultCount) {
+    return this.twitterClient.followersList({ userId: myId, cursor: nextCursor, count: count });
+  }
+
 }
