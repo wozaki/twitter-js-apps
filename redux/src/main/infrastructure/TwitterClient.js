@@ -100,6 +100,30 @@ export default class TwitterClient {
       });
   }
 
+  /**
+   * https://dev.twitter.com/rest/reference/get/followers/list
+   *
+   * @param {string} userId
+   * @param {string|undefined} screenName
+   * @param {string|undefined} cursor
+   * @param {number|undefined} count
+   * @param {boolean|undefined} skipStatus
+   * @param {boolean|undefined} includeEntities
+   * @returns {Promise<Object>} following
+   */
+  followersList({ userId, screenName, cursor, count, skipStatus, includeEntities }) {
+    return this._get(
+      'followers/list',
+      {
+        user_id: userId,
+        screen_name: screenName,
+        cursor: cursor,
+        count: count,
+        skipStatus: skipStatus,
+        include_entities: includeEntities
+      });
+  }
+
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
     return this._get(
       'statuses/home_timeline',
