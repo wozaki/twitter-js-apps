@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "target": "es6",
+    "declaration": false,
+    "outDir": "./app/",
+    "rootDir": "./src/",
+    "experimentalDecorators": true
+  },
+  "exclude": [
+    "./node_modules"
+  ]
+}

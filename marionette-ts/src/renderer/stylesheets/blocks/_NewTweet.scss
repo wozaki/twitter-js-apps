@@ -1,0 +1,44 @@
+@import "qiita-coat/scss/avatars";
+@import "../variables";
+
+.NewTweet {
+  background-color: $color-component-background;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &-main {
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    &-center {
+      flex: 1;
+      display: flex;
+      margin: 0 10px;
+    }
+
+    &-tweetCounter {
+      color: #aaa;
+      &.is-overLimit {
+        color: $color-caution;
+      }
+    }
+  }
+
+  &-footer {
+    height: 50px;
+    padding: 10px;
+    background-color: #474747;
+    display: flex;
+    justify-content: flex-end;
+    &-tweetLabel {
+      color: #9C9C9C;
+      &.is-active {
+        color: #6281FF;
+      }
+      &.is-overLimit {
+        color: #FF4C4C;
+      }
+    }
+  }
+}

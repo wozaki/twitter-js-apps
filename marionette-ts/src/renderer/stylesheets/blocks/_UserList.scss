@@ -1,0 +1,51 @@
+@import "qiita-coat/scss/avatars";
+@import "../variables";
+
+.UserList {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.UserItem {
+  background-color: $color-component-background;
+  display: flex;
+  padding: 10px;
+
+  &-avatar {
+    @include avatar;
+
+    &-child {
+      @include avatar-child;
+    }
+
+    &-parent {
+      @include avatar-parent;
+    }
+  }
+
+  &-display-name {
+    font-weight: bold;
+  }
+
+  &-header {
+    display: flex;
+  }
+
+  &-main {
+    flex: 1;
+  }
+
+  &-names {
+    margin-right: auto;
+  }
+
+  &-screen-name {
+    color: #aaa;
+    margin-left: 4px;
+  }
+
+  &-sub {
+    margin-right: 12px;
+  }
+}

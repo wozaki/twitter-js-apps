@@ -1,0 +1,21 @@
+.SideMenu {
+  background-color: #202a33;
+  height: 100vh;
+  width: 70px;
+
+  &-items {
+    text-align: center;
+  }
+
+  &-item {
+    padding: 12px 0;
+    &-icon {
+      color: #ccc;
+      font-size: 2em;
+      max-width: 30px;
+    }
+    &-avatar {
+      border-radius: 3px;
+    }
+  }
+}

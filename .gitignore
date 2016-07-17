@@ -6,3 +6,5 @@ dist
 .idea
 app
 twitter-config.js
+twitter-config.ts
+typings

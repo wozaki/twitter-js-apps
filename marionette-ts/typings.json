@@ -1,0 +1,10 @@
+{
+  "name": "twitter-redux",
+  "dependencies": {
+    "twitter-electron-window": "github:wozaki/twitter-electron-window/lib/index.d.ts"
+  },
+  "globalDependencies": {
+    "github-electron": "registry:dt/github-electron#1.2.5+20160624085047",
+    "node": "registry:dt/node#6.0.0+20160709114037"
+  }
+}
