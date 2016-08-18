@@ -33,12 +33,12 @@ export default class InfiniteScroll extends Component {
   }
 
   render() {
-    const { children, className } = this.props;
+    const { children, className, interval } = this.props;
 
     return (
       <div
         className={className}
-        onScroll={_.throttle(this.onScrolled.bind(this), 200)}
+        onScroll={_.throttle(this.onScrolled.bind(this), interval)}
       >
         {children}
       </div>
@@ -50,7 +50,8 @@ export default class InfiniteScroll extends Component {
 InfiniteScroll.defaultProps = {
   className: 'infiniteScroll',
   loadCompleted: false,
-  thresholdInPx: 200
+  thresholdInPx: 200,
+  interval: 200
 };
 
 InfiniteScroll.propTypes = {
@@ -58,5 +59,6 @@ InfiniteScroll.propTypes = {
   children: PropTypes.node,
   className: React.PropTypes.string,
   loadCompleted: React.PropTypes.bool,
-  thresholdInPx: React.PropTypes.number
+  thresholdInPx: React.PropTypes.number,
+  interval: React.PropTypes.number
 };
