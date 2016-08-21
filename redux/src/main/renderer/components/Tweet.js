@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TweetBody from './TweetBody'
 import Time from './Time'
-import { openExternal } from 'shell'
+import { shell } from 'electron'
 
 export default class Tweet extends Component {
   get url() {
@@ -10,7 +10,7 @@ export default class Tweet extends Component {
 
   onAnchorClicked(event) {
     event.preventDefault();
-    openExternal(event.currentTarget.href);
+    shell.openExternal(event.currentTarget.href);
   }
 
   render() {

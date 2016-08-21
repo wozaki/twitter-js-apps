@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { dialog } from 'remote'
+import { remote } from 'electron'
 import * as appActions from '../actions/app';
 import SideMenuContainer from '../containers/SideMenuContainer';
 
@@ -17,7 +17,7 @@ class AppContainer extends Component {
     const { errorMessage } = this.props;
 
     if (errorMessage.content) {
-      dialog.showErrorBox(errorMessage.title, errorMessage.content);
+      remote.dialog.showErrorBox(errorMessage.title, errorMessage.content);
     }
   }
 

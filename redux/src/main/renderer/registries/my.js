@@ -1,5 +1,5 @@
-import {getGlobal} from 'remote'
-const myAccount = getGlobal('myAccount');
+import { remote } from 'electron'
+const myAccount = remote.getGlobal('myAccount');
 
 class My {
   constructor(userId, screenName) {

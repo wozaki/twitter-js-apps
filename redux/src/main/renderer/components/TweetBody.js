@@ -1,12 +1,12 @@
 import React from 'react';
 import Time from './Time';
 import twitterText from 'twitter-text';
-import { openExternal } from 'shell'
+import { shell } from 'electron'
 
 class Anchor extends React.Component {
   onClicked(event) {
     event.preventDefault();
-    openExternal(event.currentTarget.href);
+    shell.openExternal(event.currentTarget.href);
   }
 
   render() {
