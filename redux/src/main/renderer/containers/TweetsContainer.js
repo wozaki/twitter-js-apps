@@ -11,13 +11,11 @@ import Tweet from '../components/Tweet'
 class TweetsContainer extends Component {
 
   render() {
-    const {isOld} = this.props.tweets;
 
     return (
       <InfiniteScroll
         className={"Tweets"}
-        onLoad={this.onLoad.bind(this)}
-        loadCompleted={isOld}>
+        onLoad={this.onLoad.bind(this)}>
         {this.renderTweets()}
       </InfiniteScroll>
     )
