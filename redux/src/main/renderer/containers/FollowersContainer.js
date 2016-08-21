@@ -23,13 +23,12 @@ class FollowersContainer extends Component {
   }
 
   render() {
-    const { users, isOld } = this.props;
+    const { users } = this.props;
 
     return (
       <InfiniteScroll
         className={"UserList"}
-        onLoad={this.onLoad.bind(this)}
-        loadCompleted={isOld}>
+        onLoad={this.onLoad.bind(this)}>
         <UserList users={users}/>
       </InfiniteScroll>
     );
@@ -47,7 +46,6 @@ function mapStateToProps(state) {
   return {
     users: followers.users,
     nextCursor: followers.nextCursor,
-    isOld: followers.isOld,
     title: 'Followers',
     isLoading: followers.users.length == 0
   };
