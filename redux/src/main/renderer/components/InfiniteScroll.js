@@ -4,32 +4,14 @@ import _ from 'lodash';
 
 export default class InfiniteScroll extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = this.initialState;
-  }
-
-  componentDidUpdate() {
-    const { loadCompleted } = this.props;
-
-    if (loadCompleted && this.state.isLoading) {
-      this.setState({ isLoading: false });
-    }
-  }
-
   onScrolled() {
     const { children, onLoad, thresholdInPx } = this.props;
     const { scrollTop, scrollHeight, offsetHeight } = ReactDOM.findDOMNode(this);
     const restOfBottom = (scrollHeight - offsetHeight) - scrollTop;
 
-    if (restOfBottom < thresholdInPx && !this.state.isLoading) {
-      this.setState({ isLoading: true });
+    if (restOfBottom < thresholdInPx) {
       onLoad(_.last(children));
     }
-  }
-
-  get initialState() {
-    return { isLoading: false };
   }
 
   render() {
@@ -49,7 +31,6 @@ export default class InfiniteScroll extends Component {
 
 InfiniteScroll.defaultProps = {
   className: 'infiniteScroll',
-  loadCompleted: false,
   thresholdInPx: 200,
   interval: 200
 };
@@ -58,7 +39,6 @@ InfiniteScroll.propTypes = {
   onLoad: React.PropTypes.func.isRequired,
   children: PropTypes.node,
   className: React.PropTypes.string,
-  loadCompleted: React.PropTypes.bool,
   thresholdInPx: React.PropTypes.number,
   interval: React.PropTypes.number
 };
