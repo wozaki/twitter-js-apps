@@ -1,6 +1,6 @@
-import {getGlobal} from 'remote'
+import { remote } from 'electron'
 import TwitterClient from '../../infrastructure/TwitterClient'
-const twitterCredential = getGlobal('twitterCredential');
+const twitterCredential = remote.getGlobal('twitterCredential');
 
 export default new TwitterClient(
     {
