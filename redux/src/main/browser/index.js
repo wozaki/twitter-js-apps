@@ -1,5 +1,5 @@
 import twitterConfig from './twitter-config.js'
-import { Application } from 'twitter-electron-window'
+import Application from './application'
 
 global.application = new Application(twitterConfig);
 global.application.run((myAccount, twitterCredential) => {
