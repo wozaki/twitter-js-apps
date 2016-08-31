@@ -47,7 +47,6 @@
     "redux-thunk": "^1.0.0",
     "spinkit": "^1.2.5",
     "twitter": "^1.2.5",
-    "twitter-electron-window": "github:wozaki/twitter-electron-window",
     "twitter-text": "^1.13.0"
   },
   "devDependencies": {
