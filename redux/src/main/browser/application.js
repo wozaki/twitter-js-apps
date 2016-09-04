@@ -77,15 +77,19 @@ export default class Application {
   }
 
   setApplicationMenu() {
-    new ApplicationMenu().on('open-dev-tools', () => {
-      this.mainWindow.window.toggleDevTools();
-    }).on('quit', () => {
-      app.quit();
-    }).on('reload', () => {
-      this.mainWindow.window.webContents.reloadIgnoringCache();
-    }).on('new-tweet', () => {
-      this.openNewTweetWindow();
-    });
+    new ApplicationMenu()
+      .on('open-dev-tools', () => {
+        this.mainWindow.window.toggleDevTools();
+      })
+      .on('quit', () => {
+        app.quit();
+      })
+      .on('reload', () => {
+        this.mainWindow.window.webContents.reloadIgnoringCache();
+      })
+      .on('new-tweet', () => {
+        this.openNewTweetWindow();
+      });
   }
 
   startCrashReporter() {
