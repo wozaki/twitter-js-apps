@@ -28,6 +28,7 @@ export default class Application {
       this.onAuthenticationSucceeded(account);
     } else {
       this.openAuthenticationWindow()
+        .on('authentication-succeeded', this.onAuthenticationSucceeded.bind(this));
     }
     this.setApplicationMenu();
     this.subscribeRendererEvent();
@@ -52,9 +53,7 @@ export default class Application {
   }
 
   openAuthenticationWindow() {
-    new AuthenticationWindow(this.consumerKey, this.consumerSecret, this.callbackUrl)
-      .on('authentication-succeeded', this.onAuthenticationSucceeded.bind(this)
-      );
+    return new AuthenticationWindow(this.consumerKey, this.consumerSecret, this.callbackUrl);
   }
 
   openMainWindow() {
