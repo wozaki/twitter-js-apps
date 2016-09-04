@@ -23,7 +23,12 @@ export default class Application {
   }
 
   onReady() {
-    this.openAuthenticationWindow();
+    if (accountRepository.existsAtLeastOne()) {
+      const account = accountRepository.restore();
+      this.onAuthenticationSucceeded(account);
+    } else {
+      this.openAuthenticationWindow()
+    }
     this.setApplicationMenu();
     this.subscribeRendererEvent();
   }
