@@ -30,8 +30,6 @@ export default class Application {
       this.openAuthenticationWindow()
         .on('authentication-succeeded', this.onAuthenticationSucceeded.bind(this));
     }
-    this.setApplicationMenu();
-    this.subscribeRendererEvent();
   }
 
   onAuthenticationSucceeded({ accessToken, accessTokenSecret, userId, screenName }) {
@@ -45,11 +43,13 @@ export default class Application {
       accessToken: accessToken,
       accessTokenSecret: accessTokenSecret
     };
-    this.callback(myAccount, twitterCredential);
 
+    this.callback(myAccount, twitterCredential);
     accountRepository.store({ accessToken, accessTokenSecret, userId, screenName });
 
     this.openMainWindow();
+    this.setApplicationMenu();
+    this.subscribeRendererEvent();
   }
 
   openAuthenticationWindow() {
