@@ -23,7 +23,7 @@ class AccountRepository {
     const json = JSON.parse(raw);
 
     if (json == null) {
-      return {}
+      return null
     }
 
     return {
@@ -32,6 +32,11 @@ class AccountRepository {
       userId: json['user_id'],
       screenName: json['screen_name']
     }
+  }
+
+  existsAtLeastOne() {
+    const account = this.restore();
+    return account != null;
   }
 
 }
