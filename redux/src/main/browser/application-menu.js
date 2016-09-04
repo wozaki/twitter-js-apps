@@ -83,27 +83,6 @@ export default class ApplicationMenu extends EventEmitter {
             label: 'View',
             submenu: [
               {
-                label: 'Search',
-                accelerator: 'Command+F',
-                click() {
-                  self.emit('search')
-                }
-              },
-              {
-                label: 'Select next channel',
-                accelerator: 'Command+]',
-                click() {
-                  self.emit('select-next-channel');
-                }
-              },
-              {
-                label: 'Select previous channel',
-                accelerator: 'Command+[',
-                click() {
-                  self.emit('select-previous-channel');
-                }
-              },
-              {
                 label: 'Reload',
                 accelerator: 'Command+R',
                 click() {

@@ -85,12 +85,6 @@ export default class Application {
       this.mainWindow.window.webContents.reloadIgnoringCache();
     }).on('new-tweet', () => {
       this.openNewTweetWindow();
-    }).on('search', () => {
-      this.mainWindow.send('select-search-box');
-    }).on('select-next-channel', () => {
-      this.mainWindow.send('select-next-channel');
-    }).on('select-previous-channel', () => {
-      this.mainWindow.send('select-previous-channel');
     });
   }
 
