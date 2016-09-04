@@ -11,7 +11,6 @@ export default class Application {
     this.callbackUrl = callbackUrl;
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
-    this.mainWindow = null;
     this.mainWindowUrl = mainWindowUrl;
     this.newTweetWindowUrl = newTweetWindowUrl;
   }
@@ -47,8 +46,8 @@ export default class Application {
     this.callback(myAccount, twitterCredential);
     accountRepository.store({ accessToken, accessTokenSecret, userId, screenName });
 
-    this.openMainWindow();
-    this.setApplicationMenu();
+    const mainWindow = this.openMainWindow();
+    this.setApplicationMenu(mainWindow);
     this.subscribeRendererEvent();
   }
 
@@ -57,7 +56,7 @@ export default class Application {
   }
 
   openMainWindow() {
-    this.mainWindow = new MainWindow(this.mainWindowUrl);
+    return new MainWindow(this.mainWindowUrl);
   }
 
   openNewTweetWindow() {
@@ -76,16 +75,16 @@ export default class Application {
     app.on('ready', this.onReady.bind(this));
   }
 
-  setApplicationMenu() {
+  setApplicationMenu(mainWindow) {
     new ApplicationMenu()
       .on('open-dev-tools', () => {
-        this.mainWindow.window.toggleDevTools();
+        mainWindow.window.toggleDevTools();
       })
       .on('quit', () => {
         app.quit();
       })
       .on('reload', () => {
-        this.mainWindow.window.webContents.reloadIgnoringCache();
+        mainWindow.window.webContents.reloadIgnoringCache();
       })
       .on('new-tweet', () => {
         this.openNewTweetWindow();
