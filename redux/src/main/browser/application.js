@@ -3,6 +3,7 @@ import ApplicationMenu from './application-menu'
 import AuthenticationWindow from './authentication-window'
 import MainWindow from './main-window'
 import NewTweetWindow from './new-tweet-window'
+import WindowCycler from './window-cycler'
 import { accountRepository } from './registory'
 
 export default class Application {
@@ -49,6 +50,9 @@ export default class Application {
     const mainWindow = this.openMainWindow();
     this.setApplicationMenu(mainWindow);
     this.subscribeRendererEvent();
+    
+    this.newTweetWindow = new WindowCycler(() => new NewTweetWindow(this.newTweetWindowUrl));
+    this.newTweetWindow.prepare()
   }
 
   openAuthenticationWindow() {
@@ -60,7 +64,7 @@ export default class Application {
   }
 
   openNewTweetWindow() {
-    new NewTweetWindow(this.newTweetWindowUrl);
+    this.newTweetWindow.showWindow()
   }
 
   subscribeRendererEvent() {
@@ -72,6 +76,11 @@ export default class Application {
   registerApplicationCallbacks() {
     app.on('window-all-closed', () => {
     });
+
+    app.on('will-quit', () => {
+      this.newTweetWindow.stop();
+    });
+
     app.on('ready', this.onReady.bind(this));
   }
 
