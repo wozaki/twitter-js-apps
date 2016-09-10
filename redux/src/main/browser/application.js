@@ -6,6 +6,7 @@ import MainWindow from './main-window'
 import NewTweetWindow from './new-tweet-window'
 import WindowCycler from './window-cycler'
 import { credentialRepository } from './registory'
+import PreferencesWindow from './preferences-window'
 
 export default class Application {
 
@@ -72,7 +73,7 @@ export default class Application {
   }
 
   openPreferencesWindow() {
-    console.log("openPreferencesWindow!")
+    new PreferencesWindow();
   }
 
   openNewTweetWindow() {
