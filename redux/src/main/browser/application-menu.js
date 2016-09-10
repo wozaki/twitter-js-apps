@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { Menu } from 'electron'
+import { Menu, shell } from 'electron'
 
 export default class ApplicationMenu extends EventEmitter {
   constructor() {
@@ -14,7 +14,7 @@ export default class ApplicationMenu extends EventEmitter {
               {
                 label: 'About',
                 click() {
-                  openExternal('https://github.com/wozaki/twitter-js-apps');
+                  shell.openExternal('https://github.com/wozaki/twitter-js-apps');
                 }
               },
               {
