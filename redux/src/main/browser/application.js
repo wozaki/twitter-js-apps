@@ -71,6 +71,10 @@ export default class Application {
     return new MainWindow(this.mainWindowUrl);
   }
 
+  openPreferencesWindow() {
+    console.log("openPreferencesWindow!")
+  }
+
   openNewTweetWindow() {
     this.newTweetWindow.showWindow()
   }
@@ -99,6 +103,9 @@ export default class Application {
       })
       .on('quit', () => {
         app.quit();
+      })
+      .on('open-preferences', () => {
+        this.openPreferencesWindow();
       })
       .on('reload', () => {
         mainWindow.reload();
