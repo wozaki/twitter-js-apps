@@ -1,6 +1,7 @@
 import { app, ipcMain } from 'electron'
+import TwitterApi from 'node-twitter-api';
 import ApplicationMenu from './application-menu'
-import AuthenticationWindow from './authentication-window'
+import Authenticator from './authenticatior'
 import MainWindow from './main-window'
 import NewTweetWindow from './new-tweet-window'
 import WindowCycler from './window-cycler'
@@ -56,7 +57,14 @@ export default class Application {
   }
 
   openAuthenticationWindow() {
-    return new AuthenticationWindow(this.consumerKey, this.consumerSecret, this.callbackUrl);
+    const twitterApi = new TwitterApi({
+      callback: this.callbackUrl,
+      consumerKey: this.consumerKey,
+      consumerSecret: this.consumerSecret
+    });
+    const authenticator = new Authenticator(twitterApi);
+
+    return authenticator.authenticateViaWindow();
   }
 
   openMainWindow() {

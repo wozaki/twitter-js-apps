@@ -29,6 +29,10 @@ class BaseWindow {
     this.browserWindow.webContents.send(...args);
   }
 
+  close(...args) {
+    this.browserWindow.close()
+  }
+
 }
 
 export default BaseWindow
