@@ -6,8 +6,8 @@ class WindowCycler {
 
   prepare() {
     this.window = this.windowConstructor();
-    this.window.browserWindow.hide();
-    this.window.browserWindow.on('closed', () => {
+    this.window.hide();
+    this.window.setClosedHandler(() => {
       if (this.isRunning) {
         this.prepare();
       }
@@ -15,7 +15,7 @@ class WindowCycler {
   }
 
   showWindow() {
-    this.window.browserWindow.show();
+    this.window.show();
   }
 
   stop() {

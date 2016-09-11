@@ -1,16 +1,8 @@
 import { BrowserWindow } from 'electron'
+import BaseWindow from './base-window'
 
-export default class NewTweetWindow {
+export default class NewTweetWindow extends BaseWindow {
   constructor(url) {
-    this.browserWindow = new BrowserWindow({ width: 300, height: 200 }); //TODO: avoid to open in front of another NewTweetWindow
-    this.browserWindow.loadURL(url);
-    this.browserWindow.on('closed', () => {
-      this.browserWindow = null;
-    });
+    super(url, { width: 300, height: 200 });
   }
-
-  show() {
-    this.browserWindow.show();
-  }
-
 }
