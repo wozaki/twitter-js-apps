@@ -101,7 +101,7 @@ export default class Application {
         app.quit();
       })
       .on('reload', () => {
-        mainWindow.window.webContents.reloadIgnoringCache();
+        mainWindow.reload();
       })
       .on('new-tweet', () => {
         this.openNewTweetWindow();

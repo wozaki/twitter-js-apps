@@ -33,6 +33,10 @@ class BaseWindow {
     this.browserWindow.close()
   }
 
+  reload() {
+    this.browserWindow.webContents.reloadIgnoringCache();
+  }
+
 }
 
 export default BaseWindow
