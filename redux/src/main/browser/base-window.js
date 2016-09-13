@@ -37,6 +37,10 @@ class BaseWindow {
     this.browserWindow.webContents.reloadIgnoringCache();
   }
 
+  toggleDevTools() {
+    this.browserWindow.toggleDevTools();
+  }
+
 }
 
 export default BaseWindow

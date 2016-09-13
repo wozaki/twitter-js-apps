@@ -95,7 +95,7 @@ export default class Application {
   setApplicationMenu(mainWindow) {
     new ApplicationMenu()
       .on('open-dev-tools', () => {
-        mainWindow.window.toggleDevTools();
+        mainWindow.toggleDevTools();
       })
       .on('quit', () => {
         app.quit();
