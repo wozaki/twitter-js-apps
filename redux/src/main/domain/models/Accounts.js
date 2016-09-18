@@ -21,6 +21,10 @@ class Accounts {
       .value();
   }
 
+  get asArray() {
+    return this._accounts;
+  }
+
   refresh(account) {
     const rejected = _.reject(this._accounts, e => e.isDummy || e.equals(account));
     const updatedAccounts = _.concat(rejected, account);
