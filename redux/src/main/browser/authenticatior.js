@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import AuthenticationWindow from './authentication-window'
+import Credential from '../domain/models/Credential'
 
 class Authenticator extends EventEmitter {
   constructor(twitterApi) {
@@ -13,15 +14,8 @@ class Authenticator extends EventEmitter {
       this._extractOauthVerifierFromWindow(authUrl, (oauthVerifier) => {
         this.twitterApi.getAccessToken(requestToken, requestTokenSecret, oauthVerifier,
           (error, accessToken, accessTokenSecret, { user_id, screen_name }) => {
-            this.emit(
-              'authentication-succeeded',
-              {
-                accessToken: accessToken,
-                accessTokenSecret: accessTokenSecret,
-                userId: user_id,
-                screenName: screen_name
-              }
-            );
+            const credential = new Credential(user_id, accessToken, accessTokenSecret, screen_name);
+            this.emit('authentication-succeeded', credential);
           });
       });
     });
