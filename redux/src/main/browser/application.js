@@ -113,7 +113,11 @@ export default class Application {
         this.openPreferencesWindow();
       })
       .on('reload', () => {
+        //TODO: broadcast all window
         mainWindow.reload();
+        if (this.preferencesWindow != null) {
+          this.preferencesWindow.reload();
+        }
       })
       .on('new-tweet', () => {
         this.openNewTweetWindow();
