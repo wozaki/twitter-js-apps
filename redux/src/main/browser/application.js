@@ -33,20 +33,20 @@ export default class Application {
     }
   }
 
-  onAuthenticationSucceeded({ accessToken, accessTokenSecret, userId, screenName }) {
+  onAuthenticationSucceeded(credential) {
     const myAccount = {
-      userId: userId,
-      screenName: screenName
+      userId: credential.userId,
+      screenName: credential.screenName
     };
     const twitterCredential = {
       consumerKey: this.consumerKey,
       consumerSecret: this.consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret
+      accessToken: credential.accessToken,
+      accessTokenSecret: credential.accessTokenSecret
     };
 
     this.callback(myAccount, twitterCredential);
-    credentialRepository.store({ accessToken, accessTokenSecret, userId, screenName });
+    credentialRepository.store(credential);
 
     const mainWindow = this.openMainWindow();
     this.setApplicationMenu(mainWindow);

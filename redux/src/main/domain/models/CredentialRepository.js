@@ -1,3 +1,5 @@
+import Credential from './Credential'
+
 const NAME = 'credential';
 
 class CredentialRepository {
@@ -6,13 +8,8 @@ class CredentialRepository {
     this.storage = storage;
   }
 
-  store({ accessToken, accessTokenSecret, userId, screenName }) {
-    const json = {
-      access_token: accessToken,
-      access_token_secret: accessTokenSecret,
-      user_id: userId,
-      screen_name: screenName
-    };
+  store(credential) {
+    const json = credential.toJson;
     const data = JSON.stringify(json);
 
     return this.storage.write(NAME, data);
@@ -26,17 +23,12 @@ class CredentialRepository {
       return null
     }
 
-    return {
-      accessToken: json['access_token'],
-      accessTokenSecret: json['access_token_secret'],
-      userId: json['user_id'],
-      screenName: json['screen_name']
-    }
+    return Credential.fromJson(json);
   }
 
   existsAtLeastOne() {
-    const account = this.restore();
-    return account != null;
+    const credential = this.restore();
+    return credential != null;
   }
 
 }
