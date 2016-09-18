@@ -1,8 +1,8 @@
 import { app } from 'electron'
-import Storage from './storage'
+import FileStorage from './FileStorage'
 import AccountRepository from './account-repository'
 
 const dir = app.getPath('userData');
-const storage = new Storage(dir);
+const storage = new FileStorage(dir);
 
 export const accountRepository = new AccountRepository(storage);

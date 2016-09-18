@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-class Storage {
+class FileStorage {
 
   constructor(dir, enc = 'utf-8') {
     this.dir = dir;
@@ -27,4 +27,4 @@ class Storage {
 
 }
 
-export default Storage
+export default FileStorage
