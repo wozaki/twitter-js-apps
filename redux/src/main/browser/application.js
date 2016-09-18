@@ -73,7 +73,7 @@ export default class Application {
   }
 
   openPreferencesWindow() {
-    new PreferencesWindow();
+    this.preferencesWindow =　new PreferencesWindow();
   }
 
   openNewTweetWindow() {
@@ -100,7 +100,11 @@ export default class Application {
   setApplicationMenu(mainWindow) {
     new ApplicationMenu()
       .on('open-dev-tools', () => {
+        //TODO: broadcast all window
         mainWindow.toggleDevTools();
+        if (this.preferencesWindow != null) {
+          this.preferencesWindow.toggleDevTools();
+        }
       })
       .on('quit', () => {
         app.quit();
