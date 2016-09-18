@@ -1,15 +1,12 @@
-import { BrowserWindow } from 'electron'
+import BaseWindow from './base-window'
 
-export default class PreferencesWindow {
+class PreferencesWindow extends BaseWindow {
   constructor() {
-    this.window = new BrowserWindow({ width: 800, height: 500 });
-    this.window.loadURL(`file://${__dirname}/../renderer/preferences-window.html`);
-    this.window.on('closed', () => {
-      this.window = null;
-    });
-  }
-
-  send(...args) {
-    this.window.webContents.send(...args);
+    super(
+      `file://${__dirname}/../renderer/preferences-window.html`,
+      { width: 800, height: 500 })
+    ;
   }
 }
+
+export default PreferencesWindow
