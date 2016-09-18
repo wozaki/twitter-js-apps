@@ -26,7 +26,8 @@ SideMenuContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {account} = state;
+    const {accounts} = state;
+    const account = accounts.primary;
     return {
         account: account
     }

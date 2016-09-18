@@ -26,7 +26,9 @@ HomeContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { account, timeline } = state;
+  const { accounts, timeline } = state;
+  const account = accounts.primary;
+
   return {
     account: account,
     tweets: timeline,

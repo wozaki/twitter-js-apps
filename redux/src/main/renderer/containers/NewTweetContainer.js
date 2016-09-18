@@ -74,7 +74,7 @@ class NewTweetContainer extends Component {
       <div className="NewTweet">
         <main className="NewTweet-main">
           <div className="NewTweet-main-left">
-            <img className="Tweet-avatar" src={account.profile_image_url}/>
+            <img className="Tweet-avatar" src={account.profileImageUrl}/>
           </div>
           <div className="NewTweet-main-center">
             <textarea
@@ -112,7 +112,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const { account } = state;
+  const { accounts } = state;
+  const account = accounts.primary;
+
   return {
     account: account
   };

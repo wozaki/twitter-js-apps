@@ -9,7 +9,7 @@ export default class SideMenu extends Component {
       <div className="SideMenu">
         <ul className="SideMenu-items">
           <li className="SideMenu-item">
-            <img className="SideMenu-item-avatar" src={account.profile_image_url}/>
+            <img className="SideMenu-item-avatar" src={account.profileImageUrl}/>
           </li>
           <li className="SideMenu-item">
             <Link to="/">
