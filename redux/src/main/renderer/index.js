@@ -10,9 +10,7 @@ import App from './containers/AppContainer'
 import Followers from './containers/FollowersContainer'
 import Following from './containers/FollowingContainer'
 import HomeContainer from './containers/HomeContainer.js'
-import configureStore from './store/configureStore'
-
-const store = configureStore();
+import store from './store/configureStore'
 
 render(
     <Provider store={store}>
