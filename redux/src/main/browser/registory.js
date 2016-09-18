@@ -1,8 +1,8 @@
 import { app } from 'electron'
-import FileStorage from './FileStorage'
-import AccountRepository from './account-repository'
+import FileStorage from '../infrastructure/FileStorage'
+import CredentialRepository from '../domain/models/CredentialRepository'
 
 const dir = app.getPath('userData');
 const storage = new FileStorage(dir);
 
-export const accountRepository = new AccountRepository(storage);
+export const credentialRepository = new CredentialRepository(storage);

@@ -1,6 +1,6 @@
-const NAME = 'account';
+const NAME = 'credential';
 
-class AccountRepository {
+class CredentialRepository {
 
   constructor(storage) {
     this.storage = storage;
@@ -41,4 +41,4 @@ class AccountRepository {
 
 }
 
-export default AccountRepository
+export default CredentialRepository

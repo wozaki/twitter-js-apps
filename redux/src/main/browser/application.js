@@ -5,7 +5,7 @@ import Authenticator from './authenticatior'
 import MainWindow from './main-window'
 import NewTweetWindow from './new-tweet-window'
 import WindowCycler from './window-cycler'
-import { accountRepository } from './registory'
+import { credentialRepository } from './registory'
 
 export default class Application {
 
@@ -24,9 +24,9 @@ export default class Application {
   }
 
   onReady() {
-    if (accountRepository.existsAtLeastOne()) {
-      const account = accountRepository.restore();
-      this.onAuthenticationSucceeded(account);
+    if (credentialRepository.existsAtLeastOne()) {
+      const credential = credentialRepository.restore();
+      this.onAuthenticationSucceeded(credential);
     } else {
       this.openAuthenticationWindow()
         .on('authentication-succeeded', this.onAuthenticationSucceeded.bind(this));
@@ -46,7 +46,7 @@ export default class Application {
     };
 
     this.callback(myAccount, twitterCredential);
-    accountRepository.store({ accessToken, accessTokenSecret, userId, screenName });
+    credentialRepository.store({ accessToken, accessTokenSecret, userId, screenName });
 
     const mainWindow = this.openMainWindow();
     this.setApplicationMenu(mainWindow);
