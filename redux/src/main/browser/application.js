@@ -72,8 +72,8 @@ export default class Application {
     return new MainWindow(this.mainWindowUrl);
   }
 
-  openPreferencesWindow() {
-    this.preferencesWindow =　new PreferencesWindow();
+  openPreferencesWindow(mainWindow) {
+    this.preferencesWindow =　new PreferencesWindow(mainWindow);
   }
 
   openNewTweetWindow() {
@@ -110,7 +110,7 @@ export default class Application {
         app.quit();
       })
       .on('open-preferences', () => {
-        this.openPreferencesWindow();
+        this.openPreferencesWindow(mainWindow);
       })
       .on('reload', () => {
         //TODO: broadcast all window
