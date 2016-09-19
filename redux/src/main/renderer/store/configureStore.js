@@ -1,11 +1,15 @@
-import {createStore, applyMiddleware} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from '../reducers'
+import persistState from 'redux-localstorage'
 
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+const KEY_REDUX_LOCAL_STORAGE = "persistent_states";
+const persistentStates = ['account'];
 
-export default function configureStore(initialState) {
-    const store = createStoreWithMiddleware(rootReducer, initialState);
+const enhancer = compose(
+  applyMiddleware(thunkMiddleware),
+  persistState(persistentStates, { key: KEY_REDUX_LOCAL_STORAGE }),
+);
+const store = createStore(rootReducer, enhancer);
 
-    return store;
-}
+export default store

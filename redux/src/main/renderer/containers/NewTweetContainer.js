@@ -10,10 +10,8 @@ import Tweet from '../../domain/models/Tweet';
 
 class NewTweetContainer extends Component {
 
-  componentWillMount() {
-    const { setUp } = this.props.actions;
-    setUp();
-
+  constructor(props) {
+    super(props);
     this.state = this.initialState();
   }
 
