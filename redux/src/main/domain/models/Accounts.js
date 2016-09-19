@@ -53,7 +53,7 @@ class Account extends Entity {
   }
 
   get isPrimary() {
-    return this._isPrimary && this.isDummy;
+    return this._isPrimary;
   }
 
   get isDummy() {
