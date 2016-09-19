@@ -57,7 +57,7 @@ export default class Application {
     this.newTweetWindow.prepare()
   }
 
-  openAuthenticationWindow() {
+  openAuthenticationWindow(force = false) {
     const twitterApi = new TwitterApi({
       callback: this.callbackUrl,
       consumerKey: this.consumerKey,
@@ -65,7 +65,7 @@ export default class Application {
     });
     const authenticator = new Authenticator(twitterApi);
 
-    return authenticator.authenticateViaWindow();
+    return authenticator.authenticateViaWindow(force);
   }
 
   openMainWindow() {
