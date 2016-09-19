@@ -2,6 +2,7 @@ import {ipcRenderer} from 'electron'
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import SideMenu from '../components/SideMenu'
+import { Accounts } from '../../domain/models/Accounts'
 
 class SideMenuContainer extends Component {
     render() {
@@ -27,7 +28,8 @@ SideMenuContainer.propTypes = {
 
 function mapStateToProps(state) {
     const {accounts} = state;
-    const account = accounts.primary;
+    const account = Accounts.fromJson(accounts).primary;
+
     return {
         account: account
     }

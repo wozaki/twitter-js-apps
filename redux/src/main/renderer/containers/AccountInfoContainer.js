@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import LinkItem from '../components/LinkItem';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
+import { Accounts } from '../../domain/models/Accounts'
 
 class AccountInfoContainer extends Component {
   render() {
@@ -25,7 +26,7 @@ AccountInfoContainer.propTypes = {
 
 function mapStateToProps(state) {
   const { accounts } = state;
-  const account = accounts.primary;
+  const account = Accounts.fromJson(accounts).primary;
 
   return {
     account: account,

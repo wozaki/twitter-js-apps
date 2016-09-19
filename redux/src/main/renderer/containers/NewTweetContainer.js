@@ -7,6 +7,7 @@ import * as appActions from '../actions/app';
 import * as tweetActions from '../actions/tweet';
 import keyStringDetector from '../registries/keyStringDetector';
 import Tweet from '../../domain/models/Tweet';
+import { Accounts } from '../../domain/models/Accounts'
 
 class NewTweetContainer extends Component {
 
@@ -113,7 +114,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const { accounts } = state;
-  const account = accounts.primary;
+  const account = Accounts.fromJson(accounts).primary;
 
   return {
     account: account

@@ -1,13 +1,41 @@
+import _ from 'lodash';
 import { RECEIVED_ACCOUNT } from '../constants/ActionTypes';
-import { Accounts, Account } from '../../domain/models/Accounts';
 
-const initialState = Accounts.dummy;
+const initialState = [{
+  created_at: null,
+  followers_count: null,
+  friends_count: null,
+  id_str: null,
+  name: null,
+  profile_image_url: null,
+  protected: null,
+  screen_name: null,
+  statuses_count: null,
+  is_initial_state: true
+}];
 
-export default function account(state = initialState, action) {
+function createAccountFrom(action) {
+  return {
+    created_at: action.user.created_at,
+    followers_count: action.user.followers_count,
+    friends_count: action.user.friends_count,
+    id_str: action.user.id_str,
+    name: action.user.name,
+    profile_image_url: action.user.profile_image_url,
+    protected: action.user.protected,
+    screen_name: action.user.screen_name,
+    statuses_count: action.user.statuses_count
+  }
+}
+
+export default function accounts(state = initialState, action) {
   switch (action.type) {
     case RECEIVED_ACCOUNT:
-      const receivedAccount = Account.fromJson(action.user, true);
-      return state.refresh(receivedAccount);
+      if (state[0].is_initial_state) {
+        return [createAccountFrom(action)];
+      }
+      const rejected = _.reject(state, (s) => s.id_str == action.user.id_str);
+      return _.concat(rejected, createAccountFrom(action));
     default:
       return state;
   }
