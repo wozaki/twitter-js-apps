@@ -35,7 +35,7 @@ class Authenticator extends EventEmitter {
         });
       } else if (matched = authedUrl.match(/&redirect_after_login_verification=([^&]*)/)) {
         window.onDidGetRedirectRequest((newUrl) => {
-          this._getAccessTokenFromWindow(newUrl);
+          this._extractOauthVerifierFromWindow(newUrl);
         });
       }
     });
