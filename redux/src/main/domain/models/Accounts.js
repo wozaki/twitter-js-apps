@@ -6,6 +6,11 @@ class Accounts {
     this._accounts = accounts;
   }
 
+  static fromJson(json) {
+    const accounts = json.map(j => Account.fromJson(j, true));
+    return new Accounts(accounts);
+  }
+
   static get dummy() {
     return new Accounts([Account.dummy]);
   }
