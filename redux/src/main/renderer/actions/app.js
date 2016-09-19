@@ -8,7 +8,7 @@ export function setUp() {
     twitterClient
       .fetchUser()
       .then(user => {
-          dispatch(receivedAccount(user));
+          dispatch(receivedAccount(user, true));
           dispatch(fetchHomeTimeline());
           dispatch(subscribeStream(user.id_str));
         })

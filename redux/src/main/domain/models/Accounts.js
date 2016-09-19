@@ -7,12 +7,8 @@ class Accounts {
   }
 
   static fromJson(json) {
-    const accounts = json.map(j => Account.fromJson(j, true));
+    const accounts = json.map(j => Account.fromJson(j));
     return new Accounts(accounts);
-  }
-
-  static get dummy() {
-    return new Accounts([Account.dummy]);
   }
 
   get primary() {
@@ -29,28 +25,16 @@ class Accounts {
   get asArray() {
     return this._accounts;
   }
-
-  refresh(account) {
-    const rejected = _.reject(this._accounts, e => e.isDummy || e.equals(account));
-    const updatedAccounts = _.concat(rejected, account);
-    return new Accounts(updatedAccounts);
-  }
 }
 
 class Account extends Entity {
-  constructor(raw, isPrimary, isDummy) {
+  constructor(raw) {
     super(raw.id_str);
     this._raw = raw;
-    this._isPrimary = isPrimary;
-    this._isDummy = isDummy;
   }
 
-  static get dummy() {
-    return new Account({}, false, true);
-  }
-
-  static fromJson(userJson, isPrimary) {
-    return new this(userJson, isPrimary, false);
+  static fromJson(userJson) {
+    return new this(userJson);
   }
 
   get id() {
@@ -58,11 +42,7 @@ class Account extends Entity {
   }
 
   get isPrimary() {
-    return this._isPrimary;
-  }
-
-  get isDummy() {
-    return this._isDummy;
+    return this._raw.is_primary;
   }
 
   get profileImageUrl() {

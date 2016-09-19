@@ -13,9 +13,10 @@ export function fetchAccount() {
   };
 }
 
-export function receivedAccount(user) {
+export function receivedAccount(user, isPrimary) {
   return {
     type: types.RECEIVED_ACCOUNT,
-    user
+    user,
+    is_primary: isPrimary
   };
 }

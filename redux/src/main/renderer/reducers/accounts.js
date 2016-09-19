@@ -11,7 +11,8 @@ const initialState = [{
   protected: null,
   screen_name: null,
   statuses_count: null,
-  is_initial_state: true
+  is_initial_state: true,
+  is_primary: true
 }];
 
 function createAccountFrom(action) {
@@ -24,7 +25,8 @@ function createAccountFrom(action) {
     profile_image_url: action.user.profile_image_url,
     protected: action.user.protected,
     screen_name: action.user.screen_name,
-    statuses_count: action.user.statuses_count
+    statuses_count: action.user.statuses_count,
+    is_primary: action.is_primary
   }
 }
 
