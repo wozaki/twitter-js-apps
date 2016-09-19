@@ -3,12 +3,12 @@ import thunkMiddleware from 'redux-thunk';
 import rootReducer from '../reducers'
 import persistState from 'redux-localstorage'
 
-const KEY_STORE_LOCAL_STORAGE = "store_local_storage";
+const KEY_REDUX_LOCAL_STORAGE = "persistent_states";
 const persistentStates = ['account'];
 
 const enhancer = compose(
   applyMiddleware(thunkMiddleware),
-  persistState(persistentStates, { key: KEY_STORE_LOCAL_STORAGE }),
+  persistState(persistentStates, { key: KEY_REDUX_LOCAL_STORAGE }),
 );
 const store = createStore(rootReducer, enhancer);
 
