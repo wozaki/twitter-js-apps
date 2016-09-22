@@ -1,8 +1,11 @@
+import _ from 'lodash';
 import { ipcRenderer } from 'electron';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import SideMenu from '../components/SideMenu';
 import { Accounts } from '../../domain/models/Accounts';
+import * as accountActions from '../actions/account';
 
 class SideMenuContainer extends Component {
 
@@ -10,9 +13,9 @@ class SideMenuContainer extends Component {
     ipcRenderer.send('open-new-tweet-window');
   }
 
-  onClickSubAccount() {
-    //TODO
-    console.log('onClickSubAccount!!');
+  onClickSubAccount(account) {
+    const { switchPrimaryAccount } = this.props.actions;
+    switchPrimaryAccount(account.id)
   }
 
   render() {
@@ -23,7 +26,7 @@ class SideMenuContainer extends Component {
         account={account}
         subAccounts={subAccounts}
         onClickedNewTweet={this.onClickedNewTweet.bind(this)}
-        onClickSubAccount={this.onClickSubAccount.bind(this)}
+        onClickSubAccount={(account) => this.onClickSubAccount(account)}
       />
     );
   }
@@ -33,6 +36,13 @@ class SideMenuContainer extends Component {
 SideMenuContainer.propTypes = {
   account: PropTypes.object.isRequired
 };
+
+function mapDispatchToProps(dispatch) {
+  const actions = _.assign({}, accountActions);
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
 
 function mapStateToProps(state) {
   const { accounts } = state;
@@ -46,4 +56,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SideMenuContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SideMenuContainer);

@@ -41,7 +41,7 @@ export default class SideMenu extends Component {
 
     return subAccounts.map((account) => {
       return (
-        <li className="SideMenu-item" onClick={onClickSubAccount}>
+        <li className="SideMenu-item" onClick={() => onClickSubAccount(account)}>
           <img className="SideMenu-item-avatar" src={account.profileImageUrl}/>
         </li>
       )
