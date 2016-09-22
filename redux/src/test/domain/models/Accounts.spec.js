@@ -1,25 +1,23 @@
 import expect from 'expect'
 import { Accounts, Account } from '../../../main/domain/models/Accounts'
-import * as twitterFixture from '../../fixtures/twitter'
+import * as accountFixture from '../../fixtures/account'
 
-const accountFixture = twitterFixture.account;
-const accountFixture2 = twitterFixture.account2;
+const primaryAccountFixture = accountFixture.primaryAccount;
 
 describe('Account', () => {
   describe('properties', () => {
     let subject;
     beforeEach(() => {
-      subject = new Account(accountFixture);
+      subject = new Account(primaryAccountFixture);
     });
 
     it('returns same value as json', () => {
-      expect(subject.id).toEqual(accountFixture.id_str);
-      expect(subject.profileImageUrl).toEqual(accountFixture.profile_image_url);
-      expect(subject.screenName).toEqual(accountFixture.screen_name);
-      expect(subject.tweetCount).toEqual(accountFixture.statuses_count);
-      expect(subject.followersCount).toEqual(accountFixture.followers_count);
-      expect(subject.followingCount).toEqual(accountFixture.friends_count);
+      expect(subject.id).toEqual(primaryAccountFixture.id_str);
+      expect(subject.profileImageUrl).toEqual(primaryAccountFixture.profile_image_url);
+      expect(subject.screenName).toEqual(primaryAccountFixture.screen_name);
+      expect(subject.tweetCount).toEqual(primaryAccountFixture.statuses_count);
+      expect(subject.followersCount).toEqual(primaryAccountFixture.followers_count);
+      expect(subject.followingCount).toEqual(primaryAccountFixture.friends_count);
     });
   });
-
 });
