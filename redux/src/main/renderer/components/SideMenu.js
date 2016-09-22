@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 export default class SideMenu extends Component {
   render() {
     const { account, onClickedNewTweet } = this.props;
+    const subAccountList = this._renderSubAccounts();
 
     return (
       <div className="SideMenu">
@@ -29,9 +30,22 @@ export default class SideMenu extends Component {
           <li className="SideMenu-item" onClick={onClickedNewTweet}>
             <i className="fa fa-pencil-square-o SideMenu-item-icon"></i>
           </li>
+          {subAccountList}
         </ul>
       </div>
     );
+  }
+
+  _renderSubAccounts() {
+    const { subAccounts, onClickSubAccount } = this.props;
+
+    return subAccounts.map((account) => {
+      return (
+        <li className="SideMenu-item" onClick={onClickSubAccount}>
+          <img className="SideMenu-item-avatar" src={account.profileImageUrl}/>
+        </li>
+      )
+    })
   }
 
 }

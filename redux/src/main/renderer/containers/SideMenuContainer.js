@@ -10,13 +10,20 @@ class SideMenuContainer extends Component {
     ipcRenderer.send('open-new-tweet-window');
   }
 
+  onClickSubAccount() {
+    //TODO
+    console.log('onClickSubAccount!!');
+  }
+
   render() {
-    const { account } = this.props;
+    const { account, subAccounts } = this.props;
 
     return (
       <SideMenu
         account={account}
+        subAccounts={subAccounts}
         onClickedNewTweet={this.onClickedNewTweet.bind(this)}
+        onClickSubAccount={this.onClickSubAccount.bind(this)}
       />
     );
   }
@@ -29,10 +36,13 @@ SideMenuContainer.propTypes = {
 
 function mapStateToProps(state) {
   const { accounts } = state;
-  const account = Accounts.fromJson(accounts).primary;
+  const _accounts = Accounts.fromJson(accounts);
+  const account = _accounts.primary;
+  const subAccounts = _accounts.subAccounts;
 
   return {
-    account: account
+    account: account,
+    subAccounts: subAccounts,
   };
 }
 
