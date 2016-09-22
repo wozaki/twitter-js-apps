@@ -11,11 +11,10 @@ class Accounts {
     return new Accounts(accounts);
   }
 
+  /**
+   * @returns {Account|undefined}
+   */
   get primary() {
-    if (this._accounts.length === 1) {
-      return _.head(this._accounts);
-    }
-
     return _.chain(this._accounts)
       .filter(account => account.isPrimary)
       .head()

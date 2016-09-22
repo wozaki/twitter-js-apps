@@ -27,3 +27,17 @@ export const subAccount = {
   is_initial_state: false,
   is_primary: false
 };
+
+export const subAccount2 = {
+  created_at: "Sat May 11 17:58:22 +0000 2009",
+  followers_count: 21,
+  friends_count: 182,
+  id_str: "58895958",
+  name: "Sean Cook sub2",
+  profile_image_url: "http://2a0.twimg.com/profile_images/1751506047/dead_sexy_normal.JPG",
+  protected: false,
+  screen_name: "theSeanCookSub2",
+  statuses_count: 2222,
+  is_initial_state: false,
+  is_primary: false
+};
