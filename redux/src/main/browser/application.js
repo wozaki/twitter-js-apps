@@ -81,9 +81,15 @@ export default class Application {
   }
 
   subscribeRendererEvent() {
-    ipcMain.on('open-new-tweet-window', () => {
-      this.openNewTweetWindow();
-    });
+    ipcMain
+      .on('open-new-tweet-window', () => {
+        this.openNewTweetWindow();
+      })
+      .on('add-account', (event) => {
+        this.openAuthenticationWindow(true).on('authentication-succeeded', (credential) => {
+          event.sender.send('added-account', credential);
+        });
+      })
   }
 
   registerApplicationCallbacks() {
