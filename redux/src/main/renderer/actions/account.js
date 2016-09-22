@@ -1,15 +1,17 @@
 import * as types from '../constants/ActionTypes';
-import twitterClient from '../registries/twitterClient';
 import { onError } from './error-handler';
+import twitterAction from './twitterAction';
 
-export function fetchAccount() {
+export function fetchAccount(credential, isPrimary) {
   return dispatch => {
-    twitterClient
-      .fetchUser()
-      .then(user => {
-        dispatch(receivedAccount(user));
-      })
-      .catch(error => dispatch(onError(error)));
+    twitterAction(credential, (twitterClient) => {
+      twitterClient
+        .fetchUser()
+        .then(user => {
+          dispatch(receivedAccount(user, isPrimary));
+        })
+        .catch(error => dispatch(onError(error)));
+    });
   };
 }
 
