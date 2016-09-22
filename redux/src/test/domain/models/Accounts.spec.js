@@ -18,6 +18,7 @@ describe('Account', () => {
       expect(subject.tweetCount).toEqual(primaryAccountFixture.statuses_count);
       expect(subject.followersCount).toEqual(primaryAccountFixture.followers_count);
       expect(subject.followingCount).toEqual(primaryAccountFixture.friends_count);
+      expect(subject.isPrimary).toEqual(primaryAccountFixture.is_primary);
     });
   });
 });
