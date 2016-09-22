@@ -22,3 +22,10 @@ export function receivedAccount(user, isPrimary) {
     is_primary: isPrimary
   };
 }
+
+export function switchPrimaryAccount(accountId) {
+  return {
+    type: types.SWITCH_PRIMARY_ACCOUNT,
+    accountId,
+  };
+}

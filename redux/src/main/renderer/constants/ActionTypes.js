@@ -1,4 +1,6 @@
+// account
 export const RECEIVED_ACCOUNT = 'RECEIVED_ACCOUNT';
+export const SWITCH_PRIMARY_ACCOUNT = 'SWITCH_PRIMARY_ACCOUNT';
 
 
 // home timeline
