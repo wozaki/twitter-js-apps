@@ -11,6 +11,9 @@ import Followers from './containers/FollowersContainer'
 import Following from './containers/FollowingContainer'
 import HomeContainer from './containers/HomeContainer.js'
 import store from './store/configureStore'
+import * as registries from './registries/electron'
+
+window.registries = registries;
 
 render(
     <Provider store={store}>
