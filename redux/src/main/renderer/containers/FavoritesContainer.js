@@ -5,23 +5,24 @@ import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
 import TweetsContainer from '../containers/TweetsContainer';
 import * as favoriteActions from '../actions/favorite';
-import my from '../registries/my';
+import { Accounts } from '../../domain/models/Accounts'
 
 class FavoritesContainer extends Component {
 
   componentWillMount() {
+    const { account } = this.props;
     const { fetchMyFavorites } = this.props.actions;
-    fetchMyFavorites(my.userId);
+    fetchMyFavorites(account.id);
   }
 
   render() {
-    const { favorites } = this.props;
+    const { favorites, account } = this.props;
     const { fetchMyFavoritesOlderThan } = this.props.actions;
 
     return (
       <TweetsContainer
         tweets={favorites}
-        fetchOldTweet={(offsetTweetId) => fetchMyFavoritesOlderThan(my.userId, offsetTweetId)}
+        fetchOldTweet={(offsetTweetId) => fetchMyFavoritesOlderThan(account.userId, offsetTweetId)}
         />
     );
   }
@@ -34,8 +35,11 @@ FavoritesContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { favorites } = state;
+  const { favorites, accounts } = state;
+  const account = Accounts.fromJson(accounts).primary;
+
   return {
+    account: account,
     favorites: favorites,
     title: 'Favorites',
     isLoading: favorites.tweets.length == 0
