@@ -25,7 +25,7 @@ export function receivedAccount(user, isPrimary) {
 
 export function switchPrimaryAccount(accountId) {
   return {
-    type: types.SWITCH_PRIMARY_ACCOUNT,
+    type: types.SWITCHED_PRIMARY_ACCOUNT,
     accountId,
   };
 }
