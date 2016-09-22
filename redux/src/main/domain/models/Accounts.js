@@ -48,6 +48,13 @@ class Account extends Entity {
     return this._raw.id_str;
   }
 
+  /**
+   * @returns {Credential}
+   */
+  get credential() {
+    return this._raw.credential;
+  }
+
   get isPrimary() {
     return this._raw.is_primary;
   }

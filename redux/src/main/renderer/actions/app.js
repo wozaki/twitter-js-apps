@@ -1,22 +1,24 @@
-import twitterClient from '../registries/twitterClient';
 import { receivedAccount } from './account';
 import { fetchHomeTimeline, receivedHomeTimeline } from './timeline';
 import { onError } from './error-handler';
+import twitterAction from './twitterAction';
 
-export function setUp() {
+export function setUp(credential) {
   return dispatch => {
-    twitterClient
-      .fetchUser()
-      .then(user => {
-          dispatch(receivedAccount(user, true));
-          dispatch(fetchHomeTimeline());
-          dispatch(subscribeStream(user.id_str));
+    twitterAction(credential, (twitterClient) => {
+      twitterClient
+        .fetchUser()
+        .then(user => {
+          dispatch(receivedAccount(user, credential, true));
+          dispatch(fetchHomeTimeline(credential));
+          dispatch(subscribeStream(twitterClient, user.id_str));
         })
-      .catch(error => dispatch(onError(error)));
-  };
+        .catch(error => dispatch(onError(error)));
+    });
+  }
 }
 
-function subscribeStream(userId) {
+function subscribeStream(twitterClient, userId) {
   return dispatch => {
     twitterClient.subscribeUserStream(userId)
       .on('tweet', (data) => {

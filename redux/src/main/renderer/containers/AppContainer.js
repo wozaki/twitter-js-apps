@@ -6,11 +6,13 @@ import { remote } from 'electron'
 import * as appActions from '../actions/app';
 import SideMenuContainer from '../containers/SideMenuContainer';
 
+const credential = remote.getGlobal('credential');
+
 class AppContainer extends Component {
   componentDidMount() {
     const { setUp } = this.props.actions;
 
-    setUp();
+    setUp(credential);
   }
 
   showErrorDialogIfNeeded() {

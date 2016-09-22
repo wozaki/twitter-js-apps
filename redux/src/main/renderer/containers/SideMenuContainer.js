@@ -14,8 +14,8 @@ class SideMenuContainer extends Component {
   }
 
   onClickSubAccount(account) {
-    const { switchPrimaryAccount } = this.props.actions;
-    switchPrimaryAccount(account.id)
+    const { switchPrimaryAccountTo } = this.props.actions;
+    switchPrimaryAccountTo(account)
   }
 
   render() {

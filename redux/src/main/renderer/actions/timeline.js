@@ -1,15 +1,18 @@
 import * as types from '../constants/ActionTypes';
-import {timelineUsecase} from '../registries/usecases';
+import { timelineUsecase } from '../registries/usecases';
 import { onError } from './error-handler';
+import twitterAction from './twitterAction';
 
-export function fetchHomeTimeline() {
+export function fetchHomeTimeline(credential) {
   return dispatch => {
-    timelineUsecase
-      .fetchHomeTweets()
-      .then(tweets => {
-        dispatch(receivedHomeTimeline(tweets));
-      })
-      .catch(error => dispatch(onError(error)));
+    twitterAction(credential, (twitterClient) => {
+      timelineUsecase(twitterClient)
+        .fetchHomeTweets()
+        .then(tweets => {
+          dispatch(receivedHomeTimeline(tweets));
+        })
+        .catch(error => dispatch(onError(error)));
+    });
   };
 }
 

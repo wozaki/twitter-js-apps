@@ -3,6 +3,7 @@ import { RECEIVED_ACCOUNT, SWITCHED_PRIMARY_ACCOUNT } from '../constants/ActionT
 
 const initialState = [{
   created_at: null,
+  credential: null,
   followers_count: null,
   friends_count: null,
   id_str: null,
@@ -18,6 +19,7 @@ const initialState = [{
 function createAccountFrom(action) {
   return {
     created_at: action.user.created_at,
+    credential: action.credential,
     followers_count: action.user.followers_count,
     friends_count: action.user.friends_count,
     id_str: action.user.id_str,
