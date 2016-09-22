@@ -1,38 +1,39 @@
-import {ipcRenderer} from 'electron'
+import { ipcRenderer } from 'electron';
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux'
-import SideMenu from '../components/SideMenu'
-import { Accounts } from '../../domain/models/Accounts'
+import { connect } from 'react-redux';
+import SideMenu from '../components/SideMenu';
+import { Accounts } from '../../domain/models/Accounts';
 
 class SideMenuContainer extends Component {
-    render() {
-        const {account} = this.props;
 
-        return (
-            <SideMenu
-                account={account}
-                onClickedNewTweet={this.onClickedNewTweet.bind(this)}
-                />
-        );
-    }
+  onClickedNewTweet() {
+    ipcRenderer.send('open-new-tweet-window');
+  }
 
-    onClickedNewTweet() {
-        ipcRenderer.send('open-new-tweet-window');
-    }
+  render() {
+    const { account } = this.props;
+
+    return (
+      <SideMenu
+        account={account}
+        onClickedNewTweet={this.onClickedNewTweet.bind(this)}
+      />
+    );
+  }
 
 }
 
 SideMenuContainer.propTypes = {
-    account: PropTypes.object.isRequired
+  account: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-    const {accounts} = state;
-    const account = Accounts.fromJson(accounts).primary;
+  const { accounts } = state;
+  const account = Accounts.fromJson(accounts).primary;
 
-    return {
-        account: account
-    }
+  return {
+    account: account
+  };
 }
 
-export default connect(mapStateToProps)(SideMenuContainer)
+export default connect(mapStateToProps)(SideMenuContainer);
