@@ -26,11 +26,12 @@ describe('Account', () => {
 });
 
 describe('Accounts', () => {
+  const primaryAccount = new Account(primaryAccountFixture);
+  const subAccount = new Account(subAccountFixture);
+  const subAccount2 = new Account(subAccount2Fixture);
+
   describe('#primary', () => {
     let subject;
-    const primaryAccount = new Account(primaryAccountFixture);
-    const subAccount = new Account(subAccountFixture);
-    const subAccount2 = new Account(subAccount2Fixture);
 
     context('when having primary Account', () => {
       beforeEach(() => {
@@ -57,6 +58,44 @@ describe('Accounts', () => {
 
       it('returns undefined', () => {
         expect(subject).toEqual(undefined);
+      });
+    });
+  });
+
+
+  describe('#subAccounts', () => {
+    let subject;
+
+    context('when having 2 sub Accounts', () => {
+      beforeEach(() => {
+        const accounts = new Accounts([
+          primaryAccount,
+          subAccount,
+          subAccount2,
+        ]);
+        subject = accounts.subAccounts;
+      });
+
+      it('returns 2 accounts', () => {
+        expect(subject.length).toEqual(2);
+      });
+
+      it('returns sub accounts', () => {
+        expect(subject[0]).toEqual(subAccount);
+        expect(subject[1]).toEqual(subAccount2);
+      });
+    });
+
+    context('when having only primary Account', () => {
+      beforeEach(() => {
+        const accounts = new Accounts([
+          primaryAccount
+        ]);
+        subject = accounts.subAccounts;
+      });
+
+      it('returns empty array', () => {
+        expect(subject).toEqual([]);
       });
     });
   });

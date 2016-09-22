@@ -21,6 +21,14 @@ class Accounts {
       .value();
   }
 
+  /**
+   * @returns {[Account] | []}
+   */
+  get subAccounts() {
+    const primaryAccount = this.primary;
+    return _.reject(this._accounts, (a) => a.id == primaryAccount.id);
+  }
+
   get asArray() {
     return this._accounts;
   }
