@@ -9,7 +9,7 @@ export function fetchHomeTimeline(credential) {
       timelineUsecase(twitterClient)
         .fetchHomeTweets()
         .then(tweets => {
-          dispatch(receivedHomeTimeline(tweets));
+          dispatch(refreshHomeTimeline(tweets));
         })
         .catch(error => dispatch(onError(error)));
     });
@@ -34,6 +34,13 @@ export function fetchOldHomeTimeline(tweetId) {
 export function receivedHomeTimeline(tweets) {
   return {
     type: types.RECEIVED_HOME_TIMELINE,
+    tweets
+  };
+}
+
+function refreshHomeTimeline(tweets) {
+  return {
+    type: types.REFRESH_HOME_TIMELINE,
     tweets
   };
 }

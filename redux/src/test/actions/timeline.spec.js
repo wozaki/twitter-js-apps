@@ -14,7 +14,7 @@ describe('timeline actions', () => {
     timelineActions.__set__('timelineUsecase', (mockTwitterClient) => stub);
   }
 
-  it('fetchHomeTimeline should create RECEIVED_HOME_TIMELINE', (done) => {
+  it('fetchHomeTimeline should create REFRESH_HOME_TIMELINE', (done) => {
     const fixtureTweets = "123";
     const stubTimelineUsecase = sinon.createStubInstance(TimelineUsecase);
     stubTimelineUsecase.fetchHomeTweets
@@ -23,7 +23,7 @@ describe('timeline actions', () => {
     stubUsecase(stubTimelineUsecase);
 
     const expectedActions = [
-      { type: types.RECEIVED_HOME_TIMELINE, tweets: fixtureTweets }
+      { type: types.REFRESH_HOME_TIMELINE, tweets: fixtureTweets }
     ];
     const store = mockStore({}, expectedActions, done);
     store.dispatch(timelineActions.fetchHomeTimeline(null));
