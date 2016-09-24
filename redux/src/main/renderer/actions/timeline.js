@@ -21,6 +21,7 @@ export function fetchHomeTimeline(credential) {
  */
 export function fetchOldHomeTimeline(tweetId) {
   return dispatch => {
+    //TODO: pass twitterClient
     timelineUsecase
       .fetchHomeTweetsOlderThan(tweetId)
       .then(tweets => {
