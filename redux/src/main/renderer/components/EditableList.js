@@ -16,12 +16,14 @@ class EditableList extends Component {
   }
 
   _getSelectedItem() {
-    const { onSelectItem, selected } = this.props;
+    const { selected } = this.state;
+    const { items } = this.props;
 
-    if (onSelectItem) {
+    if (selected) {
       return selected;
+    } else {
+      return _.head(items);
     }
-    return this.state.selected;
   };
 
   _selectItem(item, idx) {
