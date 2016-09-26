@@ -26,7 +26,7 @@ class PreferencesContainer extends Component {
 
     ipcRenderer.send('add-account');
     ipcRenderer.on('added-account', (event, credential) => {
-      fetchAccount(credential);
+      fetchAccount(credential, false);
     });
   }
 
