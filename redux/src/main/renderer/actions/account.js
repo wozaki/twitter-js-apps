@@ -1,7 +1,8 @@
 import * as types from '../constants/ActionTypes';
 import { onError } from './error-handler';
 import twitterAction from './twitterAction';
-import { setUp } from './app';
+import { subscribeStream } from './app';
+import { fetchHomeTimeline } from './timeline';
 
 export function fetchAccount(credential, isPrimary) {
   return dispatch => {
@@ -26,7 +27,20 @@ export function receivedAccount(user, credential, isPrimary) {
 }
 
 export function switchPrimaryAccountTo(account) {
+  const credential = account.credential;
+
   return dispatch => {
-    dispatch(setUp(account.credential))
+    twitterAction(credential, (twitterClient) => {
+      dispatch(fetchHomeTimeline(credential));
+      dispatch(subscribeStream(twitterClient, account.id));
+      dispatch(switchedPrimaryAccountTo(account.id));
+    });
+  };
+}
+
+function switchedPrimaryAccountTo(accountId) {
+  return {
+    type: types.SWITCHED_PRIMARY_ACCOUNT,
+    accountId
   };
 }

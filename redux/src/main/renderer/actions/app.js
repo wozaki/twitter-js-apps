@@ -18,7 +18,7 @@ export function setUp(credential) {
   }
 }
 
-function subscribeStream(twitterClient, userId) {
+export function subscribeStream(twitterClient, userId) {
   return dispatch => {
     twitterClient.subscribeUserStream(userId)
       .on('tweet', (data) => {
