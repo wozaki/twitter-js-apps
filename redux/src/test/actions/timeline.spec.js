@@ -1,17 +1,16 @@
-import expect from 'expect'
 import sinon from 'sinon'
-import rewire from 'rewire'
 import * as types from '../../main/renderer/constants/ActionTypes'
 import mockStore from '../action-helper'
 import TimelineUsecase from '../../main/domain/usecases/TimelineUsecase'
+import timelineActions from '../../main/renderer/actions/timeline'
+import { fetchHomeTimeline } from '../../main/renderer/actions/timeline'
 
-let timelineActions = rewire('../../main/renderer/actions/timeline');
 const dummyTwitterClient = {};
 
 describe('timeline actions', () => {
   function stubUsecase(stub) {
-    timelineActions.__set__('twitterAction', (credential, action) => action(dummyTwitterClient));
-    timelineActions.__set__('timelineUsecase', (mockTwitterClient) => stub);
+    timelineActions.__Rewire__('twitterAction', (credential, action) => action(dummyTwitterClient));
+    timelineActions.__Rewire__('timelineUsecase', (mockTwitterClient) => stub);
   }
 
   it('fetchHomeTimeline should create REFRESH_HOME_TIMELINE', (done) => {
@@ -26,7 +25,7 @@ describe('timeline actions', () => {
       { type: types.REFRESH_HOME_TIMELINE, tweets: fixtureTweets }
     ];
     const store = mockStore({}, expectedActions, done);
-    store.dispatch(timelineActions.fetchHomeTimeline(null));
+    store.dispatch(fetchHomeTimeline(null));
   });
 
   //TODO: ref redux/src/main/renderer/actions/timeline.js:24
