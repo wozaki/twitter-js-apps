@@ -67,7 +67,7 @@ class EditableList extends Component {
 
     const classes = classNames({
       'list-item': true,
-      'selected': item === this._getSelectedItem(),
+      'is-selected': item === this._getSelectedItem(),
       'editing': idx === editingIndex,
       'with-edit-icon': this.props.showEditIcon && editingIndex !== idx,
     });
@@ -115,8 +115,10 @@ class EditableList extends Component {
     const items = this.props.items.map((item, idx) => this._renderItem(item, idx));
 
     return (
-      <div>
+      <div className="EditableList">
+        <div className="EditableList-items-wrapper">
         {items}
+        </div>
         {this._renderButtons()}
       </div>
     );

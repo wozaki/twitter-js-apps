@@ -1,0 +1,10 @@
+@import "../variables";
+
+.EditableList {
+  &-items-wrapper {
+    .is-selected {
+      background-color: $component-active-background-color;
+      color: $component-active-color;
+    }
+  }
+}
