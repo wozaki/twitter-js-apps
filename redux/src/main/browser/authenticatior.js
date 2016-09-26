@@ -8,9 +8,9 @@ class Authenticator extends EventEmitter {
     this.twitterApi = twitterApi;
   }
 
-  authenticateViaWindow() {
+  authenticateViaWindow(force) {
     this.twitterApi.getRequestToken((error, requestToken, requestTokenSecret) => {
-      const authUrl = this.twitterApi.getAuthUrl(requestToken);
+      const authUrl = this.twitterApi.getAuthUrl(requestToken + "&force_login=" + force);
       this._extractOauthVerifierFromWindow(authUrl, (oauthVerifier) => {
         this.twitterApi.getAccessToken(requestToken, requestTokenSecret, oauthVerifier,
           (error, accessToken, accessTokenSecret, { user_id, screen_name }) => {
@@ -35,7 +35,7 @@ class Authenticator extends EventEmitter {
         });
       } else if (matched = authedUrl.match(/&redirect_after_login_verification=([^&]*)/)) {
         window.onDidGetRedirectRequest((newUrl) => {
-          this._getAccessTokenFromWindow(newUrl);
+          this._extractOauthVerifierFromWindow(newUrl);
         });
       }
     });

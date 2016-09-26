@@ -1,16 +1,18 @@
 import * as types from '../constants/ActionTypes';
-import twitterClient from '../registries/twitterClient';
 import { onError } from './error-handler';
+import twitterAction from './twitterAction';
 
-export function postTweet(text) {
+export function postTweet(text, credential) {
   return dispatch => {
-    twitterClient
-      .statusesUpdate({ text })
-      .then(tweet => {
-        dispatch(posted(tweet));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+    twitterAction(credential, (twitterClient) => {
+      twitterClient
+        .statusesUpdate({ text })
+        .then(tweet => {
+          dispatch(posted(tweet));
+        })
+        .catch(error => dispatch(onError(error)));
+    });
+  }
 }
 
 function posted(tweet) {

@@ -21,14 +21,10 @@ class HomeContainer extends Component {
   }
 }
 
-HomeContainer.propTypes = {
-  account: PropTypes.object.isRequired
-};
-
 function mapStateToProps(state) {
-  const { account, timeline } = state;
+  const { timeline } = state;
+
   return {
-    account: account,
     tweets: timeline,
     title: 'Home',
     isLoading: timeline.tweets.length == 0

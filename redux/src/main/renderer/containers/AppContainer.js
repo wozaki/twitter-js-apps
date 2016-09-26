@@ -10,7 +10,7 @@ class AppContainer extends Component {
   componentDidMount() {
     const { setUp } = this.props.actions;
 
-    setUp();
+    setUp(registries.credential);
   }
 
   showErrorDialogIfNeeded() {

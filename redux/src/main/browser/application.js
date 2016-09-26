@@ -6,6 +6,7 @@ import MainWindow from './main-window'
 import NewTweetWindow from './new-tweet-window'
 import WindowCycler from './window-cycler'
 import { credentialRepository } from './registory'
+import PreferencesWindow from './preferences-window'
 
 export default class Application {
 
@@ -34,10 +35,6 @@ export default class Application {
   }
 
   onAuthenticationSucceeded(credential) {
-    const myAccount = {
-      userId: credential.userId,
-      screenName: credential.screenName
-    };
     const twitterCredential = {
       consumerKey: this.consumerKey,
       consumerSecret: this.consumerSecret,
@@ -45,7 +42,7 @@ export default class Application {
       accessTokenSecret: credential.accessTokenSecret
     };
 
-    this.callback(myAccount, twitterCredential);
+    this.callback(twitterCredential, credential);
     credentialRepository.store(credential);
 
     const mainWindow = this.openMainWindow();
@@ -56,7 +53,7 @@ export default class Application {
     this.newTweetWindow.prepare()
   }
 
-  openAuthenticationWindow() {
+  openAuthenticationWindow(force = false) {
     const twitterApi = new TwitterApi({
       callback: this.callbackUrl,
       consumerKey: this.consumerKey,
@@ -64,11 +61,15 @@ export default class Application {
     });
     const authenticator = new Authenticator(twitterApi);
 
-    return authenticator.authenticateViaWindow();
+    return authenticator.authenticateViaWindow(force);
   }
 
   openMainWindow() {
     return new MainWindow(this.mainWindowUrl);
+  }
+
+  openPreferencesWindow(mainWindow) {
+    this.preferencesWindow =　new PreferencesWindow(mainWindow);
   }
 
   openNewTweetWindow() {
@@ -76,9 +77,15 @@ export default class Application {
   }
 
   subscribeRendererEvent() {
-    ipcMain.on('open-new-tweet-window', () => {
-      this.openNewTweetWindow();
-    });
+    ipcMain
+      .on('open-new-tweet-window', () => {
+        this.openNewTweetWindow();
+      })
+      .on('add-account', (event) => {
+        this.openAuthenticationWindow(true).on('authentication-succeeded', (credential) => {
+          event.sender.send('added-account', credential);
+        });
+      })
   }
 
   registerApplicationCallbacks() {
@@ -95,13 +102,24 @@ export default class Application {
   setApplicationMenu(mainWindow) {
     new ApplicationMenu()
       .on('open-dev-tools', () => {
+        //TODO: broadcast all window
         mainWindow.toggleDevTools();
+        if (this.preferencesWindow != null) {
+          this.preferencesWindow.toggleDevTools();
+        }
       })
       .on('quit', () => {
         app.quit();
       })
+      .on('open-preferences', () => {
+        this.openPreferencesWindow(mainWindow);
+      })
       .on('reload', () => {
+        //TODO: broadcast all window
         mainWindow.reload();
+        if (this.preferencesWindow != null) {
+          this.preferencesWindow.reload();
+        }
       })
       .on('new-tweet', () => {
         this.openNewTweetWindow();

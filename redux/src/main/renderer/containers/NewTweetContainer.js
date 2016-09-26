@@ -7,6 +7,7 @@ import * as appActions from '../actions/app';
 import * as tweetActions from '../actions/tweet';
 import keyStringDetector from '../registries/keyStringDetector';
 import Tweet from '../../domain/models/Tweet';
+import { Accounts } from '../../domain/models/Accounts'
 
 class NewTweetContainer extends Component {
 
@@ -35,9 +36,10 @@ class NewTweetContainer extends Component {
       return;
     }
 
+    const { account } = this.props;
     const { postTweet } = this.props.actions;
 
-    postTweet(this.state.text);
+    postTweet(this.state.text, account.credential);
     this.setState(this.initialState()); // TODO: init text area if succeed to tweet
   }
 
@@ -74,7 +76,7 @@ class NewTweetContainer extends Component {
       <div className="NewTweet">
         <main className="NewTweet-main">
           <div className="NewTweet-main-left">
-            <img className="Tweet-avatar" src={account.profile_image_url}/>
+            <img className="Tweet-avatar" src={account.profileImageUrl}/>
           </div>
           <div className="NewTweet-main-center">
             <textarea
@@ -112,7 +114,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const { account } = state;
+  const { accounts } = state;
+  const account = Accounts.fromJson(accounts).primary;
+
   return {
     account: account
   };

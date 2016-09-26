@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import LinkItem from '../components/LinkItem';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
+import { Accounts } from '../../domain/models/Accounts'
 
 class AccountInfoContainer extends Component {
   render() {
@@ -11,9 +12,9 @@ class AccountInfoContainer extends Component {
     // TODO: title, use my
     return (
         <ul className="lists">
-          <LinkItem label="Tweets" path={"/my-timeline"} count={account.tweet_count} />
-          <LinkItem label="Followers" path={"/followers"} count={account.followers_count} />
-          <LinkItem label="Following" path={"/followings"} count={account.following_count} />
+          <LinkItem label="Tweets" path={"/my-timeline"} count={account.tweetCount} />
+          <LinkItem label="Followers" path={"/followers"} count={account.followersCount} />
+          <LinkItem label="Following" path={"/followings"} count={account.followingCount} />
         </ul>
     );
   }
@@ -24,10 +25,12 @@ AccountInfoContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { account } = state;
+  const { accounts } = state;
+  const account = Accounts.fromJson(accounts).primary;
+
   return {
     account: account,
-    title: account.screen_name || ''
+    title: account.screenName || ''
   };
 }
 

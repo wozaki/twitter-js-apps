@@ -5,21 +5,22 @@ import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
 import UserList from '../components/UserList';
 import * as followingActions from '../actions/following';
-import my from '../registries/my';
 import InfiniteScroll from '../components/InfiniteScroll'
+import { Accounts } from '../../domain/models/Accounts'
 
 class FollowingContainer extends Component {
 
   componentWillMount() {
+    const { account } = this.props;
     const { fetchFollowing } = this.props.actions;
-    fetchFollowing(my.userId);
+    fetchFollowing(account.id);
   }
 
   onLoad() {
     const { fetchFollowingOlderThan } = this.props.actions;
-    const { nextCursor } = this.props;
+    const { account, nextCursor } = this.props;
 
-    fetchFollowingOlderThan(my.userId, nextCursor);
+    fetchFollowingOlderThan(account.id, nextCursor);
   }
 
   render() {
@@ -42,8 +43,11 @@ FollowingContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { following } = state;
+  const { following, accounts } = state;
+  const account = Accounts.fromJson(accounts).primary;
+
   return {
+    account: account,
     users: following.users,
     nextCursor: following.nextCursor,
     title: 'Following',

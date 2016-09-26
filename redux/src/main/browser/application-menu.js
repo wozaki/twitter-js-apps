@@ -26,7 +26,17 @@ export default class ApplicationMenu extends EventEmitter {
                 click() {
                   self.emit('quit');
                 }
-              }
+              },
+              {
+                type: 'separator'
+              },
+              {
+                label: 'Preferences...',
+                accelerator: 'Command+,',
+                click() {
+                  self.emit('open-preferences');
+                }
+              },
             ]
           },
           {
