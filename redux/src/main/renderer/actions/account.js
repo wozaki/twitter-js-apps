@@ -38,6 +38,14 @@ export function switchPrimaryAccountTo(account) {
   };
 }
 
+
+export function removeAccount(account) {
+  return {
+    type: types.REMOVE_ACCOUNT,
+    accountId: account.id
+  };
+}
+
 function switchedPrimaryAccountTo(accountId) {
   return {
     type: types.SWITCHED_PRIMARY_ACCOUNT,
