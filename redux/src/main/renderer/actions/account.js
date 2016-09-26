@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import * as types from '../constants/ActionTypes';
 import { onError } from './error-handler';
 import twitterAction from './twitterAction';
 import { subscribeStream } from './app';
 import { fetchHomeTimeline } from './timeline';
+import { Accounts } from '../../domain/models/Accounts'
 
 export function fetchAccount(credential, isPrimary) {
   return dispatch => {
@@ -35,6 +37,28 @@ export function switchPrimaryAccountTo(account) {
       dispatch(subscribeStream(twitterClient, account.id));
       dispatch(switchedPrimaryAccountTo(account.id));
     });
+  };
+}
+
+export function removeAccount(account) {
+  return (dispatch, getState) => {
+    dispatch(_removeAccount(account));
+
+    if (account.isPrimary) {
+      const { accounts } = getState();
+      const nextPrimaryAccount = _.head(Accounts.fromJson(accounts).subAccounts);
+      if (_.isUndefined(nextPrimaryAccount)) {
+        return
+      }
+      dispatch(switchPrimaryAccountTo(nextPrimaryAccount));
+    }
+  };
+}
+
+function _removeAccount(account) {
+  return {
+    type: types.REMOVE_ACCOUNT,
+    accountId: account.id
   };
 }
 

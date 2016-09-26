@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { RECEIVED_ACCOUNT, SWITCHED_PRIMARY_ACCOUNT } from '../constants/ActionTypes';
+import { RECEIVED_ACCOUNT, REMOVE_ACCOUNT, SWITCHED_PRIMARY_ACCOUNT } from '../constants/ActionTypes';
 
 const initialState = [{
   created_at: null,
@@ -34,18 +34,29 @@ function createAccountFrom(action) {
 
 export default function accounts(state = initialState, action) {
   switch (action.type) {
-    case RECEIVED_ACCOUNT:
+    case RECEIVED_ACCOUNT: {
       if (state[0].is_initial_state) {
         return [createAccountFrom(action)];
       }
       const rejected = _.reject(state, (s) => s.id_str == action.user.id_str);
       return _.concat(rejected, createAccountFrom(action));
-    case SWITCHED_PRIMARY_ACCOUNT:
+    }
+
+    case REMOVE_ACCOUNT: {
+      const { accountId } = action;
+      return _.reject(state, (account) => {
+        return account.id_str == accountId;
+      });
+    }
+
+    case SWITCHED_PRIMARY_ACCOUNT: {
       const { accountId } = action;
       return _.map(state, (account) => {
         account.is_primary = account.id_str == accountId;
         return account;
       });
+    }
+
     default:
       return state;
   }

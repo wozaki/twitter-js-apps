@@ -26,13 +26,13 @@ class PreferencesContainer extends Component {
 
     ipcRenderer.send('add-account');
     ipcRenderer.on('added-account', (event, credential) => {
-      fetchAccount(credential);
+      fetchAccount(credential, false);
     });
   }
 
-  _onDeleteAccount() {
-    //TODO: implement
-    console.log("_onDeleteAccount")
+  _onRemoveAccount(selectedItem, index) {
+    const { removeAccount } = this.props.actions;
+    removeAccount(selectedItem);
   }
 
   render() {
@@ -45,7 +45,7 @@ class PreferencesContainer extends Component {
           items={accounts.asArray}
           itemContent={this._renderAccount}
           onCreateItem={this._onAddAccount.bind(this)}
-          onDeleteItem={this._onDeleteAccount}
+          onDeleteItem={this._onRemoveAccount.bind(this)}
         />
       </div>
     );

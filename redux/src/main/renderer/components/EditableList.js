@@ -16,12 +16,14 @@ class EditableList extends Component {
   }
 
   _getSelectedItem() {
-    const { onSelectItem, selected } = this.props;
+    const { selected } = this.state;
+    const { items } = this.props;
 
-    if (onSelectItem) {
+    if (selected) {
       return selected;
+    } else {
+      return _.head(items);
     }
-    return this.state.selected;
   };
 
   _selectItem(item, idx) {
@@ -62,12 +64,12 @@ class EditableList extends Component {
   };
 
   _renderItem(item, idx, { editingIndex } = this.state, handlers = {}) {
-    const onClick = handlers.onClick || this._onItemClick;
+    const onClick = handlers.onClick || this._onItemClick.bind(this);
     let itemContent = this.props.itemContent(item);
 
     const classes = classNames({
       'list-item': true,
-      'selected': item === this._getSelectedItem(),
+      'is-selected': item === this._getSelectedItem(),
       'editing': idx === editingIndex,
       'with-edit-icon': this.props.showEditIcon && editingIndex !== idx,
     });
@@ -115,8 +117,10 @@ class EditableList extends Component {
     const items = this.props.items.map((item, idx) => this._renderItem(item, idx));
 
     return (
-      <div>
+      <div className="EditableList">
+        <div className="EditableList-items-wrapper">
         {items}
+        </div>
         {this._renderButtons()}
       </div>
     );
