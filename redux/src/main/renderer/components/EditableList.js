@@ -62,7 +62,7 @@ class EditableList extends Component {
   };
 
   _renderItem(item, idx, { editingIndex } = this.state, handlers = {}) {
-    const onClick = handlers.onClick || this._onItemClick;
+    const onClick = handlers.onClick || this._onItemClick.bind(this);
     let itemContent = this.props.itemContent(item);
 
     const classes = classNames({
