@@ -1,27 +1,32 @@
 import * as types from '../constants/ActionTypes';
-import {favoriteUsecase} from '../registries/usecases';
+import { favoriteUsecase } from '../registries/usecases';
 import { onError } from './error-handler';
+import { TwitterAction } from '../middlewares/twitterClient';
 
 export function fetchMyFavorites(myId) {
-  return dispatch => {
-    favoriteUsecase
-      .getList(myId)
-      .then(tweets => {
-        dispatch(receivedMyFavorites(tweets));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      favoriteUsecase(twitterClient)
+        .getList(myId)
+        .then(tweets => {
+          dispatch(receivedMyFavorites(tweets));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 export function fetchMyFavoritesOlderThan(myId, tweetId) {
-  return dispatch => {
-    favoriteUsecase
-      .getListOlderThan(myId, tweetId)
-      .then(tweets => {
-        dispatch(receivedMyOldFavorites(tweets));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      favoriteUsecase(twitterClient)
+        .getListOlderThan(myId, tweetId)
+        .then(tweets => {
+          dispatch(receivedMyOldFavorites(tweets));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 export function toggleFavorite(isFavoritedNow, tweetId) {
@@ -35,25 +40,29 @@ export function toggleFavorite(isFavoritedNow, tweetId) {
 }
 
 function createFavorite(tweetId) {
-  return dispatch => {
-    favoriteUsecase
-      .add(tweetId)
-      .then(tweet => {
-        dispatch(createdFavorite(tweet));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      favoriteUsecase(twitterClient)
+        .add(tweetId)
+        .then(tweet => {
+          dispatch(createdFavorite(tweet));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 function destroyFavorite(tweetId) {
-  return dispatch => {
-    favoriteUsecase
-      .remove(tweetId)
-      .then(tweet => {
-        dispatch(destroyedFavorite(tweet));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      favoriteUsecase(twitterClient)
+        .remove(tweetId)
+        .then(tweet => {
+          dispatch(destroyedFavorite(tweet));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 function createdFavorite(tweet) {

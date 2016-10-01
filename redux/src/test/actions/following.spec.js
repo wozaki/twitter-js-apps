@@ -4,10 +4,13 @@ import mockStore from '../action-helper'
 import FollowUsecase from '../../main/domain/usecases/FollowUsecase'
 import followingActions from '../../main/renderer/actions/following'
 import { fetchFollowing } from '../../main/renderer/actions/following'
+import * as accountFixture from '../fixtures/account'
+
+const accounts = { accounts: [accountFixture.primaryAccount] };
 
 describe('following actions', () => {
   function stubUsecase(stub) {
-    followingActions.__Rewire__('followUsecase', stub);
+    followingActions.__Rewire__('followUsecase', (mockTwitterClient) => stub);
   }
 
   it('fetchFollowing should create RECEIVED_FOLLOWING action', (done) => {
@@ -23,7 +26,7 @@ describe('following actions', () => {
     const expectedActions = [
       { type: types.RECEIVED_FOLLOWING, following: fixtureFollowing }
     ];
-    const store = mockStore({}, expectedActions, done);
+    const store = mockStore(accounts, expectedActions, done);
     store.dispatch(fetchFollowing(fixtureMyId));
   });
 

@@ -9,13 +9,13 @@ import App from './containers/AppContainer'
 import Followers from './containers/FollowersContainer'
 import Following from './containers/FollowingContainer'
 import HomeContainer from './containers/HomeContainer.js'
-import store from './store/configureStore'
+import configureStore from './store/configureStore'
 import * as registries from './registries/electron'
 
 window.registries = registries;
 
 render(
-    <Provider store={store}>
+    <Provider store={configureStore(registries)}>
         <Router>
             <Route path="/" component={App}>
                 <IndexRoute component={HomeContainer}/>

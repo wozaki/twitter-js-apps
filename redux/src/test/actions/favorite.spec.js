@@ -1,13 +1,17 @@
+import _ from 'lodash';
 import sinon from 'sinon'
 import * as types from '../../main/renderer/constants/ActionTypes'
 import mockStore from '../action-helper'
 import FavoriteUsecase from '../../main/domain/usecases/FavoriteUsecase'
 import favoriteActions from '../../main/renderer/actions/favorite'
 import { toggleFavorite } from '../../main/renderer/actions/favorite'
+import * as accountFixture from '../fixtures/account'
+
+const accounts = { accounts: [accountFixture.primaryAccount] };
 
 describe('favorite actions', () => {
   function stubUsecase(stub) {
-    favoriteActions.__Rewire__('favoriteUsecase', stub);
+    favoriteActions.__Rewire__('favoriteUsecase', (mockTwitterClient) => stub);
   }
 
   const fixtureTweet = { id_str: "123", text: "hoge" };
@@ -23,7 +27,7 @@ describe('favorite actions', () => {
     const expectedActions = [
       { type: types.DESTROYED_FAVORITE, tweet: fixtureTweet }
     ];
-    const store = mockStore({}, expectedActions, done);
+    const store = mockStore(accounts, expectedActions, done);
     store.dispatch(toggleFavorite(true, fixtureTweet.id_str));
   });
 
@@ -38,7 +42,7 @@ describe('favorite actions', () => {
     const expectedActions = [
       { type: types.CREATED_FAVORITE, tweet: fixtureTweet }
     ];
-    const store = mockStore({ tweet: 0 }, expectedActions, done);
+    const store = mockStore(_.assign(accounts, { tweet: 0 }), expectedActions, done);
     store.dispatch(toggleFavorite(false, fixtureTweet.id_str));
   });
 });

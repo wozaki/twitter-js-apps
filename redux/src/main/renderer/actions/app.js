@@ -1,11 +1,12 @@
 import { receivedAccount } from './account';
 import { fetchHomeTimeline, receivedHomeTimeline } from './timeline';
 import { onError } from './error-handler';
-import twitterAction from './twitterAction';
+import { TwitterAction } from '../middlewares/twitterClient';
 
 export function setUp(credential) {
-  return dispatch => {
-    twitterAction(credential, (twitterClient) => {
+  return new TwitterAction({
+    credential,
+    invoke: twitterClient => dispatch => {
       twitterClient
         .fetchUser()
         .then(user => {
@@ -14,8 +15,8 @@ export function setUp(credential) {
           dispatch(subscribeStream(twitterClient, user.id_str));
         })
         .catch(error => dispatch(onError(error)));
-    });
-  }
+    }
+  });
 }
 
 export function subscribeStream(twitterClient, userId) {

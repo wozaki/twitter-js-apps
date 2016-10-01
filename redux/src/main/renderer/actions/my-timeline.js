@@ -1,27 +1,32 @@
 import * as types from '../constants/ActionTypes';
 import {timelineUsecase} from '../registries/usecases';
 import { onError } from './error-handler';
+import { TwitterAction } from '../middlewares/twitterClient';
 
 export function fetchMyTimeline() {
-  return dispatch => {
-    timelineUsecase
-      .getMyTweets()
-      .then(tweets => {
-        dispatch(receivedMyTimeline(tweets));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      timelineUsecase(twitterClient)
+        .getMyTweets()
+        .then(tweets => {
+          dispatch(receivedMyTimeline(tweets));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 export function fetchOldMyTimeline(tweetId) {
-  return dispatch => {
-    timelineUsecase
-      .getMyTweetsOlderThan(tweetId)
-      .then(tweets => {
-        dispatch(receivedOldMyTimeline(tweets));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      timelineUsecase(twitterClient)
+        .getMyTweetsOlderThan(tweetId)
+        .then(tweets => {
+          dispatch(receivedOldMyTimeline(tweets));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 function receivedMyTimeline(tweets) {
