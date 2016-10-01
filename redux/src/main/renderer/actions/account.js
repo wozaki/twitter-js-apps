@@ -1,22 +1,23 @@
 import _ from 'lodash';
 import * as types from '../constants/ActionTypes';
 import { onError } from './error-handler';
-import twitterAction from './twitterAction';
 import { subscribeStream } from './app';
 import { fetchHomeTimeline } from './timeline';
 import { Accounts } from '../../domain/models/Accounts'
+import { TwitterAction } from '../middlewares/twitterClient';
 
 export function fetchAccount(credential, isPrimary) {
-  return dispatch => {
-    twitterAction(credential, (twitterClient) => {
+  return new TwitterAction({
+    credential,
+    invoke: twitterClient => dispatch => {
       twitterClient
         .fetchUser()
         .then(user => {
           dispatch(receivedAccount(user, credential, isPrimary));
         })
         .catch(error => dispatch(onError(error)));
-    });
-  };
+    }
+  });
 }
 
 export function receivedAccount(user, credential, isPrimary) {
@@ -30,14 +31,14 @@ export function receivedAccount(user, credential, isPrimary) {
 
 export function switchPrimaryAccountTo(account) {
   const credential = account.credential;
-
-  return dispatch => {
-    twitterAction(credential, (twitterClient) => {
+  return new TwitterAction({
+    credential,
+    invoke: twitterClient => dispatch => {
       dispatch(fetchHomeTimeline(credential));
       dispatch(subscribeStream(twitterClient, account.id));
       dispatch(switchedPrimaryAccountTo(account.id));
-    });
-  };
+    }
+  });
 }
 
 export function removeAccount(account) {

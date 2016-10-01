@@ -1,34 +1,36 @@
 import * as types from '../constants/ActionTypes';
 import { timelineUsecase } from '../registries/usecases';
 import { onError } from './error-handler';
-import twitterAction from './twitterAction';
+import { TwitterAction } from '../middlewares/twitterClient';
 
 export function fetchHomeTimeline(credential) {
-  return dispatch => {
-    twitterAction(credential, (twitterClient) => {
+  return new TwitterAction({
+    credential,
+    invoke: twitterClient => dispatch => {
       timelineUsecase(twitterClient)
         .fetchHomeTweets()
         .then(tweets => {
           dispatch(refreshHomeTimeline(tweets));
         })
         .catch(error => dispatch(onError(error)));
-    });
-  };
+    }
+  });
 }
 
 /**
  * @param {string} tweetId
  */
 export function fetchOldHomeTimeline(tweetId) {
-  return dispatch => {
-    //TODO: pass twitterClient
-    timelineUsecase
-      .fetchHomeTweetsOlderThan(tweetId)
-      .then(tweets => {
-        dispatch(receivedOldHomeTimeline(tweets));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      timelineUsecase(twitterClient)
+        .fetchHomeTweetsOlderThan(tweetId)
+        .then(tweets => {
+          dispatch(receivedOldHomeTimeline(tweets));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 export function receivedHomeTimeline(tweets) {

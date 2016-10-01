@@ -1,8 +1,9 @@
 import expect from 'expect'
 import { applyMiddleware } from 'redux'
+import { twitterClientMiddleware } from '../main/renderer/middlewares/twitterClient'
 import thunk from 'redux-thunk'
 
-const middlewares = [thunk];
+const middlewares = [twitterClientMiddleware({ consumerKey: '', consumerSecret: '' }), thunk];
 export default function mockStore(getState, expectedActions, onLastAction) {
   if (!Array.isArray(expectedActions)) {
     throw new Error('expectedActions should be an array of expected actions.')

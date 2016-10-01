@@ -2,40 +2,45 @@ import * as types from '../constants/ActionTypes';
 import { followUsecase } from '../registries/usecases';
 import { isLastCursor } from '../../infrastructure/cursor';
 import { onError } from './error-handler';
+import { TwitterAction } from '../middlewares/twitterClient';
 
 /**
  * @param {string} myId
- * @returns {Function}
+ * @returns {TwitterAction}
  */
 export function fetchFollowers(myId) {
-  return dispatch => {
-    followUsecase
-      .getFollowers(myId)
-      .then(followers => {
-        dispatch(receivedFollowers(followers));
-      })
-      .catch(error => dispatch(onError(error)));
-  };
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      followUsecase(twitterClient)
+        .getFollowers(myId)
+        .then(followers => {
+          dispatch(receivedFollowers(followers));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
 }
 
 /**
  * @param {string} myId
  * @param {string} nextCursor
- * @returns {Function}
+ * @returns {TwitterAction}
  */
 export function fetchFollowersOlderThan(myId, nextCursor) {
-  return dispatch => {
-    if (isLastCursor(nextCursor)) {
-      dispatch(receivedFollowersCompleted())
-    } else {
-      followUsecase
-        .getFollowersOlderThan(myId, nextCursor)
-        .then(followers => {
-          dispatch(receivedOldFollowers(followers));
-        })
-        .catch(error => dispatch(onError(error)));
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      if (isLastCursor(nextCursor)) {
+        dispatch(receivedFollowersCompleted())
+      } else {
+        followUsecase(twitterClient)
+          .getFollowersOlderThan(myId, nextCursor)
+          .then(followers => {
+            dispatch(receivedOldFollowers(followers));
+          })
+          .catch(error => dispatch(onError(error)));
+      }
     }
-  };
+  });
 }
 
 function receivedFollowers(followers) {
