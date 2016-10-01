@@ -11,7 +11,11 @@ export const primaryAccount = {
   screen_name: "theSeanCook",
   statuses_count: 2609,
   is_initial_state: false,
-  is_primary: true
+  is_primary: true,
+  credential: {
+    accessToken: "accessToken of primaryAccount fixture",
+    accessTokenSecret: "accessTokenSecret of primaryAccount fixture"
+  }
 };
 
 export const subAccount = {
@@ -25,7 +29,11 @@ export const subAccount = {
   screen_name: "theSeanCook2",
   statuses_count: 222,
   is_initial_state: false,
-  is_primary: false
+  is_primary: false,
+  credential: {
+    accessToken: "accessToken of subAccount fixture",
+    accessTokenSecret: "accessTokenSecret of subAccount fixture"
+  }
 };
 
 export const subAccount2 = {
@@ -39,5 +47,9 @@ export const subAccount2 = {
   screen_name: "theSeanCookSub2",
   statuses_count: 2222,
   is_initial_state: false,
-  is_primary: false
+  is_primary: false,
+  credential: {
+    accessToken: "accessToken of subAccount2 fixture",
+    accessTokenSecret: "accessTokenSecret of subAccount2 fixture"
+  }
 };
