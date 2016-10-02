@@ -5,9 +5,9 @@ import _ from 'lodash';
 export default class InfiniteScroll extends Component {
 
   onScrolled() {
-    const { children, onLoad, thresholdInPx } = this.props;
+    const { children, onLoad, thresholdInPx }       = this.props;
     const { scrollTop, scrollHeight, offsetHeight } = ReactDOM.findDOMNode(this);
-    const restOfBottom = (scrollHeight - offsetHeight) - scrollTop;
+    const restOfBottom                              = (scrollHeight - offsetHeight) - scrollTop;
 
     if (restOfBottom < thresholdInPx) {
       onLoad(_.last(children));
