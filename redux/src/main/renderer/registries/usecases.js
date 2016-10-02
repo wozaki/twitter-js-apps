@@ -1,4 +1,3 @@
-import twitterClient from './twitterClient';
 import TimelineUsecase from '../../domain/usecases/TimelineUsecase';
 import FavoriteUsecase from '../../domain/usecases/FavoriteUsecase';
 import FollowUsecase from '../../domain/usecases/FollowUsecase';

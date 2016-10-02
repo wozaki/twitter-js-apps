@@ -35,14 +35,7 @@ export default class Application {
   }
 
   onAuthenticationSucceeded(credential) {
-    const twitterCredential = {
-      consumerKey: this.consumerKey,
-      consumerSecret: this.consumerSecret,
-      accessToken: credential.accessToken,
-      accessTokenSecret: credential.accessTokenSecret
-    };
-
-    this.callback(twitterCredential, credential);
+    this.callback(credential);
     credentialRepository.store(credential);
 
     const mainWindow = this.openMainWindow();
