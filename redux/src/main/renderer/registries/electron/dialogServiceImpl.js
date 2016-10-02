@@ -10,3 +10,8 @@ export const addAccount = (onAddedAccount) => {
     onAddedAccount(credential);
   });
 };
+
+export const showNewTweetDialog = () => {
+  ipcRenderer.send('open-new-tweet-window');
+};
+

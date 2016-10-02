@@ -1,16 +1,16 @@
 import _ from 'lodash';
-import { ipcRenderer } from 'electron';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SideMenu from '../components/SideMenu';
 import { Accounts } from '../../domain/models/Accounts';
 import * as accountActions from '../actions/account';
+import * as dialogService from '../registries/dialogService';
 
 class SideMenuContainer extends Component {
 
   onClickedNewTweet() {
-    ipcRenderer.send('open-new-tweet-window');
+    dialogService.showNewTweetDialog();
   }
 
   onClickSubAccount(account) {
