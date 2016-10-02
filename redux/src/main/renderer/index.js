@@ -15,7 +15,7 @@ import * as registries from './registries/electron'
 window.registries = registries;
 
 render(
-    <Provider store={configureStore(registries)}>
+    <Provider store={configureStore()}>
         <Router>
             <Route path="/" component={App}>
                 <IndexRoute component={HomeContainer}/>

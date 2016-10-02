@@ -8,7 +8,7 @@ import * as registries from './registries/electron'
 window.registries = registries;
 
 render(
-    <Provider store={configureStore(registries)}>
+    <Provider store={configureStore()}>
         <PreferencesContainer />
     </Provider>,
     document.getElementById('root')
