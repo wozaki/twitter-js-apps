@@ -1,4 +1,4 @@
-import { remote, ipcRenderer } from 'electron'
+import { remote, ipcRenderer, shell } from 'electron'
 
 export const showErrorDialog = ({ title, body }) => {
   remote.dialog.showErrorBox(title, body);
@@ -9,4 +9,12 @@ export const addAccount = (onAddedAccount) => {
   ipcRenderer.on('added-account', (event, credential) => {
     onAddedAccount(credential);
   });
+};
+
+export const showNewTweetDialog = () => {
+  ipcRenderer.send('open-new-tweet-window');
+};
+
+export const openUrl = (url) => {
+  shell.openExternal(url);
 };

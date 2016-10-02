@@ -7,6 +7,7 @@ import InfiniteScroll from '../components/InfiniteScroll'
 import Retweet from '../components/Retweet'
 import ToggleFavoriteButton from '../components/ToggleFavoriteButton'
 import Tweet from '../components/Tweet'
+import * as dialogService from '../registries/dialogService';
 
 class TweetsContainer extends Component {
 
@@ -36,6 +37,11 @@ class TweetsContainer extends Component {
       />;
   }
 
+  _onAnchorClicked = (event) => {
+    event.preventDefault();
+    dialogService.openUrl(event.currentTarget.href);
+  };
+
   renderTweets() {
     const {tweets} = this.props.tweets;
 
@@ -45,11 +51,13 @@ class TweetsContainer extends Component {
           return <Retweet key={tweet.id_str}
                           tweet={tweet}
                           favoriteButton={this.favoriteButton(tweet)}
+                          onAnchorClicked={this._onAnchorClicked}
             />
         } else {
           return <Tweet key={tweet.id_str}
                         tweet={tweet}
                         favoriteButton={this.favoriteButton(tweet)}
+                        onAnchorClicked={this._onAnchorClicked}
             />
         }
       });
