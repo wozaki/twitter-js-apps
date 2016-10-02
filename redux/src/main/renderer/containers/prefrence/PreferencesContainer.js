@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { ipcRenderer } from 'electron';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -7,6 +6,7 @@ import EditableList from '../../components/EditableList';
 import IconNameItem from '../../components/IconNameItem';
 import { Accounts } from '../../../domain/models/Accounts'
 import * as accountActions from '../../actions/account';
+import * as dialogService from '../../registries/dialogService';
 
 class PreferencesContainer extends Component {
 
@@ -24,8 +24,7 @@ class PreferencesContainer extends Component {
   _onAddAccount() {
     const { fetchAccount } = this.props.actions;
 
-    ipcRenderer.send('add-account');
-    ipcRenderer.on('added-account', (event, credential) => {
+    dialogService.addAccount((credential) => {
       fetchAccount(credential, false);
     });
   }
