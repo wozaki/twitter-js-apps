@@ -10,11 +10,8 @@ export default class Retweet extends Component {
         return `https://twitter.com/${tweet.retweeted_status.user.screen_name}/status/${tweet.retweeted_status.id_str}`;
     }
 
-    onAnchorClicked(event) {
-    }
-
     render() {
-        const {tweet} = this.props;
+        const { onAnchorClicked, tweet } = this.props;
 
         return (
             <li className="Tweet" key={tweet.id_str}>
@@ -38,13 +35,16 @@ export default class Retweet extends Component {
                                 {tweet.user.name}
                             </span>
                         </div>
-                        <a className="Tweet-datetime-anchor" href={this.url} onClick={this.onAnchorClicked.bind(this)}
+                        <a className="Tweet-datetime-anchor" href={this.url} onClick={onAnchorClicked}
                            tabIndex="-1">
                             <Time className="Tweet-datetime" time={tweet.retweeted_status.created_at}/>
                         </a>
                     </div>
                     <div className="Tweet-body-container">
-                        <TweetBody tweet={tweet.retweeted_status}/>
+                        <TweetBody
+                          onAnchorClicked={onAnchorClicked}
+                          tweet={tweet.retweeted_status}
+                        />
 
                         <div className="Tweet-buttons">
                             {this.favoriteButton}

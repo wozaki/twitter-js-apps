@@ -1,23 +1,19 @@
 import React from 'react';
 import Time from './Time';
 import twitterText from 'twitter-text';
-import { shell } from 'electron'
 import TweetAnchorText from '../../domain/models/TweetAnchorText';
 
 class Anchor extends React.Component {
-  onClicked(event) {
-    event.preventDefault();
-    shell.openExternal(event.currentTarget.href);
-  }
-
   render() {
+    const { onAnchorClicked, url, text, title } = this.props;
+
     return <a
       className="Tweet-anchor"
-      dangerouslySetInnerHTML={{ __html: this.props.text }}
-      href={this.props.url}
-      onClick={this.onClicked.bind(this)}
+      dangerouslySetInnerHTML={{ __html: text }}
+      href={url}
+      onClick={onAnchorClicked}
       tabIndex="-1"
-      title={this.props.title}
+      title={title}
     />;
   }
 }
@@ -51,10 +47,11 @@ class Text extends React.Component {
 export default class TweetBody extends React.Component {
   getComponents() {
     const components       = [];
-    const { text, id_str } = this.props.tweet;
+    const { onAnchorClicked, tweet } = this.props;
+    const { text, id_str } = tweet;
     let index              = 0;
 
-    const entities = new TweetAnchorText(this.props.tweet).entities;
+    const entities = new TweetAnchorText(tweet).entities;
     entities.forEach((entity) => {
       components.push(<Text text={text.substring(index, entity.startIndex)}/>);
 
@@ -64,6 +61,7 @@ export default class TweetBody extends React.Component {
             text={entity.text}
             title={entity.title}
             url={entity.url}
+            onAnchorClicked={onAnchorClicked}
           />
         );
       }
