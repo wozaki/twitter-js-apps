@@ -1,21 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-export default class Header extends Component {
-  render() {
-    const { searchBox } = this.props;
-
-    return (
-      <header className="Header">
-        <h1 className="Header-title">
-          {this.props.title}
-        </h1>
-        {searchBox}
-      </header>
-    );
-  }
-}
+const Header = ({ title, searchBox }) => {
+  return (
+    <header className="Header">
+      <h1 className="Header-title">
+        {title}
+      </h1>
+      {searchBox}
+    </header>
+  );
+};
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   searchBox: PropTypes.element
 };
+
+export default Header;

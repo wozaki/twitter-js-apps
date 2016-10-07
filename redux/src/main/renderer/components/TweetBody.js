@@ -3,51 +3,43 @@ import Time from './Time';
 import twitterText from 'twitter-text';
 import TweetAnchorText from '../../domain/models/TweetAnchorText';
 
-class Anchor extends React.Component {
-  render() {
-    const { onAnchorClicked, url, text, title } = this.props;
+const Anchor = ({ onAnchorClicked, url, text, title }) => {
+  return (
+    <a className="Tweet-anchor"
+       dangerouslySetInnerHTML={{ __html: text }}
+       href={url}
+       onClick={onAnchorClicked}
+       tabIndex="-1"
+       title={title}
+    />
+  )
+};
 
-    return <a
-      className="Tweet-anchor"
-      dangerouslySetInnerHTML={{ __html: text }}
-      href={url}
-      onClick={onAnchorClicked}
-      tabIndex="-1"
-      title={title}
-    />;
-  }
-}
+const Image = ({ imageUrl, tweetUrl }) => {
 
-class Image extends React.Component {
-  onClicked(event) {
+  const onClicked = (event) => {
     event.preventDefault();
-  }
+  };
 
-  render() {
-    return (
-      <div className="Tweet-image-container">
-        <a href={this.props.tweetUrl} onClick={this.onClicked.bind(this)} tabIndex="-1">
-          <img className="Tweet-image" src={this.props.imageUrl}/>
-        </a>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="Tweet-image-container">
+      <a href={tweetUrl} onClick={onClicked} tabIndex="-1">
+        <img className="Tweet-image" src={imageUrl}/>
+      </a>
+    </div>
+  );
+};
 
-class Text extends React.Component {
-  getText() {
-    return twitterText.htmlEscape(this.props.text);
-  }
+const Text = ({ text }) => {
+  const escapedText = twitterText.htmlEscape(text);
+  return <span dangerouslySetInnerHTML={{ __html: escapedText }}/>;
+};
 
-  render() {
-    return <span dangerouslySetInnerHTML={{ __html: this.getText() }}/>;
-  }
-}
+const TweetBody = ({ onAnchorClicked, tweet }) => {
 
-export default class TweetBody extends React.Component {
-  getComponents() {
+  const getComponents = () => {
     const components       = [];
-    const { onAnchorClicked, tweet } = this.props;
+    // const { onAnchorClicked, tweet } = this.props;
     const { text, id_str } = tweet;
     let index              = 0;
 
@@ -55,7 +47,7 @@ export default class TweetBody extends React.Component {
     entities.forEach((entity) => {
       components.push(<Text text={text.substring(index, entity.startIndex)}/>);
 
-      if (this.getImageUrls().indexOf(entity.url) === -1) {
+      if (getImageUrls().indexOf(entity.url) === -1) {
         components.push(
           <Anchor
             text={entity.text}
@@ -69,13 +61,13 @@ export default class TweetBody extends React.Component {
     });
 
     components.push(<Text text={text.substring(index, text.length)}/>);
-    components.push(...this.getImages());
+    components.push(...getImages());
     return components;
-  }
+  };
 
-  getImages() {
-    if (this.props.tweet.extended_entities && this.props.tweet.extended_entities.media) {
-      return this.props.tweet.extended_entities.media.filter((media) => {
+  const getImages = () => {
+    if (tweet.extended_entities && tweet.extended_entities.media) {
+      return tweet.extended_entities.media.filter((media) => {
         return media.type === 'photo';
       }).map((media) => {
         return <Image imageUrl={media.media_url_https} tweetUrl={media.url}/>;
@@ -83,11 +75,11 @@ export default class TweetBody extends React.Component {
     } else {
       return [];
     }
-  }
+  };
 
-  getImageUrls() {
-    if (this.props.tweet.extended_entities && this.props.tweet.extended_entities.media) {
-      return this.props.tweet.extended_entities.media.filter((media) => {
+  const getImageUrls = () => {
+    if (tweet.extended_entities && tweet.extended_entities.media) {
+      return tweet.extended_entities.media.filter((media) => {
         return media.type === 'photo';
       }).map((media) => {
         return media.url;
@@ -95,13 +87,13 @@ export default class TweetBody extends React.Component {
     } else {
       return [];
     }
-  }
+  };
 
-  render() {
-    return (
-      <div className="Tweet-body">
-        {this.getComponents()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="Tweet-body">
+      {getComponents()}
+    </div>
+  );
+};
+
+export default TweetBody

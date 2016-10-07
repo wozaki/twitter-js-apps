@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-export default class UserList extends Component {
+const UserList = ({ users }) => {
 
-  get renderItems() {
-    const { users } = this.props;
+  const renderItems = () => {
 
     return users.map((user) => {
       return (
@@ -23,17 +22,15 @@ export default class UserList extends Component {
         </li>
       );
     });
-  }
+  };
 
-  render() {
-    return (
-      <ul>
-        {this.renderItems}
-      </ul>
-    );
-  }
+  return (
+    <ul>
+      {renderItems()}
+    </ul>
+  );
 
-}
+};
 
 UserList.propTypes = {
   users: PropTypes.arrayOf(
@@ -45,3 +42,5 @@ UserList.propTypes = {
     })
   ).isRequired
 };
+
+export default UserList
