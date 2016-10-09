@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import sinon from 'sinon'
-import * as types from '../../main/renderer/constants/ActionTypes'
+import * as types from '../../../main/renderer/constants/ActionTypes'
 import mockStore from '../action-helper'
-import FavoriteUsecase from '../../main/domain/usecases/FavoriteUsecase'
-import favoriteActions from '../../main/renderer/actions/favorite'
-import { toggleFavorite } from '../../main/renderer/actions/favorite'
-import * as accountFixture from '../fixtures/account'
+import FavoriteUsecase from '../../../main/domain/usecases/FavoriteUsecase'
+import favoriteActions from '../../../main/renderer/actions/favorite'
+import { toggleFavorite } from '../../../main/renderer/actions/favorite'
+import * as accountFixture from '../../fixtures/account'
 
 const accounts = { accounts: [accountFixture.primaryAccount] };
 

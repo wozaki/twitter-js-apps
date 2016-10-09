@@ -1,7 +1,7 @@
 import React from 'react';
 import expect from 'expect'
 import { shallow } from 'enzyme';
-import Header from '../../main/renderer/components/Header';
+import Header from '../../../main/renderer/components/Header';
 
 describe('<Header />', () => {
   it('renders title with given props', () => {

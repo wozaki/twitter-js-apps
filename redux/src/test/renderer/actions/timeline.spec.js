@@ -1,10 +1,10 @@
 import sinon from 'sinon'
-import * as types from '../../main/renderer/constants/ActionTypes'
+import * as types from '../../../main/renderer/constants/ActionTypes'
 import mockStore from '../action-helper'
-import TimelineUsecase from '../../main/domain/usecases/TimelineUsecase'
-import timelineActions from '../../main/renderer/actions/timeline'
-import { fetchHomeTimeline, fetchOldHomeTimeline } from '../../main/renderer/actions/timeline'
-import * as accountFixture from '../fixtures/account'
+import TimelineUsecase from '../../../main/domain/usecases/TimelineUsecase'
+import timelineActions from '../../../main/renderer/actions/timeline'
+import { fetchHomeTimeline, fetchOldHomeTimeline } from '../../../main/renderer/actions/timeline'
+import * as accountFixture from '../../fixtures/account'
 
 const dummyTwitterClient = {};
 const credential         = { accessToken: "test accessToken", accessTokenSecret: "test accessTokenSecret" };

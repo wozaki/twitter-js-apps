@@ -1,10 +1,10 @@
 import sinon from 'sinon'
-import * as types from '../../main/renderer/constants/ActionTypes'
+import * as types from '../../../main/renderer/constants/ActionTypes'
 import mockStore from '../action-helper'
-import FollowUsecase from '../../main/domain/usecases/FollowUsecase'
-import followingActions from '../../main/renderer/actions/following'
-import { fetchFollowing } from '../../main/renderer/actions/following'
-import * as accountFixture from '../fixtures/account'
+import FollowUsecase from '../../../main/domain/usecases/FollowUsecase'
+import followingActions from '../../../main/renderer/actions/following'
+import { fetchFollowing } from '../../../main/renderer/actions/following'
+import * as accountFixture from '../../fixtures/account'
 
 const accounts = { accounts: [accountFixture.primaryAccount] };
 

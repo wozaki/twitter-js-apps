@@ -2,9 +2,9 @@ import React from 'react';
 import expect from 'expect'
 import { spy } from 'sinon'
 import { shallow } from 'enzyme';
-import SideMenu from '../../main/renderer/components/SideMenu';
-import { Account } from '../../main/domain/models/Accounts'
-import * as accountFixture from '../fixtures/account'
+import SideMenu from '../../../main/renderer/components/SideMenu';
+import { Account } from '../../../main/domain/models/Accounts'
+import * as accountFixture from '../../fixtures/account'
 
 const primaryAccount = new Account(accountFixture.primaryAccount);
 const subAccount     = new Account(accountFixture.subAccount);

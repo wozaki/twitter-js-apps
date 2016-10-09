@@ -1,6 +1,6 @@
 import expect from 'expect'
 import { applyMiddleware } from 'redux'
-import { twitterClientMiddleware } from '../main/renderer/middlewares/twitterClient'
+import { twitterClientMiddleware } from '../../main/renderer/middlewares/twitterClient'
 import thunk from 'redux-thunk'
 
 const middlewares = [twitterClientMiddleware({ consumerKey: '', consumerSecret: '' }), thunk];

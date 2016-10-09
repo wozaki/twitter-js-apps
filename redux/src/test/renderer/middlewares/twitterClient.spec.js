@@ -1,9 +1,9 @@
 import expect from 'expect'
 import { spy } from 'sinon'
 import assert from 'assert'
-import { twitterClientMiddleware, TwitterAction } from '../../main/renderer/middlewares/twitterClient'
-import TwitterClient from '../../main/infrastructure/TwitterClient'
-import * as accountFixture from '../fixtures/account'
+import { twitterClientMiddleware, TwitterAction } from '../../../main/renderer/middlewares/twitterClient'
+import TwitterClient from '../../../main/infrastructure/TwitterClient'
+import * as accountFixture from '../../fixtures/account'
 
 describe('twitterClientMiddleware', () => {
   const doDispatch = () => {};
