@@ -2,9 +2,9 @@ import React from 'react';
 import expect from 'expect'
 import { spy } from 'sinon'
 import { shallow } from 'enzyme';
-import Tweet from '../../main/renderer/components/Tweet';
-import ToggleFavoriteButton from '../../main/renderer/components/ToggleFavoriteButton';
-import { homeTimeline } from '../fixtures/homeTimeline';
+import Tweet from '../../../main/renderer/components/Tweet';
+import ToggleFavoriteButton from '../../../main/renderer/components/ToggleFavoriteButton';
+import { homeTimeline } from '../../fixtures/homeTimeline';
 
 describe('<Tweet />', () => {
   const tweet = homeTimeline[0];

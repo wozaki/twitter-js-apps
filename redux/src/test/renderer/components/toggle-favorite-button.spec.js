@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-addons-test-utils'
 import sinon from 'sinon'
 import mockDom from '../mock-dom'
-import ToggleFavoriteButton from '../../main/renderer/components/ToggleFavoriteButton'
+import ToggleFavoriteButton from '../../../main/renderer/components/ToggleFavoriteButton'
 
 function render(isFavorited, toggleFavorite) {
     function toElement(props) {
