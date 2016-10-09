@@ -11,6 +11,18 @@ class BaseWindow {
       }
       this.browserWindow = null;
     });
+    this.browserWindow.hide();
+  }
+
+  /**
+   * @return {string}
+   */
+  get key() {
+    throw Error("you must override this method")
+  }
+
+  focus() {
+    this.browserWindow.focus();
   }
 
   show() {
