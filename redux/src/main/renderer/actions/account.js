@@ -56,6 +56,13 @@ export function removeAccount(account) {
   };
 }
 
+export function replaceAccounts(accounts) {
+  return {
+    type: types.REPLACE_ACCOUNTS,
+    accounts
+  };
+}
+
 function _removeAccount(account) {
   return {
     type: types.REMOVE_ACCOUNT,

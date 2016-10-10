@@ -1,6 +1,7 @@
 // account
-export const RECEIVED_ACCOUNT = 'RECEIVED_ACCOUNT';
-export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
+export const RECEIVED_ACCOUNT         = 'RECEIVED_ACCOUNT';
+export const REPLACE_ACCOUNTS         = 'REPLACE_ACCOUNTS';
+export const REMOVE_ACCOUNT           = 'REMOVE_ACCOUNT';
 export const SWITCHED_PRIMARY_ACCOUNT = 'SWITCHED_PRIMARY_ACCOUNT';
 
 

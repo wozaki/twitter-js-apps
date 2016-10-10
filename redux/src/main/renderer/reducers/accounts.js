@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { RECEIVED_ACCOUNT, REMOVE_ACCOUNT, SWITCHED_PRIMARY_ACCOUNT } from '../constants/ActionTypes';
+import { RECEIVED_ACCOUNT, REPLACE_ACCOUNTS, REMOVE_ACCOUNT, SWITCHED_PRIMARY_ACCOUNT } from '../constants/ActionTypes';
 
 const initialState = [{
   created_at: null,
@@ -40,6 +40,10 @@ export default function accounts(state = initialState, action) {
       }
       const rejected = _.reject(state, (s) => s.id_str == action.user.id_str);
       return _.concat(rejected, createAccountFrom(action));
+    }
+
+    case REPLACE_ACCOUNTS: {
+      return action.accounts;
     }
 
     case REMOVE_ACCOUNT: {
