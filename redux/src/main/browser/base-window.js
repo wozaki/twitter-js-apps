@@ -2,15 +2,37 @@ import { BrowserWindow } from 'electron'
 
 class BaseWindow {
   constructor(url, options) {
-    this.onClosedHandler = null;
-    this.browserWindow = new BrowserWindow(options);
+    this.isRunning = true;
+    this.prepare(url, options);
+  }
+
+  prepare(url, options) {
+    this.initializer = () => new BrowserWindow(options);
+    this.browserWindow = this.initializer();
+    this.browserWindow.hide();
     this.browserWindow.loadURL(url);
     this.browserWindow.on('closed', () => {
-      if (this.onClosedHandler != null) {
-        this.onClosedHandler();
+      if (this.isRunning) {
+        this.prepare(url, options);
+      } else {
+        this.browserWindow = null;
       }
-      this.browserWindow = null;
     });
+  }
+
+  stopHotLoading() {
+    this.isRunning = false
+  }
+
+  /**
+   * @return {string}
+   */
+  get key() {
+    throw Error("you must override this method")
+  }
+
+  focus() {
+    this.browserWindow.focus();
   }
 
   show() {
@@ -19,10 +41,6 @@ class BaseWindow {
 
   hide() {
     this.browserWindow.hide();
-  }
-
-  setClosedHandler(handler) {
-    this.onClosedHandler = handler;
   }
 
   send(...args) {

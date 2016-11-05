@@ -4,9 +4,9 @@ import ApplicationMenu from './application-menu'
 import Authenticator from './authenticatior'
 import MainWindow from './main-window'
 import NewTweetWindow from './new-tweet-window'
-import WindowCycler from './window-cycler'
 import { credentialRepository } from './registory'
 import PreferencesWindow from './preferences-window'
+import WindowManager from './window-manager'
 
 export default class Application {
 
@@ -16,6 +16,7 @@ export default class Application {
     this.consumerSecret = consumerSecret;
     this.mainWindowUrl = mainWindowUrl;
     this.newTweetWindowUrl = newTweetWindowUrl;
+    this.windowManager = new WindowManager();
   }
 
   run(callback) {
@@ -38,12 +39,18 @@ export default class Application {
     this.callback(credential);
     credentialRepository.store(credential);
 
-    const mainWindow = this.openMainWindow();
-    this.setApplicationMenu(mainWindow);
+    const mainWindow = new MainWindow(this.mainWindowUrl);
+    const newTweetWindow = new NewTweetWindow(this.newTweetWindowUrl);
+    const preferencesWindow = new PreferencesWindow(mainWindow);
+    this.windowManager.register(mainWindow, newTweetWindow, preferencesWindow);
+
+    mainWindow.browserWindow.on('closed', () => {
+      this.quit();
+    });
+
+    this.openMainWindow();
+    this.setApplicationMenu();
     this.subscribeRendererEvent();
-    
-    this.newTweetWindow = new WindowCycler(() => new NewTweetWindow(this.newTweetWindowUrl));
-    this.newTweetWindow.prepare()
   }
 
   openAuthenticationWindow(force = false) {
@@ -58,15 +65,15 @@ export default class Application {
   }
 
   openMainWindow() {
-    return new MainWindow(this.mainWindowUrl);
+    this.windowManager.ensure(MainWindow.KEY)
   }
 
-  openPreferencesWindow(mainWindow) {
-    this.preferencesWindow =　new PreferencesWindow(mainWindow);
+  openPreferencesWindow() {
+    this.windowManager.ensure(PreferencesWindow.KEY)
   }
 
   openNewTweetWindow() {
-    this.newTweetWindow.showWindow()
+    this.windowManager.ensure(NewTweetWindow.KEY)
   }
 
   subscribeRendererEvent() {
@@ -86,33 +93,29 @@ export default class Application {
     });
 
     app.on('will-quit', () => {
-      this.newTweetWindow.stop();
     });
 
     app.on('ready', this.onReady.bind(this));
   }
 
-  setApplicationMenu(mainWindow) {
+  quit() {
+    this.windowManager.stopHotLoading();
+    app.quit();
+  }
+
+  setApplicationMenu() {
     new ApplicationMenu()
       .on('open-dev-tools', () => {
-        //TODO: broadcast all window
-        mainWindow.toggleDevTools();
-        if (this.preferencesWindow != null) {
-          this.preferencesWindow.toggleDevTools();
-        }
+        this.windowManager.toggleDevTools();
       })
       .on('quit', () => {
-        app.quit();
+        this.quit();
       })
       .on('open-preferences', () => {
-        this.openPreferencesWindow(mainWindow);
+        this.openPreferencesWindow();
       })
       .on('reload', () => {
-        //TODO: broadcast all window
-        mainWindow.reload();
-        if (this.preferencesWindow != null) {
-          this.preferencesWindow.reload();
-        }
+        this.windowManager.reload();
       })
       .on('new-tweet', () => {
         this.openNewTweetWindow();
