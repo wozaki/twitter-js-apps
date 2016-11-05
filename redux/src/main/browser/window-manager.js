@@ -39,6 +39,10 @@ class WindowManager {
     this._toAllWindows((window) => window.reload());
   }
 
+  stopHotLoading() {
+    this._toAllWindows((w) => w.stopHotLoading())
+  }
+
   _toAllWindows(fn) {
     _.each(this._windows, (window) => {
       fn(window);

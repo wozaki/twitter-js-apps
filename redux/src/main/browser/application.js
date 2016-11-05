@@ -45,13 +45,13 @@ export default class Application {
     const preferencesWindow = new PreferencesWindow(mainWindow);
     this.windowManager.register(mainWindow, newTweetWindow, preferencesWindow);
 
+    mainWindow.browserWindow.on('closed', () => {
+      this.quit();
+    });
+
     this.openMainWindow();
     this.setApplicationMenu();
     this.subscribeRendererEvent();
-
-    //TODO: hot reloading
-    // this.newTweetWindow = new WindowCycler(() => new NewTweetWindow(this.newTweetWindowUrl));
-    // this.newTweetWindow.prepare()
   }
 
   openAuthenticationWindow(force = false) {
@@ -94,10 +94,14 @@ export default class Application {
     });
 
     app.on('will-quit', () => {
-      // this.newTweetWindow.stop();
     });
 
     app.on('ready', this.onReady.bind(this));
+  }
+
+  quit() {
+    this.windowManager.stopHotLoading();
+    app.quit();
   }
 
   setApplicationMenu() {
@@ -106,7 +110,7 @@ export default class Application {
         this.windowManager.toggleDevTools();
       })
       .on('quit', () => {
-        app.quit();
+        this.quit();
       })
       .on('open-preferences', () => {
         this.openPreferencesWindow();
