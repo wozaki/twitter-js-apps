@@ -34,6 +34,11 @@ const SideMenu = ({ account, onClickSubAccount, subAccounts }) => {
             <i className="fa fa-user SideMenu-item-icon"></i>
           </Link>
         </li>
+        <li className="SideMenu-item">
+          <Link to="/lists">
+            <i className="fa fa-list SideMenu-item-icon"></i>
+          </Link>
+        </li>
         {renderSubAccounts()}
       </ul>
     </div>

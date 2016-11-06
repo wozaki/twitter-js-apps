@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute } from 'react-router'
 import AccountInfo from './containers/AccountInfoContainer'
 import FavoritesContainer from './containers/FavoritesContainer'
 import MyTimelineContainer from './containers/MyTimelineContainer'
+import ListsContainer from './containers/ListsContainer'
 import App from './containers/AppContainer'
 import Followers from './containers/FollowersContainer'
 import Following from './containers/FollowingContainer'
@@ -21,6 +22,7 @@ render(
                 <IndexRoute component={HomeContainer}/>
                 <Route path='/account-info' component={AccountInfo}/>
                 <Route path='/favorites' component={FavoritesContainer}/>
+                <Route path='/lists' component={ListsContainer}/>
                 <Route path='/my-timeline' component={MyTimelineContainer}/>
                 <Route path='/followers' component={Followers}/>
                 <Route path='/followings' component={Following}/>
