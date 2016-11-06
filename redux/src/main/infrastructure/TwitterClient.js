@@ -124,6 +124,26 @@ export default class TwitterClient {
       });
   }
 
+  /**
+   * https://dev.twitter.com/rest/reference/get/lists/ownerships
+   *
+   * @param userId
+   * @param screenName
+   * @param count
+   * @param cursor
+   * @return {Promise<Object>}
+   */
+  listsOwnership({ userId, screenName, count, cursor }) {
+    return this._get(
+      'lists/ownerships',
+      {
+        user_id: userId,
+        screen_name: screenName,
+        count: count,
+        cursor: cursor
+      });
+  }
+
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
     return this._get(
       'statuses/home_timeline',
