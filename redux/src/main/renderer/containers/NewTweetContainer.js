@@ -83,7 +83,6 @@ class NewTweetContainer extends Component {
               className="Editor-textarea"
               onChange={this.onTextareaChanged.bind(this)}
               onKeyDown={this.onTextareaKeyDown.bind(this)}
-              placeholder="What's happening?"
               value={this.state.text}>
             </textarea>
           </div>
