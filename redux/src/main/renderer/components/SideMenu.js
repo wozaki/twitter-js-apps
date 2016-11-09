@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const SideMenu = ({ account, onClickedNewTweet, onClickSubAccount, subAccounts }) => {
+const SideMenu = ({ account, onClickSubAccount, subAccounts }) => {
 
   const renderSubAccounts = () => {
     return subAccounts.map((account) => {
@@ -34,9 +34,6 @@ const SideMenu = ({ account, onClickedNewTweet, onClickSubAccount, subAccounts }
             <i className="fa fa-user SideMenu-item-icon"></i>
           </Link>
         </li>
-        <li className="SideMenu-item" onClick={onClickedNewTweet}>
-          <i className="fa fa-pencil-square-o SideMenu-item-icon"></i>
-        </li>
         {renderSubAccounts()}
       </ul>
     </div>
@@ -45,7 +42,6 @@ const SideMenu = ({ account, onClickedNewTweet, onClickSubAccount, subAccounts }
 
 SideMenu.propTypes = {
   account: PropTypes.object.isRequired,
-  onClickedNewTweet: PropTypes.func.isRequired
 };
 
 export default SideMenu

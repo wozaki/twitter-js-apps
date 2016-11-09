@@ -5,13 +5,8 @@ import { bindActionCreators } from 'redux';
 import SideMenu from '../components/SideMenu';
 import { Accounts } from '../../domain/models/Accounts';
 import * as accountActions from '../actions/account';
-import * as dialogService from '../registries/dialogService';
 
 class SideMenuContainer extends Component {
-
-  onClickedNewTweet() {
-    dialogService.showNewTweetDialog();
-  }
 
   onClickSubAccount(account) {
     const { switchPrimaryAccountTo } = this.props.actions;
@@ -25,7 +20,6 @@ class SideMenuContainer extends Component {
       <SideMenu
         account={account}
         subAccounts={subAccounts}
-        onClickedNewTweet={this.onClickedNewTweet.bind(this)}
         onClickSubAccount={(account) => this.onClickSubAccount(account)}
       />
     );
