@@ -6,7 +6,8 @@ class MainWindow extends BaseWindow {
   static KEY = key;
 
   constructor(url) {
-    super(url, { width: 500, height: 800 });
+    //TODO: implement dummy window buttons
+    super(url, { width: 500, height: 800 , frame: false });
   }
 
   get key() {
