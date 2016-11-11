@@ -11,15 +11,6 @@ const subAccount     = new Account(accountFixture.subAccount);
 const subAccount2    = new Account(accountFixture.subAccount2);
 
 describe('<SideMenu />', () => {
-  it('calls onClickedNewTweet when pencil icon is clicked', () => {
-    const props      = { account: primaryAccount, onClickedNewTweet: spy(), subAccounts: [] };
-    const wrapper    = shallow(<SideMenu {...props}/>);
-    const pencilIcon = wrapper.find('.fa-pencil-square-o').closest('.SideMenu-item');
-
-    pencilIcon.simulate('click');
-    expect(props.onClickedNewTweet.calledOnce).toEqual(true);
-  });
-
   it('renders all account avatar', () => {
     const props   = { account: primaryAccount, onClickedNewTweet: ()=> {}, subAccounts: [subAccount, subAccount2] };
     const wrapper = shallow(<SideMenu {...props}/>);
