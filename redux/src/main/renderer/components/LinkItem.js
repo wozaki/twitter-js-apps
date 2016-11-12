@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const LinkItem = ({ path, label, count }) => {
+const LinkItem = ({ path, label, count, query }) => {
   // TODO: use LINK in react-router
   // TODO: separate label and count by element
   return (
     <li>
-      <Link to={path || ""} className="LinkItem">
+      <Link to={path || ""} className="LinkItem" query={query} >
         <p className="LinkItem-label">
           {label}
         </p>
@@ -23,7 +23,8 @@ const LinkItem = ({ path, label, count }) => {
 LinkItem.propTypes = {
   path: PropTypes.string, // TODO isRequired
   label: PropTypes.string.isRequired,
-  count: PropTypes.number
+  count: PropTypes.number,
+  query: PropTypes.object
 };
 
 export default LinkItem
