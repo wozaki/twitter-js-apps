@@ -3,28 +3,24 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
-import * as listsActions from '../actions/lists';
-import { Accounts } from '../../domain/models/Accounts'
+import * as tweetsInListActions from '../actions/tweets-in-list';
+import TweetsContainer from '../containers/TweetsContainer';
 
 class TweetsInListContainer extends Component {
 
   componentWillMount() {
-    const { account }       = this.props;
-    const { listId }        = this.props.params;
-
-    //TODO: fetch tweet on list
-    console.log("listId", this.props.params.listId)
-    console.log("name", this.props.location.query.name)
+    const { fetchTweets }    = this.props.actions;
+    const { listId }         = this.props.params;
+    fetchTweets(listId);
   }
 
   render() {
-    //TODO: render tweets on list
+    const { tweetsInList } = this.props;
 
     return (
-      <div>
-        <ul className="lists">
-        </ul>
-      </div>
+      <TweetsContainer
+        tweets={tweetsInList}
+      />
     );
   }
 
@@ -32,25 +28,23 @@ class TweetsInListContainer extends Component {
 
 TweetsInListContainer.propTypes = {
   actions: PropTypes.object.isRequired,
-  lists: PropTypes.object.isRequired
+  tweets: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, props) {
-  const { lists, accounts } = state;
-  const account             = Accounts.fromJson(accounts).primary;
+  const { tweetsInList } = state;
   const { name }            = props.location.query;
 
+  //TODO: extract tweets from tweetsInList
   //TODO: use List model
   return {
-    account: account,
-    lists: lists,
-    title: name,
-    isLoading: lists.lists.length == 0
+    tweetsInList: tweetsInList,
+    title: name
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = _.assign({}, listsActions);
+  const actions = _.assign({}, tweetsInListActions);
   return {
     actions: bindActionCreators(actions, dispatch)
   };
