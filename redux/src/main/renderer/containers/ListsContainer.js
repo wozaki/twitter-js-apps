@@ -18,7 +18,7 @@ class ListsContainer extends Component {
   _createListItems(lists) {
     //TODO: add path
     return lists.map(l => {
-      return <LinkItem label={l.name} path={`/lists/${l.id_str}`} count={l.member_count} query={{ name: l.name }}/>
+      return <LinkItem label={l.name} path={`/lists/${l.id_str}/tweets`} count={l.member_count} query={{ name: l.name }}/>
     });
   }
 

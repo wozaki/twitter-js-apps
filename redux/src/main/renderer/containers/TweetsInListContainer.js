@@ -6,7 +6,7 @@ import MainContainerWrapper from '../containers/MainContainerWrapper';
 import * as listsActions from '../actions/lists';
 import { Accounts } from '../../domain/models/Accounts'
 
-class ListContainer extends Component {
+class TweetsInListContainer extends Component {
 
   componentWillMount() {
     const { account }       = this.props;
@@ -30,7 +30,7 @@ class ListContainer extends Component {
 
 }
 
-ListContainer.propTypes = {
+TweetsInListContainer.propTypes = {
   actions: PropTypes.object.isRequired,
   lists: PropTypes.object.isRequired
 };
@@ -56,4 +56,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContainerWrapper(ListContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainerWrapper(TweetsInListContainer));
