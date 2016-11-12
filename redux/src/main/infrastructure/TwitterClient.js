@@ -144,6 +144,36 @@ export default class TwitterClient {
       });
   }
 
+  /**
+   * https://dev.twitter.com/rest/reference/get/lists/statuses
+   *
+   * @param {string} listId
+   * @param {string} [slug] - You can identify a list by its slug instead of its numerical id
+   * @param {string} [ownerScreenName]
+   * @param {string} [ownerId]
+   * @param {string} [sinceId]
+   * @param {number} [maxId]
+   * @param {number} [count]
+   * @param {boolean} [includeEntities]
+   * @param {boolean} [includeRts]
+   * @return {Promise<Object>}
+   */
+  listsStatuses({ listId, slug, ownerScreenName, ownerId, sinceId, maxId, count, includeEntities, includeRts }) {
+    return this._get(
+      'lists/statuses',
+      {
+        list_id: listId,
+        slug: slug,
+        owner_screen_name: ownerScreenName,
+        owner_id: ownerId,
+        since_id: sinceId,
+        max_id: maxId,
+        count: count,
+        include_entities: includeEntities,
+        include_rts: includeRts,
+      });
+  }
+
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
     return this._get(
       'statuses/home_timeline',
