@@ -5,30 +5,24 @@ import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
 import * as listsActions from '../actions/lists';
 import { Accounts } from '../../domain/models/Accounts'
-import LinkItem from '../components/LinkItem';
 
-class ListsContainer extends Component {
+class ListContainer extends Component {
 
   componentWillMount() {
     const { account }       = this.props;
-    const { fetchOwnLists } = this.props.actions;
-    fetchOwnLists(account.id);
-  }
+    const { listId }        = this.props.params;
 
-  _createListItems(lists) {
-    //TODO: add path
-    return lists.map(l => {
-      return <LinkItem label={l.name} path={`/lists/${l.id_str}`} count={l.member_count} query={{ name: l.name }}/>
-    });
+    //TODO: fetch tweet on list
+    console.log("listId", this.props.params.listId)
+    console.log("name", this.props.location.query.name)
   }
 
   render() {
-    const { lists } = this.props;
+    //TODO: render tweets on list
 
     return (
       <div>
         <ul className="lists">
-          {this._createListItems(lists.lists)}
         </ul>
       </div>
     );
@@ -36,20 +30,21 @@ class ListsContainer extends Component {
 
 }
 
-ListsContainer.propTypes = {
+ListContainer.propTypes = {
   actions: PropTypes.object.isRequired,
   lists: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   const { lists, accounts } = state;
   const account             = Accounts.fromJson(accounts).primary;
+  const { name }            = props.location.query;
 
-  //TODO: use Lists model
+  //TODO: use List model
   return {
     account: account,
     lists: lists,
-    title: 'Lists',
+    title: name,
     isLoading: lists.lists.length == 0
   };
 }
@@ -61,4 +56,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContainerWrapper(ListsContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainerWrapper(ListContainer));

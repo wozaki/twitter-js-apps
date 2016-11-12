@@ -6,6 +6,7 @@ import AccountInfo from './containers/AccountInfoContainer'
 import FavoritesContainer from './containers/FavoritesContainer'
 import MyTimelineContainer from './containers/MyTimelineContainer'
 import ListsContainer from './containers/ListsContainer'
+import ListContainer from './containers/ListContainer'
 import App from './containers/AppContainer'
 import Followers from './containers/FollowersContainer'
 import Following from './containers/FollowingContainer'
@@ -23,6 +24,7 @@ render(
                 <Route path='/account-info' component={AccountInfo}/>
                 <Route path='/favorites' component={FavoritesContainer}/>
                 <Route path='/lists' component={ListsContainer}/>
+                <Route path='/lists/:listId' component={ListContainer}/>
                 <Route path='/my-timeline' component={MyTimelineContainer}/>
                 <Route path='/followers' component={Followers}/>
                 <Route path='/followings' component={Following}/>

@@ -5,6 +5,7 @@ const initialState = { lists: [], nextCursor: defaultCursor };
 
 function shapeLists(listInAction) {
   return {
+    id_str: listInAction.id_str,
     name: listInAction.name,
     mode: listInAction.mode,
     member_count: listInAction.member_count,
