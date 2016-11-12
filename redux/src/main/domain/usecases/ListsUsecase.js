@@ -16,6 +16,10 @@ class ListsUsecase {
     return this.twitterClient.listsOwnership({ userId: myId, count: count });
   }
 
+  getTweets(listId, sinceId) {
+    return this.twitterClient.listsStatuses({ listId: listId, sinceId: sinceId });
+  }
+
 }
 
 export default ListsUsecase
