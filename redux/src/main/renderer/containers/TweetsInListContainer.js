@@ -9,15 +9,15 @@ import TweetsContainer from '../containers/TweetsContainer';
 class TweetsInListContainer extends Component {
 
   componentWillMount() {
-    const { fetchTweets }    = this.props.actions;
-    const { listId }         = this.props.params;
+    const { fetchTweets } = this.props.actions;
+    const { listId }      = this.props.params;
     fetchTweets(listId);
   }
 
   render() {
-    const { tweetsInList } = this.props;
-    const { listId }       = this.props.params;
-    const { fetchOlderTweets }    = this.props.actions;
+    const { tweetsInList }     = this.props;
+    const { listId }           = this.props.params;
+    const { fetchOlderTweets } = this.props.actions;
 
     return (
       <TweetsContainer
@@ -35,7 +35,7 @@ TweetsInListContainer.propTypes = {
 };
 
 function mapStateToProps(state, props) {
-  const { tweetsInList } = state;
+  const { tweetsInList }    = state;
   const { name }            = props.location.query;
 
   //TODO: extract tweets from tweetsInList
