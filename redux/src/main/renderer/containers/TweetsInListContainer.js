@@ -16,10 +16,13 @@ class TweetsInListContainer extends Component {
 
   render() {
     const { tweetsInList } = this.props;
+    const { listId }       = this.props.params;
+    const { fetchOlderTweets }    = this.props.actions;
 
     return (
       <TweetsContainer
         tweets={tweetsInList}
+        fetchOldTweet={(offsetTweetId) => fetchOlderTweets(listId, offsetTweetId)}
       />
     );
   }

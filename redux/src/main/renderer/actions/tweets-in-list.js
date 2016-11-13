@@ -21,6 +21,19 @@ export function fetchTweets(listId, sinceId) {
   });
 }
 
+export function fetchOlderTweets(listId, maxTweetId) {
+  return new TwitterAction({
+    invoke: twitterClient => dispatch => {
+      new ListsUsecase(twitterClient)
+        .getOlderTweets(listId, maxTweetId)
+        .then(tweets => {
+          dispatch(receivedTweetsInList(tweets));
+        })
+        .catch(error => dispatch(onError(error)));
+    }
+  });
+}
+
 function receivedTweetsInList(tweets) {
   return {
     type: types.RECEIVED_TWEETS_IN_LIST,

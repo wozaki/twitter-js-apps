@@ -20,6 +20,14 @@ class ListsUsecase {
     return this.twitterClient.listsStatuses({ listId: listId, sinceId: sinceId });
   }
 
+  getOlderTweets(listId, maxTweetId) {
+    return this.twitterClient
+      .listsStatuses({ listId: listId, maxId: maxTweetId })
+      .then(tweets => {
+        return tweets.filter(t => t.id_str !== maxTweetId);
+      });
+  }
+
 }
 
 export default ListsUsecase

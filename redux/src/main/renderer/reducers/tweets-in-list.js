@@ -6,7 +6,7 @@ export default function tweetsInList(state = initialState, action) {
   switch (action.type) {
     case RECEIVED_TWEETS_IN_LIST:
       return {
-        tweets: action.tweets
+        tweets: state.tweets.concat(action.tweets)
       };
 
     default:
