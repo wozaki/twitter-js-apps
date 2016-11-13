@@ -20,6 +20,11 @@ export function fetchTweets(listId) {
   });
 }
 
+/**
+ * @param {string} listId
+ * @param {string} maxTweetId
+ * @return {TwitterAction}
+ */
 export function fetchOlderTweets(listId, maxTweetId) {
   return new TwitterAction({
     invoke: twitterClient => dispatch => {

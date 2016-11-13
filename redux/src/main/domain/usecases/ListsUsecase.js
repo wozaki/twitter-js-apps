@@ -16,10 +16,19 @@ class ListsUsecase {
     return this.twitterClient.listsOwnership({ userId: myId, count: count });
   }
 
+  /**
+   * @param {string} listId
+   * @return {Promise.<Object>}
+   */
   getTweets(listId) {
     return this.twitterClient.listsStatuses({ listId: listId });
   }
 
+  /**
+   * @param listId
+   * @param maxTweetId
+   * @return {Promise.<Object>}
+   */
   getOlderTweets(listId, maxTweetId) {
     return this.twitterClient
       .listsStatuses({ listId: listId, maxId: maxTweetId })
