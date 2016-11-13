@@ -5,10 +5,9 @@ import { TwitterAction } from '../middlewares/twitterClient';
 
 /**
  * @param {string} listId
- * @param {string} sinceId
  * @return {TwitterAction}
  */
-export function fetchTweets(listId, sinceId) {
+export function fetchTweets(listId) {
   return new TwitterAction({
     invoke: twitterClient => dispatch => {
       new ListsUsecase(twitterClient)

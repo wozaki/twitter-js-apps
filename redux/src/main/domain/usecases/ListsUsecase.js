@@ -16,8 +16,8 @@ class ListsUsecase {
     return this.twitterClient.listsOwnership({ userId: myId, count: count });
   }
 
-  getTweets(listId, sinceId) {
-    return this.twitterClient.listsStatuses({ listId: listId, sinceId: sinceId });
+  getTweets(listId) {
+    return this.twitterClient.listsStatuses({ listId: listId });
   }
 
   getOlderTweets(listId, maxTweetId) {
