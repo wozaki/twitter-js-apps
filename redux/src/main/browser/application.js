@@ -11,12 +11,12 @@ import WindowManager from './window-manager'
 export default class Application {
 
   constructor({ consumerKey, consumerSecret, callbackUrl, mainWindowUrl, newTweetWindowUrl }) {
-    this.callbackUrl = callbackUrl;
-    this.consumerKey = consumerKey;
-    this.consumerSecret = consumerSecret;
-    this.mainWindowUrl = mainWindowUrl;
+    this.callbackUrl       = callbackUrl;
+    this.consumerKey       = consumerKey;
+    this.consumerSecret    = consumerSecret;
+    this.mainWindowUrl     = mainWindowUrl;
     this.newTweetWindowUrl = newTweetWindowUrl;
-    this.windowManager = new WindowManager();
+    this.windowManager     = new WindowManager();
   }
 
   run(callback) {
