@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "main": "app/main/browser/index.js",
   "scripts": {
-    "prestart": "npm run compile",
+    "prestart": "yarn run compile",
     "start": "electron --debug=5858 .",
     "compile": "gulp compile",
     "test": "NODE_ENV=test mocha src/test/ --compilers js:babel-core/register --recursive",
