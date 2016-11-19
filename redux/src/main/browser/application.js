@@ -40,7 +40,14 @@ export default class Application {
     credentialRepository.store(credential);
 
     const mainWindow = new MainWindow(this.mainWindowUrl);
-    const newTweetWindow = new NewTweetWindow(this.newTweetWindowUrl);
+    mainWindow
+      .on('scroll-touch-begin', () => {
+        mainWindow.send('scroll-touch-begin')
+      })
+      .on('scroll-touch-end', () => {
+        mainWindow.send('scroll-touch-end')
+      });
+    const newTweetWindow    = new NewTweetWindow(this.newTweetWindowUrl);
     const preferencesWindow = new PreferencesWindow(mainWindow);
     this.windowManager.register(mainWindow, newTweetWindow, preferencesWindow);
 
