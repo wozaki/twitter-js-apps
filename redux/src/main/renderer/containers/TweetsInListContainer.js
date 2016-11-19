@@ -21,7 +21,7 @@ class TweetsInListContainer extends Component {
 
     return (
       <TweetsContainer
-        tweets={tweetsInList}
+        tweets={tweetsInList.tweets}
         fetchOldTweet={(offsetTweetId) => fetchOlderTweets(listId, offsetTweetId)}
       />
     );

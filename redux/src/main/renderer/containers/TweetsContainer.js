@@ -43,7 +43,7 @@ class TweetsContainer extends Component {
   };
 
   renderTweets() {
-    const {tweets} = this.props.tweets;
+    const {tweets} = this.props;
 
     if (!_.isEmpty(tweets)) {
       return tweets.map((tweet) => {
@@ -67,7 +67,7 @@ class TweetsContainer extends Component {
 
 TweetsContainer.propTypes = {
   fetchOldTweet: PropTypes.func,
-  tweets: PropTypes.object.isRequired
+  tweets: PropTypes.array.isRequired
 };
 
 function mapDispatchToProps(dispatch) {
