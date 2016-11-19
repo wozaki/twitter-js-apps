@@ -80,6 +80,7 @@ class NewTweetContainer extends Component {
           </div>
           <div className="NewTweet-main-center">
             <textarea
+              autoFocus
               className="Editor-textarea"
               onChange={this.onTextareaChanged.bind(this)}
               onKeyDown={this.onTextareaKeyDown.bind(this)}
