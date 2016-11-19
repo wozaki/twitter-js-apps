@@ -7,7 +7,7 @@ class BaseWindow {
   }
 
   prepare(url, options) {
-    this.initializer = () => new BrowserWindow(options);
+    this.initializer   = () => new BrowserWindow(options);
     this.browserWindow = this.initializer();
     this.browserWindow.hide();
     this.browserWindow.loadURL(url);
@@ -45,6 +45,11 @@ class BaseWindow {
 
   send(...args) {
     this.browserWindow.webContents.send(...args);
+  }
+
+  on(eventName, callback) {
+    this.browserWindow.on(eventName, callback);
+    return this;
   }
 
   close(...args) {
