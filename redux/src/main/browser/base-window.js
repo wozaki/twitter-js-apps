@@ -60,6 +60,10 @@ class BaseWindow {
     this.browserWindow.webContents.reloadIgnoringCache();
   }
 
+  goBack() {
+    this.browserWindow.webContents.goBack();
+  }
+
   toggleDevTools() {
     this.browserWindow.toggleDevTools();
   }
