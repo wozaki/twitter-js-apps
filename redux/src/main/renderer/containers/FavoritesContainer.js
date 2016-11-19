@@ -16,12 +16,12 @@ class FavoritesContainer extends Component {
   }
 
   render() {
-    const { favorites, account } = this.props;
+    const { tweets, account } = this.props;
     const { fetchMyFavoritesOlderThan } = this.props.actions;
 
     return (
       <TweetsContainer
-        tweets={favorites}
+        tweets={tweets}
         fetchOldTweet={(offsetTweetId) => fetchMyFavoritesOlderThan(account.userId, offsetTweetId)}
         />
     );
@@ -31,18 +31,19 @@ class FavoritesContainer extends Component {
 
 FavoritesContainer.propTypes = {
   actions: PropTypes.object.isRequired,
-  favorites: PropTypes.object.isRequired
+  tweets: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   const { favorites, accounts } = state;
+  const { tweets } = favorites;
   const account = Accounts.fromJson(accounts).primary;
 
   return {
     account: account,
-    favorites: favorites,
+    tweets: tweets,
     title: 'Favorites',
-    isLoading: favorites.tweets.length == 0
+    isLoading: tweets.length == 0
   };
 }
 

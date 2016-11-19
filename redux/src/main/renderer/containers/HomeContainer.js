@@ -22,12 +22,12 @@ class HomeContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const { timeline } = state;
+  const { tweets } = state.timeline;
 
   return {
-    tweets: timeline,
+    tweets: tweets,
     title: 'Home',
-    isLoading: timeline.tweets.length == 0
+    isLoading: tweets.length == 0
   };
 }
 

@@ -28,13 +28,13 @@ class MyTimelineContainer extends Component {
 
 MyTimelineContainer.propTypes = {
   actions: PropTypes.object.isRequired,
-  tweets: PropTypes.object.isRequired
+  tweets: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   const { myTimeline } = state;
   return {
-    tweets: myTimeline,
+    tweets: myTimeline.tweets,
     title: 'Tweets',
     isLoading: myTimeline.tweets.length == 0
   };
