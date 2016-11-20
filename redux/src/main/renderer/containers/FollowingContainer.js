@@ -51,7 +51,8 @@ function mapStateToProps(state) {
     users: following.users,
     nextCursor: following.nextCursor,
     title: 'Following',
-    isLoading: following.users.length == 0
+    isLoading: following.users.length == 0,
+    navigatableBySwipe: true
   };
 }
 

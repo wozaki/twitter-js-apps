@@ -36,7 +36,8 @@ function mapStateToProps(state) {
   return {
     tweets: myTimeline.tweets,
     title: 'Tweets',
-    isLoading: myTimeline.tweets.length == 0
+    isLoading: myTimeline.tweets.length == 0,
+    navigatableBySwipe: true
   };
 }
 
