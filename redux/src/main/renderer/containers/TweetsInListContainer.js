@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
 import * as tweetsInListActions from '../actions/tweets-in-list';
 import TweetsContainer from '../containers/TweetsContainer';
+import TweetsInList from '../../domain/models/TweetsInList';
 
 class TweetsInListContainer extends Component {
 
@@ -15,13 +16,13 @@ class TweetsInListContainer extends Component {
   }
 
   render() {
-    const { tweetsInList }     = this.props;
+    const { tweets }           = this.props;
     const { listId }           = this.props.params;
     const { fetchOlderTweets } = this.props.actions;
 
     return (
       <TweetsContainer
-        tweets={tweetsInList.tweets}
+        tweets={tweets}
         fetchOldTweet={(offsetTweetId) => fetchOlderTweets(listId, offsetTweetId)}
       />
     );
@@ -35,14 +36,15 @@ TweetsInListContainer.propTypes = {
 };
 
 function mapStateToProps(state, props) {
-  const { tweetsInList }    = state;
-  const { name }            = props.location.query;
+  const tweetsInList = new TweetsInList(state.tweetsInList);
+  const { listId }   = props.params;
+  const { name }     = props.location.query;
+  const tweets       = tweetsInList.tweets(listId);
 
-  //TODO: extract tweets from tweetsInList
-  //TODO: use List model
   return {
-    tweetsInList: tweetsInList,
+    tweets: tweets,
     title: name,
+    isLoading: tweets.length == 0,
     navigatableBySwipe: true
   };
 }
