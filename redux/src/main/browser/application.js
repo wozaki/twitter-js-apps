@@ -93,6 +93,10 @@ export default class Application {
           event.sender.send('added-account', credential);
         });
       })
+      .on('go-back', () => {
+        const mainWindow = this.windowManager.find(MainWindow.KEY);
+        mainWindow.goBack()
+      })
   }
 
   registerApplicationCallbacks() {
