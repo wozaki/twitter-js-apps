@@ -5,23 +5,23 @@ import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
 import * as tweetsInListActions from '../actions/tweets-in-list';
 import TweetsContainer from '../containers/TweetsContainer';
+import TweetsInList from '../../domain/models/TweetsInList';
 
 class TweetsInListContainer extends Component {
 
   componentWillMount() {
     const { fetchTweets } = this.props.actions;
-    const { listId }      = this.props.params;
+    const { listId }      = this.props;
     fetchTweets(listId);
   }
 
   render() {
-    const { tweetsInList }     = this.props;
-    const { listId }           = this.props.params;
+    const { listId, tweets }   = this.props;
     const { fetchOlderTweets } = this.props.actions;
 
     return (
       <TweetsContainer
-        tweets={tweetsInList.tweets}
+        tweets={tweets}
         fetchOldTweet={(offsetTweetId) => fetchOlderTweets(listId, offsetTweetId)}
       />
     );
@@ -31,18 +31,21 @@ class TweetsInListContainer extends Component {
 
 TweetsInListContainer.propTypes = {
   actions: PropTypes.object.isRequired,
+  listId: PropTypes.string.isRequired,
   tweets: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, props) {
-  const { tweetsInList }    = state;
-  const { name }            = props.location.query;
+  const tweetsInList = new TweetsInList(state.tweetsInList);
+  const { listId }   = props.params;
+  const { name }     = props.location.query;
+  const tweets       = tweetsInList.tweets(listId);
 
-  //TODO: extract tweets from tweetsInList
-  //TODO: use List model
   return {
-    tweetsInList: tweetsInList,
+    tweets: tweets,
+    listId: listId,
     title: name,
+    isLoading: tweets.length == 0,
     navigatableBySwipe: true
   };
 }

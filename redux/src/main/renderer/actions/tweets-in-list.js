@@ -13,7 +13,7 @@ export function fetchTweets(listId) {
       new ListsUsecase(twitterClient)
         .getTweets(listId)
         .then(tweets => {
-          dispatch(receivedFirstTweetsInList(tweets));
+          dispatch(receivedFirstTweetsInList(listId, tweets));
         })
         .catch(error => dispatch(onError(error)));
     }
@@ -31,23 +31,25 @@ export function fetchOlderTweets(listId, maxTweetId) {
       new ListsUsecase(twitterClient)
         .getOlderTweets(listId, maxTweetId)
         .then(tweets => {
-          dispatch(receivedOlderTweetsInList(tweets));
+          dispatch(receivedOlderTweetsInList(listId, tweets));
         })
         .catch(error => dispatch(onError(error)));
     }
   });
 }
 
-function receivedFirstTweetsInList(tweets) {
+function receivedFirstTweetsInList(listId, tweets) {
   return {
     type: types.RECEIVED_FIRST_TWEETS_IN_LIST,
+    listId,
     tweets
   };
 }
 
-function receivedOlderTweetsInList(tweets) {
+function receivedOlderTweetsInList(listId, tweets) {
   return {
     type: types.RECEIVED_OLDER_TWEETS_IN_LIST,
+    listId,
     tweets
   };
 }
