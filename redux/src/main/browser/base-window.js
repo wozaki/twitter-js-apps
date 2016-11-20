@@ -7,7 +7,7 @@ class BaseWindow {
   }
 
   prepare(url, options) {
-    this.initializer = () => new BrowserWindow(options);
+    this.initializer   = () => new BrowserWindow(options);
     this.browserWindow = this.initializer();
     this.browserWindow.hide();
     this.browserWindow.loadURL(url);
@@ -47,12 +47,21 @@ class BaseWindow {
     this.browserWindow.webContents.send(...args);
   }
 
+  on(eventName, callback) {
+    this.browserWindow.on(eventName, callback);
+    return this;
+  }
+
   close(...args) {
     this.browserWindow.close()
   }
 
   reload() {
     this.browserWindow.webContents.reloadIgnoringCache();
+  }
+
+  goBack() {
+    this.browserWindow.webContents.goBack();
   }
 
   toggleDevTools() {

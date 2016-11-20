@@ -11,12 +11,12 @@ import WindowManager from './window-manager'
 export default class Application {
 
   constructor({ consumerKey, consumerSecret, callbackUrl, mainWindowUrl, newTweetWindowUrl }) {
-    this.callbackUrl = callbackUrl;
-    this.consumerKey = consumerKey;
-    this.consumerSecret = consumerSecret;
-    this.mainWindowUrl = mainWindowUrl;
+    this.callbackUrl       = callbackUrl;
+    this.consumerKey       = consumerKey;
+    this.consumerSecret    = consumerSecret;
+    this.mainWindowUrl     = mainWindowUrl;
     this.newTweetWindowUrl = newTweetWindowUrl;
-    this.windowManager = new WindowManager();
+    this.windowManager     = new WindowManager();
   }
 
   run(callback) {
@@ -40,7 +40,14 @@ export default class Application {
     credentialRepository.store(credential);
 
     const mainWindow = new MainWindow(this.mainWindowUrl);
-    const newTweetWindow = new NewTweetWindow(this.newTweetWindowUrl);
+    mainWindow
+      .on('scroll-touch-begin', () => {
+        mainWindow.send('scroll-touch-begin')
+      })
+      .on('scroll-touch-end', () => {
+        mainWindow.send('scroll-touch-end')
+      });
+    const newTweetWindow    = new NewTweetWindow(this.newTweetWindowUrl);
     const preferencesWindow = new PreferencesWindow(mainWindow);
     this.windowManager.register(mainWindow, newTweetWindow, preferencesWindow);
 
@@ -85,6 +92,10 @@ export default class Application {
         this.openAuthenticationWindow(true).on('authentication-succeeded', (credential) => {
           event.sender.send('added-account', credential);
         });
+      })
+      .on('go-back', () => {
+        const mainWindow = this.windowManager.find(MainWindow.KEY);
+        mainWindow.goBack()
       })
   }
 
