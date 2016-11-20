@@ -11,13 +11,12 @@ class TweetsInListContainer extends Component {
 
   componentWillMount() {
     const { fetchTweets } = this.props.actions;
-    const { listId }      = this.props.params;
+    const { listId }      = this.props;
     fetchTweets(listId);
   }
 
   render() {
-    const { tweets }           = this.props;
-    const { listId }           = this.props.params;
+    const { listId, tweets }   = this.props;
     const { fetchOlderTweets } = this.props.actions;
 
     return (
@@ -32,6 +31,7 @@ class TweetsInListContainer extends Component {
 
 TweetsInListContainer.propTypes = {
   actions: PropTypes.object.isRequired,
+  listId: PropTypes.string.isRequired,
   tweets: PropTypes.array.isRequired
 };
 
@@ -43,6 +43,7 @@ function mapStateToProps(state, props) {
 
   return {
     tweets: tweets,
+    listId: listId,
     title: name,
     isLoading: tweets.length == 0,
     navigatableBySwipe: true
