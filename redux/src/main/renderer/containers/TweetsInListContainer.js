@@ -42,7 +42,8 @@ function mapStateToProps(state, props) {
   //TODO: use List model
   return {
     tweetsInList: tweetsInList,
-    title: name
+    title: name,
+    navigatableBySwipe: true
   };
 }
 
