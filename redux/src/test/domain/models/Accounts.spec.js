@@ -5,6 +5,7 @@ import * as accountFixture from '../../fixtures/account'
 const primaryAccountFixture = accountFixture.primaryAccount;
 const subAccountFixture = accountFixture.subAccount;
 const subAccount2Fixture = accountFixture.subAccount2;
+const dummyAccountFixture = accountFixture.dummyAccount;
 
 describe('Account', () => {
   describe('properties', () => {
@@ -23,12 +24,26 @@ describe('Account', () => {
       expect(subject.isPrimary).toEqual(primaryAccountFixture.is_primary);
     });
   });
+
+  describe('isDummy', () => {
+    context('when id is null', () => {
+      it('returns true', () => {
+        expect(new Account(dummyAccountFixture).isDummy).toEqual(true)
+      });
+    });
+    context('when id is not null', () => {
+      it('returns false', () => {
+        expect(new Account(primaryAccountFixture).isDummy).toEqual(false)
+      });
+    });
+  });
 });
 
 describe('Accounts', () => {
   const primaryAccount = new Account(primaryAccountFixture);
   const subAccount = new Account(subAccountFixture);
   const subAccount2 = new Account(subAccount2Fixture);
+  const dummyAccount = new Account(dummyAccountFixture);
 
   describe('#primary', () => {
     let subject;
@@ -99,4 +114,40 @@ describe('Accounts', () => {
       });
     });
   });
+
+
+  describe('#isEmpty', () => {
+    let subject;
+
+    context('when having Account', () => {
+      beforeEach(() => {
+        const accounts = new Accounts([primaryAccount]);
+        subject        = accounts.isEmpty;
+      });
+      it('returns false', () => {
+        expect(subject).toEqual(false);
+      });
+    });
+
+    context('when having no Account', () => {
+      beforeEach(() => {
+        const accounts = new Accounts([]);
+        subject        = accounts.isEmpty;
+      });
+      it('returns true', () => {
+        expect(subject).toEqual(true);
+      });
+    });
+
+    context('when having only dummy Account', () => {
+      beforeEach(() => {
+        const accounts = new Accounts([dummyAccount]);
+        subject        = accounts.isEmpty;
+      });
+      it('returns true', () => {
+        expect(subject).toEqual(true);
+      });
+    });
+  });
+
 });

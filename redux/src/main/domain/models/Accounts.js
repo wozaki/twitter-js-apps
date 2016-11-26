@@ -31,6 +31,14 @@ class Accounts {
   get asArray() {
     return this._accounts;
   }
+
+  /**
+   * @returns {boolean}
+   */
+  get isEmpty() {
+    return _.isEmpty(this._accounts) || (this._accounts.length == 1 && this._accounts[0].isDummy);
+  }
+
 }
 
 class Account extends Entity {
@@ -56,6 +64,13 @@ class Account extends Entity {
 
   get isPrimary() {
     return this._raw.is_primary;
+  }
+
+  /**
+   * @return {boolean}
+   */
+  get isDummy() {
+    return this._raw.id_str == null;
   }
 
   get profileImageUrl() {
