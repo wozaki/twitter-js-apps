@@ -4,6 +4,14 @@ export const showErrorDialog = ({ title, body }) => {
   remote.dialog.showErrorBox(title, body);
 };
 
+
+/**
+ * @callback onAddedAccount
+ * @param {Credential} credential
+ */
+/**
+ * @param {onAddedAccount} onAddedAccount
+ */
 export const addAccount = (onAddedAccount) => {
   ipcRenderer.send('add-account');
   ipcRenderer.on('added-account', (event, credential) => {
