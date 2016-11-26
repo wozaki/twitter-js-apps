@@ -3,7 +3,7 @@ import { RECEIVED_ACCOUNT, REPLACE_ACCOUNTS, REMOVE_ACCOUNT, SWITCHED_PRIMARY_AC
 
 const initialState = [];
 
-function createAccountFrom(action) {
+function shapeAccount(action) {
   return {
     created_at: action.user.created_at,
     credential: action.credential,
@@ -23,10 +23,10 @@ export default function accounts(state = initialState, action) {
   switch (action.type) {
     case RECEIVED_ACCOUNT: {
       if (_.isEmpty(state)) {
-        return [createAccountFrom(action)];
+        return [shapeAccount(action)];
       }
       const rejected = _.reject(state, (s) => s.id_str == action.user.id_str);
-      return _.concat(rejected, createAccountFrom(action));
+      return _.concat(rejected, shapeAccount(action));
     }
 
     case REPLACE_ACCOUNTS: {
