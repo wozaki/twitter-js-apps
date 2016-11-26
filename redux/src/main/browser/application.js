@@ -4,7 +4,6 @@ import ApplicationMenu from './application-menu'
 import Authenticator from './authenticatior'
 import MainWindow from './main-window'
 import NewTweetWindow from './new-tweet-window'
-import { credentialRepository } from './registory'
 import PreferencesWindow from './preferences-window'
 import WindowManager from './window-manager'
 
@@ -19,26 +18,12 @@ export default class Application {
     this.windowManager     = new WindowManager();
   }
 
-  run(callback) {
-    this.callback = callback;
+  run() {
     this.startCrashReporter();
     this.registerApplicationCallbacks();
   }
 
   onReady() {
-    if (credentialRepository.existsAtLeastOne()) {
-      const credential = credentialRepository.restore();
-      this.onAuthenticationSucceeded(credential);
-    } else {
-      this.openAuthenticationWindow()
-        .on('authentication-succeeded', this.onAuthenticationSucceeded.bind(this));
-    }
-  }
-
-  onAuthenticationSucceeded(credential) {
-    this.callback(credential);
-    credentialRepository.store(credential);
-
     const mainWindow = new MainWindow(this.mainWindowUrl);
     mainWindow
       .on('scroll-touch-begin', () => {

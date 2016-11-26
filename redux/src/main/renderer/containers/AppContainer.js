@@ -5,12 +5,19 @@ import { connect } from 'react-redux';
 import * as appActions from '../actions/app';
 import SideMenuContainer from '../containers/SideMenuContainer';
 import * as dialogService from '../registries/dialogService';
+import { Accounts } from '../../domain/models/Accounts';
 
 class AppContainer extends Component {
-  componentDidMount() {
-    const { setUp } = this.props.actions;
 
-    setUp(registries.credential);
+  componentWillMount() {
+    const { accounts } = this.props;
+    const { setUp }    = this.props.actions;
+
+    if (accounts.isEmpty) {
+      dialogService.addAccount((credential) => setUp(credential));
+    } else {
+      setUp(accounts.primary.credential);
+    }
   }
 
   showErrorDialogIfNeeded() {
@@ -48,8 +55,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const { errorMessage } = state;
+  const { accounts, errorMessage } = state;
+  const _accounts                  = Accounts.fromJson(accounts);
+
   return {
+    accounts: _accounts,
     errorMessage: errorMessage
   };
 }
