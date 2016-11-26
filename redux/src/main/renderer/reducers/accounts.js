@@ -1,20 +1,7 @@
 import _ from 'lodash';
 import { RECEIVED_ACCOUNT, REPLACE_ACCOUNTS, REMOVE_ACCOUNT, SWITCHED_PRIMARY_ACCOUNT } from '../constants/ActionTypes';
 
-const initialState = [{
-  created_at: null,
-  credential: null,
-  followers_count: null,
-  friends_count: null,
-  id_str: null,
-  name: null,
-  profile_image_url: null,
-  protected: null,
-  screen_name: null,
-  statuses_count: null,
-  is_initial_state: true,
-  is_primary: true
-}];
+const initialState = [];
 
 function createAccountFrom(action) {
   return {
@@ -35,7 +22,7 @@ function createAccountFrom(action) {
 export default function accounts(state = initialState, action) {
   switch (action.type) {
     case RECEIVED_ACCOUNT: {
-      if (state[0].is_initial_state) {
+      if (_.isEmpty(state)) {
         return [createAccountFrom(action)];
       }
       const rejected = _.reject(state, (s) => s.id_str == action.user.id_str);

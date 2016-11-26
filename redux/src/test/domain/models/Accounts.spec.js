@@ -150,4 +150,30 @@ describe('Accounts', () => {
     });
   });
 
+  describe('#fromJson', () => {
+    let subject;
+
+    context('when given an empty array', () => {
+      beforeEach(() => {
+        subject = Accounts.fromJson([]);
+      });
+      it('returns Accounts having only dummy account', () => {
+        expect(subject.asArray.length).toEqual(1);
+        expect(subject.asArray[0].isDummy).toEqual(true);
+      });
+    });
+
+    context('when given two raw account objects', () => {
+      beforeEach(() => {
+        subject = Accounts.fromJson([primaryAccountFixture, subAccountFixture]);
+      });
+      it('returns Accounts having two Account', () => {
+        expect(subject.asArray.length).toEqual(2);
+        expect(subject.asArray[0].id).toEqual(primaryAccountFixture.id_str);
+        expect(subject.asArray[1].id).toEqual(subAccountFixture.id_str);
+      });
+    });
+  });
+
+
 });

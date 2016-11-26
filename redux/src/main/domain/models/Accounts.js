@@ -4,18 +4,20 @@ import Entity from './Entity';
 class Accounts {
 
   /**
-   * @param {[Account]} accounts
+   * @param {Account[]} accounts
    */
   constructor(accounts) {
     this._accounts = accounts;
   }
 
   /**
-   * @param {Object} json
+   * @param {Object[]} rowAccounts
    * @return {Accounts}
    */
-  static fromJson(json) {
-    const accounts = json.map(j => Account.fromJson(j));
+  static fromJson(rowAccounts) {
+    const accounts = _.isEmpty(rowAccounts)
+      ? [Account.dummy]
+      : rowAccounts.map(rowAccount => Account.fromJson(rowAccount));
     return new Accounts(accounts);
   }
 
@@ -52,6 +54,21 @@ class Accounts {
 
 }
 
+const rowDummyAccount = {
+  created_at: null,
+  credential: null,
+  followers_count: null,
+  friends_count: null,
+  id_str: null,
+  name: null,
+  profile_image_url: null,
+  protected: null,
+  screen_name: null,
+  statuses_count: null,
+  is_initial_state: true,
+  is_primary: true
+};
+
 class Account extends Entity {
 
   /**
@@ -68,6 +85,13 @@ class Account extends Entity {
    */
   static fromJson(userJson) {
     return new this(userJson);
+  }
+
+  /**
+   * @return {Account}
+   */
+  static get dummy() {
+    return new Account(rowDummyAccount);
   }
 
   /**
