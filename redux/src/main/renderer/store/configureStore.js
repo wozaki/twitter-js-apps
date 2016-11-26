@@ -31,7 +31,9 @@ function subscribeStorage(store) {
     if (storageEvent.key == KEY_REDUX_LOCAL_STORAGE) {
       if (storageEvent.newValue != storageEvent.oldValue) {
         const updated = JSON.parse(storageEvent.newValue);
-        store.dispatch(replaceAccounts(updated.accounts))
+        if (updated) {
+          store.dispatch(replaceAccounts(updated.accounts))
+        }
       }
     }
   }
