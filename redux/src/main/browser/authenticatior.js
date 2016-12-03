@@ -25,7 +25,6 @@ class Authenticator extends EventEmitter {
 
   _extractOauthVerifierFromWindow(authUrl, callback) {
     const window = new AuthenticationWindow(authUrl);
-
     window.onWillNavigate((authedUrl) => {
       let matched;
       if (matched = authedUrl.match(/\?oauth_token=([^&]*)&oauth_verifier=([^&]*)/)) {
