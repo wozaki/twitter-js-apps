@@ -14,12 +14,6 @@ class AuthenticationWindow extends BaseWindow {
     })
   }
 
-  onDidGetRedirectRequest(callback) {
-    this.browserWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl, isMainFrame) => {
-      callback(newUrl);
-    });
-  }
-
   get key() {
     return key;
   }
