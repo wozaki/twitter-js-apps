@@ -7,6 +7,7 @@ import following from './following';
 import lists from './lists';
 import timeline from './timeline';
 import tweetsInList from './tweets-in-list';
+import users from './users';
 import myTimeline from './my-timeline';
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   lists,
   timeline,
   tweetsInList,
+  users,
   myTimeline
 });
 
