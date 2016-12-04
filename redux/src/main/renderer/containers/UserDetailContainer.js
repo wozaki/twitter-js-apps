@@ -41,6 +41,7 @@ class UserDetailContainer extends Component {
           <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{user.name}</p>
           <p style={{ fontSize: '17px', marginBottom: '10px' }}>{user.screenNameWithAt}</p>
           <p style={{ marginBottom: '10px' }}>{user.description}</p>
+          <p style={{ color: 'gray' }}>{user.location}</p>
           <a href={user.url.expanded} onClick={this._onUrlClicked}>{user.url.forDisplay}</a>
         </div>
         <ul className="lists">

@@ -14,6 +14,7 @@ function shapeUser({ user }) {
     protected: user.protected,
     screen_name: user.screen_name,
     statuses_count: user.statuses_count,
+    location: user.location,
     entities: user.entities,
   }
 }
