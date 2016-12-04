@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import ProfileImageUrl from './ProfileImageUrl';
 
 class Users {
 
@@ -83,10 +84,10 @@ class User {
   }
 
   /**
-   * @return {string}
+   * @return {ProfileImageUrl}
    */
   get profileImageUrl() {
-    return this._object.profile_image_url;
+    return new ProfileImageUrl(this._object.profile_image_url);
   }
 
   /**
