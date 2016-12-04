@@ -214,6 +214,24 @@ export default class TwitterClient {
   }
 
   /**
+   * https://dev.twitter.com/rest/reference/get/users/show
+   *
+   * @param {string} userId
+   * @param {string} [screenName]
+   * @param {boolean} [includeEntities]
+   * @return {*}
+   */
+  usersShow({ userId, screenName, includeEntities }) {
+    return this._get(
+      'users/show',
+      {
+        user_id: userId,
+        screen_name: screenName,
+        include_entities: includeEntities
+      });
+  }
+
+  /**
    * @param userId {string}
    * @returns {EventEmitter}
    */
