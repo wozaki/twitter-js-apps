@@ -44,6 +44,7 @@ const dummyObject = {
   protected: null,
   screen_name: null,
   statuses_count: null,
+  location: null,
   entities: null,
 };
 
@@ -148,6 +149,14 @@ class User {
     const url = _.get(this._object.entities, 'url.urls[0]');
     return new UrlEntity(url);
   }
+
+  /**
+   * @return {string}
+   */
+  get location() {
+    return this._object.location;
+  }
+
 }
 
 export { Users, User };
