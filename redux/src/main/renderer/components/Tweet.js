@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import TweetBody from './TweetBody'
 import Time from './Time'
 
@@ -8,7 +9,9 @@ const Tweet = ({ tweet, favoriteButton, onAnchorClicked }) => {
   return (
     <li className="Tweet">
       <div className="Tweet-sub">
-        <img className="Tweet-avatar" src={tweet.user.profile_image_url} height="48" width="48"/>
+        <Link to={`/users/${tweet.user.id_str}`}>
+          <img className="Tweet-avatar" src={tweet.user.profile_image_url} height="48" width="48"/>
+        </Link>
       </div>
       <div className="Tweet-main">
         <div className="Tweet-header">
