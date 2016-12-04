@@ -6,6 +6,7 @@ import MainContainerWrapper from '../containers/MainContainerWrapper';
 import { Users } from '../../domain/models/Users'
 import LinkItem from '../components/LinkItem';
 import * as userActions from '../actions/user';
+import * as dialogService from '../registries/dialogService';
 
 class UserDetailContainer extends Component {
 
@@ -15,6 +16,11 @@ class UserDetailContainer extends Component {
 
     fetchUser(userId);
   }
+
+  _onUrlClicked = (event) => {
+    event.preventDefault();
+    dialogService.openUrl(event.currentTarget.href);
+  };
 
   render() {
     const { user } = this.props;
@@ -43,6 +49,7 @@ class UserDetailContainer extends Component {
             <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{user.name}</p>
             <p style={{ fontSize: '17px' }}>{user.screenNameWithAt}</p>
             <p>{user.description}</p>
+            <a href={user.url.expanded} onClick={this._onUrlClicked}>{user.url.forDisplay}</a>
           </div>
         </div>
         <ul className="lists">
