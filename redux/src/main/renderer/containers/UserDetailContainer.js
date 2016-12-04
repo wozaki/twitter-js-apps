@@ -25,6 +25,7 @@ class UserDetailContainer extends Component {
   render() {
     const { user } = this.props;
 
+    //TODO: Implement LinkItems
     return (
       <div>
         <div className="main"
@@ -45,9 +46,9 @@ class UserDetailContainer extends Component {
           <a href={user.url.expanded} onClick={this._onUrlClicked}>{user.url.forDisplay}</a>
         </div>
         <ul className="lists">
-          <LinkItem label="Tweets" path={"/my-timeline"} count={user.tweetCount}/>
-          <LinkItem label="Followers" path={"/followers"} count={user.followersCount}/>
-          <LinkItem label="Following" path={"/followings"} count={user.followingCount}/>
+          <LinkItem label="Tweets" path={""} count={user.tweetCount}/>
+          <LinkItem label="Followers" path={""} count={user.followersCount}/>
+          <LinkItem label="Following" path={""} count={user.followingCount}/>
         </ul>
       </div>
     );
