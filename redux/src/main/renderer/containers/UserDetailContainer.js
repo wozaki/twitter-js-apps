@@ -34,23 +34,14 @@ class UserDetailContainer extends Component {
                width: '100%',
                flexDirection: 'column',
                alignItems: 'center',
-               padding: '10px'
+               padding: '20px'
              }}>
-          <img className="Tweet-avatar" src={user.profileImageUrl.original} height="120" width="120"/>
-          <div className="body-wrapper"
-               style={{
-                 display: 'flex',
-                 justifyContent: 'center',
-                 width: '100%',
-                 flexDirection: 'column',
-                 alignItems: 'center',
-                 padding: '20px'
-               }}>
-            <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{user.name}</p>
-            <p style={{ fontSize: '17px' }}>{user.screenNameWithAt}</p>
-            <p>{user.description}</p>
-            <a href={user.url.expanded} onClick={this._onUrlClicked}>{user.url.forDisplay}</a>
-          </div>
+          <img className="Tweet-avatar" src={user.profileImageUrl.original}
+               style={{ height: "120px", width: "120px", marginBottom: '10px' }}/>
+          <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{user.name}</p>
+          <p style={{ fontSize: '17px', marginBottom: '10px' }}>{user.screenNameWithAt}</p>
+          <p style={{ marginBottom: '10px' }}>{user.description}</p>
+          <a href={user.url.expanded} onClick={this._onUrlClicked}>{user.url.forDisplay}</a>
         </div>
         <ul className="lists">
           <LinkItem label="Tweets" path={"/my-timeline"} count={user.tweetCount}/>
