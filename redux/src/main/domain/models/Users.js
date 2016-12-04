@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import ProfileImageUrl from './ProfileImageUrl';
+import UrlEntity from './UrlEntity';
 
 class Users {
 
@@ -43,6 +44,7 @@ const dummyObject = {
   protected: null,
   screen_name: null,
   statuses_count: null,
+  entities: null,
 };
 
 class User {
@@ -137,6 +139,14 @@ class User {
    */
   get description() {
     return this._object.description;
+  }
+
+  /**
+   * @return {UrlEntity}
+   */
+  get url() {
+    const url = _.get(this._object.entities, 'url.urls[0]');
+    return new UrlEntity(url);
   }
 }
 
