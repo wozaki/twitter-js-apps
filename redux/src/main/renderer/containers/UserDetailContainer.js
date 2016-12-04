@@ -21,8 +21,29 @@ class UserDetailContainer extends Component {
 
     return (
       <div>
-        <div className="main" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+        <div className="main"
+             style={{
+               display: 'flex',
+               justifyContent: 'center',
+               width: '100%',
+               flexDirection: 'column',
+               alignItems: 'center',
+               padding: '10px'
+             }}>
           <img className="Tweet-avatar" src={user.profileImageUrl.original} height="120" width="120"/>
+          <div className="body-wrapper"
+               style={{
+                 display: 'flex',
+                 justifyContent: 'center',
+                 width: '100%',
+                 flexDirection: 'column',
+                 alignItems: 'center',
+                 padding: '20px'
+               }}>
+            <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{user.name}</p>
+            <p style={{ fontSize: '17px' }}>{user.screenNameWithAt}</p>
+            <p>{user.description}</p>
+          </div>
         </div>
         <ul className="lists">
           <LinkItem label="Tweets" path={"/my-timeline"} count={user.tweetCount}/>

@@ -100,6 +100,13 @@ class User {
   /**
    * @return {string}
    */
+  get screenNameWithAt() {
+    return _.isNull(this.screenName) ? '' : "@" + this.screenName
+  }
+
+  /**
+   * @return {string}
+   */
   get name() {
     return this._object.name;
   }
@@ -123,6 +130,13 @@ class User {
    */
   get followingCount() {
     return this._object.friends_count;
+  }
+
+  /**
+   * @return {string}
+   */
+  get description() {
+    return this._object.description;
   }
 }
 
