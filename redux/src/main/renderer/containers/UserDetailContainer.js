@@ -20,11 +20,16 @@ class UserDetailContainer extends Component {
     const { user } = this.props;
 
     return (
-      <ul className="lists">
-        <LinkItem label="Tweets" path={"/my-timeline"} count={user.tweetCount}/>
-        <LinkItem label="Followers" path={"/followers"} count={user.followersCount}/>
-        <LinkItem label="Following" path={"/followings"} count={user.followingCount}/>
-      </ul>
+      <div>
+        <div className="main" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <img className="Tweet-avatar" src={user.profileImageUrl.original} height="120" width="120"/>
+        </div>
+        <ul className="lists">
+          <LinkItem label="Tweets" path={"/my-timeline"} count={user.tweetCount}/>
+          <LinkItem label="Followers" path={"/followers"} count={user.followersCount}/>
+          <LinkItem label="Following" path={"/followings"} count={user.followingCount}/>
+        </ul>
+      </div>
     );
   }
 }
@@ -50,7 +55,7 @@ function mapStateToProps(state, props) {
   return {
     user: user,
     userId: userId,
-    title: _.defaultTo(user.screenName,''),
+    title: _.defaultTo(user.screenName, ''),
     navigatableBySwipe: true
   };
 }
