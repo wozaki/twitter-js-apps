@@ -14,17 +14,17 @@ class Accounts {
    * @param {Object[]} accountObjects
    * @return {Accounts}
    */
-  static fromJson(accountObjects) {
+  static fromObjects(accountObjects) {
     const accounts = _.isEmpty(accountObjects)
       ? [Account.dummy]
-      : accountObjects.map(obj => Account.fromJson(obj));
+      : accountObjects.map(obj => Account.fromObject(obj));
     return new Accounts(accounts);
   }
 
   /**
    * @returns {Account|undefined}
    */
-  get primary() { 
+  get primary() {
     return _.chain(this._accounts)
       .filter(account => account.isPrimary)
       .head()
@@ -83,7 +83,7 @@ class Account extends Entity {
    * @param {Object} userObject
    * @return {Account}
    */
-  static fromJson(userObject) {
+  static fromObject(userObject) {
     return new this(userObject);
   }
 

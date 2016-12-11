@@ -42,7 +42,7 @@ ListsContainer.propTypes = {
 
 function mapStateToProps(state) {
   const { lists, accounts } = state;
-  const account             = Accounts.fromJson(accounts).primary;
+  const account             = Accounts.fromObjects(accounts).primary;
 
   //TODO: use Lists model
   return {

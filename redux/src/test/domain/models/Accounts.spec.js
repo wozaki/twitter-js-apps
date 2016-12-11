@@ -150,12 +150,12 @@ describe('Accounts', () => {
     });
   });
 
-  describe('#fromJson', () => {
+  describe('#fromObjects', () => {
     let subject;
 
     context('when given an empty array', () => {
       beforeEach(() => {
-        subject = Accounts.fromJson([]);
+        subject = Accounts.fromObjects([]);
       });
       it('returns Accounts having only dummy account', () => {
         expect(subject.asArray.length).toEqual(1);
@@ -165,7 +165,7 @@ describe('Accounts', () => {
 
     context('when given two raw account objects', () => {
       beforeEach(() => {
-        subject = Accounts.fromJson([primaryAccountFixture, subAccountFixture]);
+        subject = Accounts.fromObjects([primaryAccountFixture, subAccountFixture]);
       });
       it('returns Accounts having two Account', () => {
         expect(subject.asArray.length).toEqual(2);
