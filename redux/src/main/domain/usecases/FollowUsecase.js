@@ -31,22 +31,22 @@ export default class FollowUsecase {
   }
 
   /**
-   * @param {string} myId
+   * @param {string} userId
    * @param {number} count
    * @returns {Promise<Object>}
    */
-  getFollowers(myId, count = this.defaultCount) {
-    return this.twitterClient.followersList({ userId: myId, count: count });
+  getFollowers(userId, count = this.defaultCount) {
+    return this.twitterClient.followersList({ userId: userId, count: count });
   }
 
   /**
-   * @param {string} myId
+   * @param {string} userId
    * @param {string} nextCursor
    * @param {number} count
    * @returns {Promise.<Object>}
    */
-  getFollowersOlderThan(myId, nextCursor, count = this.defaultCount) {
-    return this.twitterClient.followersList({ userId: myId, cursor: nextCursor, count: count });
+  getFollowersOlderThan(userId, nextCursor, count = this.defaultCount) {
+    return this.twitterClient.followersList({ userId: userId, cursor: nextCursor, count: count });
   }
 
 }

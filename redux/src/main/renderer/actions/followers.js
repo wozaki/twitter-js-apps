@@ -5,16 +5,16 @@ import { onError } from './error-handler';
 import { TwitterAction } from '../middlewares/twitterClient';
 
 /**
- * @param {string} myId
+ * @param {string} userId
  * @returns {TwitterAction}
  */
-export function fetchFollowers(myId) {
+export function fetchFollowers(userId) {
   return new TwitterAction({
     invoke: twitterClient => dispatch => {
       followUsecase(twitterClient)
-        .getFollowers(myId)
+        .getFollowers(userId)
         .then(followers => {
-          dispatch(receivedFollowers(followers));
+          dispatch(receivedFollowers(userId, followers));
         })
         .catch(error => dispatch(onError(error)));
     }
@@ -22,20 +22,20 @@ export function fetchFollowers(myId) {
 }
 
 /**
- * @param {string} myId
+ * @param {string} userId
  * @param {string} nextCursor
  * @returns {TwitterAction}
  */
-export function fetchFollowersOlderThan(myId, nextCursor) {
+export function fetchFollowersOlderThan(userId, nextCursor) {
   return new TwitterAction({
     invoke: twitterClient => dispatch => {
       if (isLastCursor(nextCursor)) {
         dispatch(receivedFollowersCompleted())
       } else {
         followUsecase(twitterClient)
-          .getFollowersOlderThan(myId, nextCursor)
+          .getFollowersOlderThan(userId, nextCursor)
           .then(followers => {
-            dispatch(receivedOldFollowers(followers));
+            dispatch(receivedOldFollowers(userId, followers));
           })
           .catch(error => dispatch(onError(error)));
       }
@@ -43,16 +43,18 @@ export function fetchFollowersOlderThan(myId, nextCursor) {
   });
 }
 
-function receivedFollowers(followers) {
+function receivedFollowers(ownerId, followers) {
   return {
     type: types.RECEIVED_FOLLOWERS,
+    ownerId,
     followers
   };
 }
 
-function receivedOldFollowers(followers) {
+function receivedOldFollowers(ownerId, followers) {
   return {
     type: types.RECEIVED_OLD_FOLLOWERS,
+    ownerId,
     followers
   };
 }

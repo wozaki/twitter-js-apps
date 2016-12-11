@@ -5,23 +5,22 @@ import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
 import UserList from '../components/UserList';
 import * as followersActions from '../actions/followers';
-import InfiniteScroll from '../components/InfiniteScroll'
-import { Accounts } from '../../domain/models/Accounts'
+import InfiniteScroll from '../components/InfiniteScroll';
 
 class FollowersContainer extends Component {
 
   componentWillMount() {
-    const { account } = this.props;
+    const { userId }         = this.props;
     const { fetchFollowers } = this.props.actions;
-    fetchFollowers(account.id);
+    fetchFollowers(userId);
   }
 
-  onLoad() {
+  _onLoad = () => {
     const { fetchFollowersOlderThan } = this.props.actions;
-    const { account, nextCursor } = this.props;
+    const { nextCursor, userId }      = this.props;
 
-    fetchFollowersOlderThan(account.id, nextCursor);
-  }
+    fetchFollowersOlderThan(userId, nextCursor);
+  };
 
   render() {
     const { users } = this.props;
@@ -29,7 +28,7 @@ class FollowersContainer extends Component {
     return (
       <InfiniteScroll
         className={"UserList"}
-        onLoad={this.onLoad.bind(this)}>
+        onLoad={this._onLoad}>
         <UserList users={users}/>
       </InfiniteScroll>
     );
@@ -42,16 +41,18 @@ FollowersContainer.propTypes = {
   users: PropTypes.array.isRequired
 };
 
-function mapStateToProps(state) {
-  const { followers, accounts } = state;
-  const account = Accounts.fromObjects(accounts).primary;
+function mapStateToProps(state, props) {
+  const { userId } = props.params;
+  const followers  = state.followers[userId];
+  const users      = _.get(followers, 'users', []);
+  const nextCursor = _.get(followers, 'nextCursor', -1); //TODO: reference cursor
 
   return {
-    account: account,
-    users: followers.users,
-    nextCursor: followers.nextCursor,
+    users: users,
+    userId: userId,
+    nextCursor: nextCursor,
     title: 'Followers',
-    isLoading: followers.users.length == 0,
+    isLoading: users.length === 0,
     navigatableBySwipe: true
   };
 }

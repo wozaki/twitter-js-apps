@@ -24,9 +24,9 @@ render(
                 <Route path='/lists' component={ListsContainer}/>
                 <Route path='/lists/:listId/tweets' component={TweetsInListContainer}/>
                 <Route path='/my-timeline' component={MyTimelineContainer}/>
-                <Route path='/followers' component={Followers}/>
                 <Route path='/followings' component={Following}/>
                 <Route path='/users/:userId' component={UserDetailContainer}/>
+                <Route path='/users/:userId/followers' component={Followers}/>
             </Route>
         </Router>
     </Provider>,
