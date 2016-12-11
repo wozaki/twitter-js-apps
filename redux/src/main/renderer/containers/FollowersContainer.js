@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import MainContainerWrapper from '../containers/MainContainerWrapper';
 import UserList from '../components/UserList';
 import * as followersActions from '../actions/followers';
-import InfiniteScroll from '../components/InfiniteScroll'
-import { Accounts } from '../../domain/models/Accounts'
+import InfiniteScroll from '../components/InfiniteScroll';
+import { Accounts } from '../../domain/models/Accounts';
 
 class FollowersContainer extends Component {
 
@@ -16,12 +16,12 @@ class FollowersContainer extends Component {
     fetchFollowers(account.id);
   }
 
-  onLoad() {
+  _onLoad = () => {
     const { fetchFollowersOlderThan } = this.props.actions;
     const { account, nextCursor } = this.props;
 
     fetchFollowersOlderThan(account.id, nextCursor);
-  }
+  };
 
   render() {
     const { users } = this.props;
@@ -29,7 +29,7 @@ class FollowersContainer extends Component {
     return (
       <InfiniteScroll
         className={"UserList"}
-        onLoad={this.onLoad.bind(this)}>
+        onLoad={this._onLoad}>
         <UserList users={users}/>
       </InfiniteScroll>
     );
@@ -51,7 +51,7 @@ function mapStateToProps(state) {
     users: followers.users,
     nextCursor: followers.nextCursor,
     title: 'Followers',
-    isLoading: followers.users.length == 0,
+    isLoading: followers.users.length === 0,
     navigatableBySwipe: true
   };
 }
