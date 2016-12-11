@@ -13,7 +13,7 @@ class AccountInfoContainer extends Component {
     return (
         <ul className="lists">
           <LinkItem label="Tweets" path={"/my-timeline"} count={account.tweetCount} />
-          <LinkItem label="Followers" path={"/followers"} count={account.followersCount} />
+          <LinkItem label="Followers" path={`/users/${account.id}/followers`} count={account.followersCount} />
           <LinkItem label="Following" path={"/followings"} count={account.followingCount} />
         </ul>
     );

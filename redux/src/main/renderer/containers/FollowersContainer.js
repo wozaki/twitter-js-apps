@@ -6,21 +6,20 @@ import MainContainerWrapper from '../containers/MainContainerWrapper';
 import UserList from '../components/UserList';
 import * as followersActions from '../actions/followers';
 import InfiniteScroll from '../components/InfiniteScroll';
-import { Accounts } from '../../domain/models/Accounts';
 
 class FollowersContainer extends Component {
 
   componentWillMount() {
-    const { account } = this.props;
+    const { userId }         = this.props;
     const { fetchFollowers } = this.props.actions;
-    fetchFollowers(account.id);
+    fetchFollowers(userId);
   }
 
   _onLoad = () => {
     const { fetchFollowersOlderThan } = this.props.actions;
-    const { account, nextCursor } = this.props;
+    const { nextCursor, userId }      = this.props;
 
-    fetchFollowersOlderThan(account.id, nextCursor);
+    fetchFollowersOlderThan(userId, nextCursor);
   };
 
   render() {
@@ -42,13 +41,13 @@ FollowersContainer.propTypes = {
   users: PropTypes.array.isRequired
 };
 
-function mapStateToProps(state) {
-  const { followers, accounts } = state;
-  const account = Accounts.fromObjects(accounts).primary;
+function mapStateToProps(state, props) {
+  const { followers } = state;
+  const { userId }    = props.params;
 
   return {
-    account: account,
     users: followers.users,
+    userId: userId,
     nextCursor: followers.nextCursor,
     title: 'Followers',
     isLoading: followers.users.length === 0,

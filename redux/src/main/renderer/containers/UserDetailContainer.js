@@ -47,7 +47,7 @@ class UserDetailContainer extends Component {
         </div>
         <ul className="lists">
           <LinkItem label="Tweets" path={""} count={user.tweetCount}/>
-          <LinkItem label="Followers" path={""} count={user.followersCount}/>
+          <LinkItem label="Followers" path={`/users/${user.id}/followers`} count={user.followersCount}/>
           <LinkItem label="Following" path={""} count={user.followingCount}/>
         </ul>
       </div>
