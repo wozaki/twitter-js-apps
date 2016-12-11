@@ -17,7 +17,7 @@ class Accounts {
   static fromObjects(accountObjects) {
     const accounts = _.isEmpty(accountObjects)
       ? [Account.dummy]
-      : accountObjects.map(obj => Account.fromObject(obj));
+      : accountObjects.map(Account.fromObject);
     return new Accounts(accounts);
   }
 
