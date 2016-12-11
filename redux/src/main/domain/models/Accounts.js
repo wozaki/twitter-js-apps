@@ -11,20 +11,20 @@ class Accounts {
   }
 
   /**
-   * @param {Object[]} rowAccounts
+   * @param {Object[]} accountObjects
    * @return {Accounts}
    */
-  static fromJson(rowAccounts) {
-    const accounts = _.isEmpty(rowAccounts)
+  static fromJson(accountObjects) {
+    const accounts = _.isEmpty(accountObjects)
       ? [Account.dummy]
-      : rowAccounts.map(rowAccount => Account.fromJson(rowAccount));
+      : accountObjects.map(obj => Account.fromJson(obj));
     return new Accounts(accounts);
   }
 
   /**
    * @returns {Account|undefined}
    */
-  get primary() {
+  get primary() { 
     return _.chain(this._accounts)
       .filter(account => account.isPrimary)
       .head()
@@ -54,7 +54,7 @@ class Accounts {
 
 }
 
-const rowDummyAccount = {
+const dummyAccountObject = {
   created_at: null,
   credential: null,
   followers_count: null,
@@ -72,89 +72,89 @@ const rowDummyAccount = {
 class Account extends Entity {
 
   /**
-   * @param {Object} raw
+   * @param {Object} object
    */
-  constructor(raw) {
-    super(raw.id_str);
-    this._raw = raw;
+  constructor(object) {
+    super(object.id_str);
+    this._object = object;
   }
 
   /**
-   * @param {Object} userJson
+   * @param {Object} userObject
    * @return {Account}
    */
-  static fromJson(userJson) {
-    return new this(userJson);
+  static fromJson(userObject) {
+    return new this(userObject);
   }
 
   /**
    * @return {Account}
    */
   static get dummy() {
-    return new Account(rowDummyAccount);
+    return new Account(dummyAccountObject);
   }
 
   /**
    * @return {string}
    */
   get id() {
-    return this._raw.id_str;
+    return this._object.id_str;
   }
 
   /**
    * @returns {Credential}
    */
   get credential() {
-    return this._raw.credential;
+    return this._object.credential;
   }
 
   /**
    * @return {boolean}
    */
   get isPrimary() {
-    return this._raw.is_primary;
+    return this._object.is_primary;
   }
 
   /**
    * @return {boolean}
    */
   get isDummy() {
-    return this._raw.id_str == null;
+    return this._object.id_str == null;
   }
 
   /**
    * @return {string}
    */
   get profileImageUrl() {
-    return this._raw.profile_image_url;
+    return this._object.profile_image_url;
   }
 
   /**
    * @return {string}
    */
   get screenName() {
-    return this._raw.screen_name;
+    return this._object.screen_name;
   }
 
   /**
    * @return {number}
    */
   get tweetCount() {
-    return this._raw.statuses_count;
+    return this._object.statuses_count;
   }
 
   /**
    * @return {number}
    */
   get followersCount() {
-    return this._raw.followers_count;
+    return this._object.followers_count;
   }
 
   /**
    * @return {number}
    */
   get followingCount() {
-    return this._raw.friends_count;
+    return this._object.friends_count;
   }
 }
 
