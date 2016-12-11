@@ -27,7 +27,7 @@ export const twitterClientMiddleware = ({ consumerKey, consumerSecret }) => ({ d
 
     const { invoke, credential } = action;
     const { accounts }           = getState();
-    const primaryAccount         = Accounts.fromJson(accounts).primary;
+    const primaryAccount         = Accounts.fromObjects(accounts).primary;
 
     if (_.isUndefined(credential) && _.isUndefined(primaryAccount)) {
       throw Error("please pass credential if primary account doesn't exist");

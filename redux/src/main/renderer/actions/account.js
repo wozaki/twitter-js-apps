@@ -47,7 +47,7 @@ export function removeAccount(account) {
 
     if (account.isPrimary) {
       const { accounts } = getState();
-      const nextPrimaryAccount = _.head(Accounts.fromJson(accounts).subAccounts);
+      const nextPrimaryAccount = _.head(Accounts.fromObjects(accounts).subAccounts);
       if (_.isUndefined(nextPrimaryAccount)) {
         return
       }

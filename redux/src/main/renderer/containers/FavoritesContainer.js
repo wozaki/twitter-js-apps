@@ -37,7 +37,7 @@ FavoritesContainer.propTypes = {
 function mapStateToProps(state) {
   const { favorites, accounts } = state;
   const { tweets } = favorites;
-  const account = Accounts.fromJson(accounts).primary;
+  const account = Accounts.fromObjects(accounts).primary;
 
   return {
     account: account,

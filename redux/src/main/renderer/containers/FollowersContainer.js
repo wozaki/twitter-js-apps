@@ -44,7 +44,7 @@ FollowersContainer.propTypes = {
 
 function mapStateToProps(state) {
   const { followers, accounts } = state;
-  const account = Accounts.fromJson(accounts).primary;
+  const account = Accounts.fromObjects(accounts).primary;
 
   return {
     account: account,

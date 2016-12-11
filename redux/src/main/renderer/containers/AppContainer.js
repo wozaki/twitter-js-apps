@@ -56,7 +56,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const { accounts, errorMessage } = state;
-  const _accounts                  = Accounts.fromJson(accounts);
+  const _accounts                  = Accounts.fromObjects(accounts);
 
   return {
     accounts: _accounts,

@@ -40,7 +40,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const { accounts } = state;
-  const _accounts = Accounts.fromJson(accounts);
+  const _accounts = Accounts.fromObjects(accounts);
   const account = _accounts.primary;
   const subAccounts = _accounts.subAccounts;
 
