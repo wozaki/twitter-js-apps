@@ -12,7 +12,7 @@ const LinkItem = ({ path, label, count, query }) => {
         </p>
 
         <div className="LinkItem-rightContents">
-          <span className="LinkItem-count">{Number(count).toLocaleString()}</span>
+          <span className="LinkItem-count">{count && Number(count).toLocaleString()}</span>
           <i className="fa fa-chevron-right"></i>
         </div>
       </Link>
