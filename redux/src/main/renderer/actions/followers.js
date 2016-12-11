@@ -14,7 +14,7 @@ export function fetchFollowers(userId) {
       followUsecase(twitterClient)
         .getFollowers(userId)
         .then(followers => {
-          dispatch(receivedFollowers(followers));
+          dispatch(receivedFollowers(userId, followers));
         })
         .catch(error => dispatch(onError(error)));
     }
@@ -35,7 +35,7 @@ export function fetchFollowersOlderThan(userId, nextCursor) {
         followUsecase(twitterClient)
           .getFollowersOlderThan(userId, nextCursor)
           .then(followers => {
-            dispatch(receivedOldFollowers(followers));
+            dispatch(receivedOldFollowers(userId, followers));
           })
           .catch(error => dispatch(onError(error)));
       }
@@ -43,16 +43,18 @@ export function fetchFollowersOlderThan(userId, nextCursor) {
   });
 }
 
-function receivedFollowers(followers) {
+function receivedFollowers(ownerId, followers) {
   return {
     type: types.RECEIVED_FOLLOWERS,
+    ownerId,
     followers
   };
 }
 
-function receivedOldFollowers(followers) {
+function receivedOldFollowers(ownerId, followers) {
   return {
     type: types.RECEIVED_OLD_FOLLOWERS,
+    ownerId,
     followers
   };
 }

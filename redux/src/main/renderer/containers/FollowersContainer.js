@@ -42,15 +42,17 @@ FollowersContainer.propTypes = {
 };
 
 function mapStateToProps(state, props) {
-  const { followers } = state;
-  const { userId }    = props.params;
+  const { userId } = props.params;
+  const followers  = state.followers[userId];
+  const users      = _.get(followers, 'users', []);
+  const nextCursor = _.get(followers, 'nextCursor', -1); //TODO: reference cursor
 
   return {
-    users: followers.users,
+    users: users,
     userId: userId,
-    nextCursor: followers.nextCursor,
+    nextCursor: nextCursor,
     title: 'Followers',
-    isLoading: followers.users.length === 0,
+    isLoading: users.length === 0,
     navigatableBySwipe: true
   };
 }
