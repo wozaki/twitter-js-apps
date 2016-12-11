@@ -84,7 +84,7 @@ class Account extends Entity {
    * @return {Account}
    */
   static fromObject(userObject) {
-    return new this(userObject);
+    return new Account(userObject);
   }
 
   /**
