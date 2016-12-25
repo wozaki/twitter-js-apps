@@ -1,3 +1,5 @@
+//TODO: remove this action
+
 import * as types from '../constants/ActionTypes';
 import {timelineUsecase} from '../registries/usecases';
 import { onError } from './error-handler';
@@ -7,7 +9,7 @@ export function fetchMyTimeline() {
   return new TwitterAction({
     invoke: twitterClient => dispatch => {
       timelineUsecase(twitterClient)
-        .getMyTweets()
+        .getUserTweets("")
         .then(tweets => {
           dispatch(receivedMyTimeline(tweets));
         })
@@ -20,7 +22,7 @@ export function fetchOldMyTimeline(tweetId) {
   return new TwitterAction({
     invoke: twitterClient => dispatch => {
       timelineUsecase(twitterClient)
-        .getMyTweetsOlderThan(tweetId)
+        .getTweetsOlderThan("", tweetId)
         .then(tweets => {
           dispatch(receivedOldMyTimeline(tweets));
         })

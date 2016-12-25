@@ -188,6 +188,20 @@ export default class TwitterClient {
       });
   }
 
+  /**
+   * https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+   *
+   * @param {string} userId
+   * @param {string} [screenName]
+   * @param {string} [sinceId]
+   * @param {string} [count]
+   * @param {string} [maxId]
+   * @param {string} [trimUser]
+   * @param {string} [excludeReplies]
+   * @param {string} [contributorDetails]
+   * @param {string} [includeRts]
+   * @return {Promise<Object>}
+   */
   statusesUserTimeline({ userId, screenName, sinceId, count, maxId, trimUser, excludeReplies, contributorDetails, includeRts }) {
     return this._get(
       'statuses/user_timeline',
