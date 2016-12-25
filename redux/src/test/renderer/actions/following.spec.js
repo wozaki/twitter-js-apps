@@ -24,7 +24,7 @@ describe('following actions', () => {
     stubUsecase(stubFollowUsecase);
 
     const expectedActions = [
-      { type: types.RECEIVED_FOLLOWING, following: fixtureFollowing }
+      { type: types.RECEIVED_FOLLOWING, userId: fixtureMyId, following: fixtureFollowing }
     ];
     const store = mockStore(accounts, expectedActions, done);
     store.dispatch(fetchFollowing(fixtureMyId));
