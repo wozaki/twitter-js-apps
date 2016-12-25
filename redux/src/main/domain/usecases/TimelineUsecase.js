@@ -21,13 +21,22 @@ export default class TimelineUsecase {
       });
   }
 
-  getMyTweets() {
-    return this.twitterClient.statusesUserTimeline({})
+  /**
+   * @param {string} userId
+   * @return {Promise.<Object>}
+   */
+  getUserTweets(userId) {
+    return this.twitterClient.statusesUserTimeline({ userId })
   }
 
-  getMyTweetsOlderThan(maxTweetId) {
+  /**
+   * @param {string} userId
+   * @param {string} maxTweetId
+   * @return {Promise.<Object>}
+   */
+  getTweetsOlderThan(userId, maxTweetId) {
     return this.twitterClient
-      .statusesUserTimeline({ maxId: maxTweetId })
+      .statusesUserTimeline({ userId, maxId: maxTweetId })
       .then(tweets => {
         return tweets.filter(t => t.id_str !== maxTweetId);
       });
