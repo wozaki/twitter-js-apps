@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router';
 import TweetBody from './TweetBody'
 import Time from './Time'
+import UserAvatar from './UserAvatar'
 
 const Tweet = ({ tweet, favoriteButton, onAnchorClicked }) => {
   const url = `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
@@ -9,9 +9,7 @@ const Tweet = ({ tweet, favoriteButton, onAnchorClicked }) => {
   return (
     <li className="Tweet">
       <div className="Tweet-sub">
-        <Link to={`/users/${tweet.user.id_str}`}>
-          <img className="Tweet-avatar" src={tweet.user.profile_image_url} height="48" width="48"/>
-        </Link>
+        <UserAvatar user={tweet.user} />
       </div>
       <div className="Tweet-main">
         <div className="Tweet-header">
