@@ -6,21 +6,24 @@ import MainContainerWrapper from '../containers/MainContainerWrapper';
 import UserList from '../components/UserList';
 import * as followingActions from '../actions/following';
 import InfiniteScroll from '../components/InfiniteScroll'
-import { Accounts } from '../../domain/models/Accounts'
 
+/**
+ * Render specific user's following
+ * @extends Component
+ */
 class FollowingContainer extends Component {
 
   componentWillMount() {
-    const { account } = this.props;
+    const { userId } = this.props;
     const { fetchFollowing } = this.props.actions;
-    fetchFollowing(account.id);
+    fetchFollowing(userId);
   }
 
   onLoad() {
     const { fetchFollowingOlderThan } = this.props.actions;
-    const { account, nextCursor } = this.props;
+    const { userId, nextCursor } = this.props;
 
-    fetchFollowingOlderThan(account.id, nextCursor);
+    fetchFollowingOlderThan(userId, nextCursor);
   }
 
   render() {
@@ -42,16 +45,18 @@ FollowingContainer.propTypes = {
   users: PropTypes.array.isRequired
 };
 
-function mapStateToProps(state) {
-  const { following, accounts } = state;
-  const account = Accounts.fromObjects(accounts).primary;
+function mapStateToProps(state, props) {
+  const { following } = state;
+  const { userId } = props.params;
+
+  const users = following.userId == userId ? following.users : [];
 
   return {
-    account: account,
-    users: following.users,
+    userId: userId,
+    users: users,
     nextCursor: following.nextCursor,
     title: 'Following',
-    isLoading: following.users.length == 0,
+    isLoading: users.length == 0,
     navigatableBySwipe: true
   };
 }

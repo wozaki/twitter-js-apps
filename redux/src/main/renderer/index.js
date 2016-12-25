@@ -28,6 +28,7 @@ render(
                 <Route path='/followings' component={Following}/>
                 <Route path='/users/:userId' component={UserDetailContainer}/>
                 <Route path='/users/:userId/followers' component={Followers}/>
+                <Route path='/users/:userId/following' component={Following}/>
                 <Route path='/users/:userId/tweets' component={UserTimelineContainer}/>
             </Route>
         </Router>
