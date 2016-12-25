@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import UserAvatar from './UserAvatar'
 
 const UserList = ({ users }) => {
 
@@ -8,7 +9,7 @@ const UserList = ({ users }) => {
       return (
         <li className="UserItem" key={user.id_str}>
           <div className="UserItem-sub">
-            <img className="UserItem-avatar" src={user.profile_image_url} height="48" width="48"/>
+            <UserAvatar user={user} />
           </div>
           <div className="UserItem-main">
             <div className="UserItem-header">

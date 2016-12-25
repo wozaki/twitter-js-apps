@@ -10,18 +10,6 @@
     color: $color-link;
   }
 
-  &-avatar {
-    @include avatar;
-
-    &-child {
-      @include avatar-child;
-    }
-
-    &-parent {
-      @include avatar-parent;
-    }
-  }
-
   &-body {
     flex: 1;
 

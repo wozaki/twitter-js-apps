@@ -12,18 +12,6 @@
   display: flex;
   padding: 10px;
 
-  &-avatar {
-    @include avatar;
-
-    &-child {
-      @include avatar-child;
-    }
-
-    &-parent {
-      @include avatar-parent;
-    }
-  }
-
   &-display-name {
     font-weight: bold;
   }
