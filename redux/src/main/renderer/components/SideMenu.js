@@ -30,7 +30,7 @@ const SideMenu = ({ account, onClickSubAccount, subAccounts }) => {
           </Link>
         </li>
         <li className="SideMenu-item">
-          <Link to="/account-info">
+          <Link to={`/users/${account.id}`}>
             <i className="fa fa-user SideMenu-item-icon"></i>
           </Link>
         </li>
