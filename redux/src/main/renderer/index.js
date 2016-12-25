@@ -12,6 +12,7 @@ import Followers from './containers/FollowersContainer'
 import Following from './containers/FollowingContainer'
 import HomeContainer from './containers/HomeContainer.js'
 import UserDetailContainer from './containers/UserDetailContainer'
+import UserTimelineContainer from './containers/UserTimelineContainer'
 import configureStore from './store/configureStore'
 
 render(
@@ -27,6 +28,7 @@ render(
                 <Route path='/followings' component={Following}/>
                 <Route path='/users/:userId' component={UserDetailContainer}/>
                 <Route path='/users/:userId/followers' component={Followers}/>
+                <Route path='/users/:userId/tweets' component={UserTimelineContainer}/>
             </Route>
         </Router>
     </Provider>,

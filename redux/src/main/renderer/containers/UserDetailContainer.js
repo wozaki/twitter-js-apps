@@ -46,7 +46,7 @@ class UserDetailContainer extends Component {
           <a href={user.url.expanded} onClick={this._onUrlClicked}>{user.url.forDisplay}</a>
         </div>
         <ul className="lists">
-          <LinkItem label="Tweets" path={""} count={user.tweetCount}/>
+          <LinkItem label="Tweets" path={`/users/${user.id}/tweets`} count={user.tweetCount}/>
           <LinkItem label="Followers" path={`/users/${user.id}/followers`} count={user.followersCount}/>
           <LinkItem label="Following" path={""} count={user.followingCount}/>
         </ul>
