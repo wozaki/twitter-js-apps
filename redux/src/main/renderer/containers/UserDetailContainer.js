@@ -17,6 +17,21 @@ class UserDetailContainer extends Component {
     fetchUser(userId);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { userId }             = this.props;
+    const { userId: nextUserId } = nextProps;
+    const { fetchUser }          = this.props.actions;
+
+    // We needs to fetch user in componentWillReceiveProps because nothing is rendered when executing the following flow:
+    //  1. open others UserDetailsContainer
+    //  2. click the account icon in SideMenu
+    //  3. nothing is rendered
+    // In above follow, DOM is not destroyed so `componentWillMount` or `render` is not called
+    if (userId != nextUserId) {
+      fetchUser(nextUserId);
+    }
+  }
+
   _onUrlClicked = (event) => {
     event.preventDefault();
     dialogService.openUrl(event.currentTarget.href);
