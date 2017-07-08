@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as appActions from '../actions/app';
 import * as tweetActions from '../actions/tweet';
+import * as mediaActions from '../actions/media';
 import keyStringDetector from '../registries/keyStringDetector';
 import Tweet from '../../domain/models/Tweet';
 import Media from '../../domain/models/Media';
@@ -46,8 +47,11 @@ class NewTweetContainer extends Component {
   }
 
   onChooseImage() {
-    dialogService.chooseImageFile({ extensions: Media.IMAGE_FILE_EXTENSIONS }, (filePath) => {
-      console.log("CALLBACK!", filePath)
+    dialogService.chooseImageFile({ extensions: Media.IMAGE_FILE_EXTENSIONS }, (filePaths) => {
+      if (_.isUndefined(filePaths)) return;
+      const media = Media.build(filePaths[0]);
+      const { uploadToTweet } = this.props.actions;
+      uploadToTweet(media);
     });
   }
 
@@ -74,8 +78,15 @@ class NewTweetContainer extends Component {
     });
   }
 
+  decodeImage(media) {
+    if (media === null) return;
+    const base64 = media.toBase64();
+    const extension = media.extension;
+    return `data:image/${extension};base64,${base64}`;
+  }
+
   render() {
-    const { account } = this.props;
+    const { account, mediaToTweet } = this.props;
 
     // TODO: render place
     // TODO: post image
@@ -94,6 +105,9 @@ class NewTweetContainer extends Component {
               onKeyDown={this.onTextareaKeyDown.bind(this)}
               value={this.state.text}>
             </textarea>
+          </div>
+          <div className="NewTweetMedia">
+            <img className="Tweet-avatar" src={this.decodeImage(mediaToTweet.media)}/>
           </div>
           <div className={this.tweetCounterClassName}>
             {this.getRestTextLength()}
@@ -118,18 +132,19 @@ NewTweetContainer.propTypes = {
 };
 
 function mapDispatchToProps(dispatch) {
-  const actions = _.assign({}, appActions, tweetActions);
+  const actions = _.assign({}, appActions, tweetActions, mediaActions);
   return {
     actions: bindActionCreators(actions, dispatch)
   };
 }
 
 function mapStateToProps(state) {
-  const { accounts } = state;
+  const { accounts, mediaToTweet } = state;
   const account = Accounts.fromObjects(accounts).primary;
 
   return {
-    account: account
+    account: account,
+    mediaToTweet: mediaToTweet,
   };
 }
 
