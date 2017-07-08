@@ -7,7 +7,9 @@ import * as appActions from '../actions/app';
 import * as tweetActions from '../actions/tweet';
 import keyStringDetector from '../registries/keyStringDetector';
 import Tweet from '../../domain/models/Tweet';
+import Media from '../../domain/models/Media';
 import { Accounts } from '../../domain/models/Accounts'
+import * as dialogService from '../registries/dialogService';
 
 class NewTweetContainer extends Component {
 
@@ -41,6 +43,12 @@ class NewTweetContainer extends Component {
 
     postTweet(this.state.text, account.credential);
     this.setState(this.initialState()); // TODO: init text area if succeed to tweet
+  }
+
+  onChooseImage() {
+    dialogService.chooseImageFile({ extensions: Media.IMAGE_FILE_EXTENSIONS }, (filePath) => {
+      console.log("CALLBACK!", filePath)
+    });
   }
 
   getRestTextLength() {
@@ -92,6 +100,9 @@ class NewTweetContainer extends Component {
           </div>
         </main>
         <footer className="NewTweet-footer">
+          <div className={this.tweetLabelClassName} onClick={this.onChooseImage.bind(this)}>
+            Image
+          </div>
           <div className={this.tweetLabelClassName} onClick={this.onTweetSubmitted.bind(this)}>
             Tweet
           </div>
