@@ -2,6 +2,10 @@ import fs from 'fs';
 
 export default class Media {
 
+  static appendsAdditionalMedia(currentMedias) {
+    return currentMedias.length < 4;
+  }
+
   static get IMAGE_FILE_EXTENSIONS() {
     return ['jpg', 'jpeg', 'png', 'gif'];
   }
