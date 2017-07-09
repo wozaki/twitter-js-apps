@@ -74,9 +74,10 @@ class NewTweetContainer extends Component {
   }
 
   get tweetLabelClassName() {
+    const { medias } = this.props.mediaToTweet;
     return classNames({
       'NewTweet-footer-tweetLabel': true,
-      'is-active': this.state.text.length > 0,
+      'is-active': this.state.text.length > 0 || medias.length > 0,
       'is-overLimit': this.state.isExceededLimitCharLength
     });
   }
