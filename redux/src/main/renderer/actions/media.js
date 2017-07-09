@@ -8,7 +8,8 @@ function upload(media, actionType) {
       twitterClient
         .mediaUpload({ media: media.buffer })
         .then(response => {
-          dispatch(uploadedMedia(actionType, media, response));
+          const m = media.uploaded(response.media_id_string);
+          dispatch(uploadedMedia(actionType, m));
         })
         .catch(error => dispatch(onError(error)));
     }
@@ -26,10 +27,9 @@ export function removeMedia(mediaId) {
   };
 }
 
-function uploadedMedia(actionType, media, response) {
+function uploadedMedia(actionType, media) {
   return {
     type: actionType,
     media,
-    response
   };
 }

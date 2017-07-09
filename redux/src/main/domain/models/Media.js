@@ -13,13 +13,22 @@ export default class Media {
     return new Media(buffer, extension);
   }
 
-  constructor(buffer, extension) {
+  constructor(buffer, extension, id = null ) {
     this.buffer = buffer;
     this.extension = extension;
+    this.id = id;
   }
 
   toBase64() {
     return this.buffer.toString('base64')
+  }
+
+  /**
+   * @param {string} mediaId
+   * @return {Media}
+   */
+  uploaded(mediaId) {
+    return new Media(this.buffer, this.extension, mediaId);
   }
 
 }

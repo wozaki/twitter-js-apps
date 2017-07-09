@@ -5,7 +5,6 @@ import {
 } from '../constants/ActionTypes';
 
 const initialState = {
-  mediaId: '',
   media: null,
 };
 
@@ -23,7 +22,7 @@ export default function mediaToTweet(state = initialState, action) {
     }
 
     case UPLOADED_MEDIA_TO_TWEET: {
-      return shapeAccount(action);
+      return { media: action.media };
     }
 
     default:

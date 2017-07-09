@@ -42,7 +42,7 @@ class NewTweetContainer extends Component {
     const { account, mediaToTweet } = this.props;
     const { postTweet }             = this.props.actions;
 
-    postTweet(this.state.text, account.credential, mediaToTweet.mediaId);
+    postTweet(this.state.text, account.credential, mediaToTweet.media.id);
     this.setState(this.initialState()); // TODO: init text area if succeed to tweet
   }
 
@@ -91,7 +91,7 @@ class NewTweetContainer extends Component {
 
     if (mediaToTweet.media === null) return;
     
-    removeMedia(mediaToTweet.media.mediaId)
+    removeMedia(mediaToTweet.media.id)
   }
 
   render() {
