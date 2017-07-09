@@ -124,9 +124,9 @@ class NewTweetContainer extends Component {
             {this.getRestTextLength()}
           </div>
         </main>
-        <footer className="NewTweet-footer">
-          <div className={this.tweetLabelClassName} onClick={this.onChooseImage.bind(this)}>
-            Image
+        <footer className="NewTweet-footer" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div className="OptionalButtons" style={{ marginRight: 'auto' }}>
+            <i className="fa fa-picture-o fa-lg fa-white" onClick={this.onChooseImage.bind(this)}/>
           </div>
           <div className={this.tweetLabelClassName} onClick={this.onTweetSubmitted.bind(this)}>
             Tweet
