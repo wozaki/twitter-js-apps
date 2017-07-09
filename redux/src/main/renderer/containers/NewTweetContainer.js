@@ -85,6 +85,15 @@ class NewTweetContainer extends Component {
     return `data:image/${extension};base64,${base64}`;
   }
 
+  onRemoveImage() {
+    const { removeMedia } = this.props.actions;
+    const { mediaToTweet } = this.props;
+
+    if (mediaToTweet.media === null) return;
+    
+    removeMedia(mediaToTweet.media.mediaId)
+  }
+
   render() {
     const { account, mediaToTweet } = this.props;
 
@@ -106,7 +115,7 @@ class NewTweetContainer extends Component {
             </textarea>
           </div>
           { mediaToTweet.media && (
-            <div className="NewTweetMedia">
+            <div className="NewTweetMedia" onClick={this.onRemoveImage.bind(this)}>
               <img src={this.decodeImage(mediaToTweet.media)}/>
               <i className="fa fa-times-circle fa-lg fa-times"/>
             </div>

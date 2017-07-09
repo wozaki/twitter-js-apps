@@ -19,6 +19,13 @@ export function uploadToTweet(media) {
   return upload(media, types.UPLOADED_MEDIA_TO_TWEET);
 }
 
+export function removeMedia(mediaId) {
+  return {
+    type: types.REMOVE_MEDIA_TO_TWEET,
+    mediaId,
+  };
+}
+
 function uploadedMedia(actionType, media, response) {
   return {
     type: actionType,
