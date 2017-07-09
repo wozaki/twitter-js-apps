@@ -1,0 +1,30 @@
+.NewTweetMedia {
+  position: relative;
+  cursor: pointer;
+  height: 36px;
+  width: 36px;
+
+  img {
+    height: 36px;
+    width: 36px;
+    opacity: 1;
+  }
+
+  i {
+    opacity: 0;
+    position: absolute;
+    top: 11px;
+    left: 9px;
+  }
+
+  // https://www.w3schools.com/howto/howto_css_image_overlay.asp
+  &:hover {
+    img {
+      opacity: 0.6;
+    }
+
+    i {
+      opacity: 1;
+    }
+  }
+}

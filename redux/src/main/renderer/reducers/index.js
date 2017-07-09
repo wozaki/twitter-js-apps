@@ -5,6 +5,7 @@ import favorites from './favorites';
 import followers from './followers';
 import following from './following';
 import lists from './lists';
+import mediaToTweet from './mediaToTweet';
 import timeline from './timeline';
 import tweetsInList from './tweets-in-list';
 import users from './users';
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   followers,
   following,
   lists,
+  mediaToTweet,
   timeline,
   tweetsInList,
   users,

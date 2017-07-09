@@ -43,3 +43,7 @@ export const RECEIVED_USER = 'RECEIVED_USER';
 
 //error message
 export const ADD_ERROR_MESSAGE = 'ADD_ERROR_MESSAGE';
+
+//media
+export const UPLOADED_MEDIA_TO_TWEET = 'UPLOADED_MEDIA_TO_TWEET';
+export const REMOVE_MEDIA_TO_TWEET = 'REMOVE_MEDIA_TO_TWEET';

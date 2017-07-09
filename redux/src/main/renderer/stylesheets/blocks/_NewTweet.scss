@@ -25,6 +25,15 @@
     }
   }
 
+  &-media-buttons {
+    &.is-overLimit {
+      .btn {
+        color: $color-font-gray-disabled;
+        cursor: default;
+      }
+    }
+  }
+
   &-footer {
     height: 50px;
     padding: 10px;

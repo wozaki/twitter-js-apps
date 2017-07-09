@@ -174,6 +174,23 @@ export default class TwitterClient {
       });
   }
 
+  /**
+   * https://dev.twitter.com/rest/reference/post/media/upload
+   * https://dev.twitter.com/rest/media/uploading-media.html
+   * https://github.com/desmondmorris/node-twitter/tree/master/examples#media
+   *
+   * @param media
+   * @param cursor
+   * @return {*}
+   */
+  mediaUpload({ media }) {
+    return this._post(
+      'media/upload',
+      {
+        media: media,
+      });
+  }
+
   statusesHomeTimeline({ count, sinceId, maxId, trimUser, excludeReplies, contributorDetails, includeEntities }) {
     return this._get(
       'statuses/home_timeline',
@@ -218,11 +235,19 @@ export default class TwitterClient {
       });
   }
 
-  statusesUpdate({ text }) {
+  /**
+   * https://dev.twitter.com/rest/reference/post/statuses/update.html
+   *
+   * @param {string} text
+   * @param {string} mediaIdCsv
+   * @return {*}
+   */
+  statusesUpdate({ text, mediaIdCsv }) {
     return this._post(
       'statuses/update',
       {
-        status: text
+        status: text,
+        media_ids: mediaIdCsv
       }
     );
   }
