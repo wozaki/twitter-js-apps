@@ -235,11 +235,19 @@ export default class TwitterClient {
       });
   }
 
-  statusesUpdate({ text }) {
+  /**
+   * https://dev.twitter.com/rest/reference/post/statuses/update.html
+   *
+   * @param {string} text
+   * @param {string} mediaId
+   * @return {*}
+   */
+  statusesUpdate({ text, mediaId }) {
     return this._post(
       'statuses/update',
       {
-        status: text
+        status: text,
+        media_ids: mediaId
       }
     );
   }

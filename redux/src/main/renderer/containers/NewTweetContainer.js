@@ -39,10 +39,10 @@ class NewTweetContainer extends Component {
       return;
     }
 
-    const { account } = this.props;
+    const { account, mediaToTweet } = this.props;
     const { postTweet } = this.props.actions;
 
-    postTweet(this.state.text, account.credential);
+    postTweet(this.state.text, account.credential, mediaToTweet.mediaId);
     this.setState(this.initialState()); // TODO: init text area if succeed to tweet
   }
 
