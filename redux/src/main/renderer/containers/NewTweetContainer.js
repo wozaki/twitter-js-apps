@@ -40,7 +40,7 @@ class NewTweetContainer extends Component {
     }
 
     const { account, mediaToTweet } = this.props;
-    const { postTweet } = this.props.actions;
+    const { postTweet }             = this.props.actions;
 
     postTweet(this.state.text, account.credential, mediaToTweet.mediaId);
     this.setState(this.initialState()); // TODO: init text area if succeed to tweet
@@ -49,7 +49,7 @@ class NewTweetContainer extends Component {
   onChooseImage() {
     dialogService.chooseImageFile({ extensions: Media.IMAGE_FILE_EXTENSIONS }, (filePaths) => {
       if (_.isUndefined(filePaths)) return;
-      const media = Media.build(filePaths[0]);
+      const media             = Media.build(filePaths[0]);
       const { uploadToTweet } = this.props.actions;
       uploadToTweet(media);
     });
@@ -80,7 +80,7 @@ class NewTweetContainer extends Component {
 
   decodeImage(media) {
     if (media === null) return;
-    const base64 = media.toBase64();
+    const base64    = media.toBase64();
     const extension = media.extension;
     return `data:image/${extension};base64,${base64}`;
   }
@@ -141,7 +141,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const { accounts, mediaToTweet } = state;
-  const account = Accounts.fromObjects(accounts).primary;
+  const account                    = Accounts.fromObjects(accounts).primary;
 
   return {
     account: account,
