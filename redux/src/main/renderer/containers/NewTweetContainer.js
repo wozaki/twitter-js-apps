@@ -105,9 +105,11 @@ class NewTweetContainer extends Component {
               value={this.state.text}>
             </textarea>
           </div>
-          <div className="NewTweetMedia">
-            <img src={this.decodeImage(mediaToTweet.media)} style={{ height: '35px', width: '35px' }}/>
-          </div>
+          { mediaToTweet.media && (
+            <div className="NewTweetMedia">
+              <img src={this.decodeImage(mediaToTweet.media)} style={{ height: '35px', width: '35px' }}/>
+            </div>
+          )}
           <div className={this.tweetCounterClassName}>
             {this.getRestTextLength()}
           </div>
