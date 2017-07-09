@@ -107,7 +107,8 @@ class NewTweetContainer extends Component {
           </div>
           { mediaToTweet.media && (
             <div className="NewTweetMedia">
-              <img src={this.decodeImage(mediaToTweet.media)} style={{ height: '35px', width: '35px' }}/>
+              <img src={this.decodeImage(mediaToTweet.media)}/>
+              <i className="fa fa-times-circle fa-lg fa-times"/>
             </div>
           )}
           <div className={this.tweetCounterClassName}>
