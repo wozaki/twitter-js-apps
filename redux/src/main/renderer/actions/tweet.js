@@ -2,12 +2,12 @@ import * as types from '../constants/ActionTypes';
 import { onError } from './error-handler';
 import { TwitterAction } from '../middlewares/twitterClient';
 
-export function postTweet(text, credential, mediaId = null) {
+export function postTweet(text, credential, medias = []) {
   return new TwitterAction({
     credential,//不要？
     invoke: twitterClient => dispatch => {
       twitterClient
-        .statusesUpdate({ text, mediaId })
+        .statusesUpdate({ text, mediaIdCsv: medias.map(m => m.id).join(',') })
         .then(tweet => {
           dispatch(posted(tweet));
         })

@@ -42,7 +42,7 @@ class NewTweetContainer extends Component {
     const { account, mediaToTweet } = this.props;
     const { postTweet }             = this.props.actions;
 
-    postTweet(this.state.text, account.credential, mediaToTweet.media.id);
+    postTweet(this.state.text, account.credential, mediaToTweet.medias);
     this.setState(this.initialState()); // TODO: init text area if succeed to tweet
   }
 
@@ -85,17 +85,24 @@ class NewTweetContainer extends Component {
     return `data:image/${extension};base64,${base64}`;
   }
 
-  onRemoveImage() {
+  onRemoveImage(media) {
     const { removeMedia } = this.props.actions;
-    const { mediaToTweet } = this.props;
+    removeMedia(media.id)
+  }
 
-    if (mediaToTweet.media === null) return;
-    
-    removeMedia(mediaToTweet.media.id)
+  get renderMedias() {
+    const { medias } = this.props.mediaToTweet;
+
+    return medias.map(media =>
+      <div key={media.id} className="NewTweetMedia" onClick={this.onRemoveImage.bind(this, media)}>
+        <img src={this.decodeImage(media)}/>
+        <i className="fa fa-times-circle fa-lg fa-times"/>
+      </div>
+    );
   }
 
   render() {
-    const { account, mediaToTweet } = this.props;
+    const { account } = this.props;
 
     // TODO: render place
 
@@ -114,12 +121,7 @@ class NewTweetContainer extends Component {
               value={this.state.text}>
             </textarea>
           </div>
-          { mediaToTweet.media && (
-            <div className="NewTweetMedia" onClick={this.onRemoveImage.bind(this)}>
-              <img src={this.decodeImage(mediaToTweet.media)}/>
-              <i className="fa fa-times-circle fa-lg fa-times"/>
-            </div>
-          )}
+          {this.renderMedias}
           <div className={this.tweetCounterClassName}>
             {this.getRestTextLength()}
           </div>

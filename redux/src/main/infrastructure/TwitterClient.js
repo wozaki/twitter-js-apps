@@ -239,15 +239,15 @@ export default class TwitterClient {
    * https://dev.twitter.com/rest/reference/post/statuses/update.html
    *
    * @param {string} text
-   * @param {string} mediaId
+   * @param {string} mediaIdCsv
    * @return {*}
    */
-  statusesUpdate({ text, mediaId }) {
+  statusesUpdate({ text, mediaIdCsv }) {
     return this._post(
       'statuses/update',
       {
         status: text,
-        media_ids: mediaId
+        media_ids: mediaIdCsv
       }
     );
   }
