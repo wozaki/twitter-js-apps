@@ -89,7 +89,6 @@ class NewTweetContainer extends Component {
     const { account, mediaToTweet } = this.props;
 
     // TODO: render place
-    // TODO: post image
 
     return (
       <div className="NewTweet">
@@ -107,7 +106,7 @@ class NewTweetContainer extends Component {
             </textarea>
           </div>
           <div className="NewTweetMedia">
-            <img className="Tweet-avatar" src={this.decodeImage(mediaToTweet.media)}/>
+            <img src={this.decodeImage(mediaToTweet.media)} style={{ height: '35px', width: '35px' }}/>
           </div>
           <div className={this.tweetCounterClassName}>
             {this.getRestTextLength()}
