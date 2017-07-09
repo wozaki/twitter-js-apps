@@ -15,4 +15,8 @@ body {
 
 img {
   -webkit-user-drag: none;
+
+  &.rounded {
+    border-radius: 3px;
+  }
 }
