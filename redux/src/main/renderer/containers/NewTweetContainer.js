@@ -47,6 +47,9 @@ class NewTweetContainer extends Component {
   }
 
   onChooseImage() {
+    const { medias } = this.props.mediaToTweet;
+    if (!Media.appendsAdditionalMedia(medias)) return;
+
     dialogService.chooseImageFile({ extensions: Media.IMAGE_FILE_EXTENSIONS }, (filePaths) => {
       if (_.isUndefined(filePaths)) return;
       const media             = Media.build(filePaths[0]);
@@ -75,6 +78,14 @@ class NewTweetContainer extends Component {
       'NewTweet-footer-tweetLabel': true,
       'is-active': this.state.text.length > 0,
       'is-overLimit': this.state.isExceededLimitCharLength
+    });
+  }
+
+  get mediaButtonsClassName() {
+    const { medias } = this.props.mediaToTweet;
+    return classNames({
+      'NewTweet-media-buttons': true,
+      'is-overLimit': !Media.appendsAdditionalMedia(medias),
     });
   }
 
@@ -128,7 +139,9 @@ class NewTweetContainer extends Component {
         </main>
         <footer className="NewTweet-footer" style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <div className="OptionalButtons" style={{ marginRight: 'auto' }}>
-            <i className="fa fa-picture-o fa-lg fa-white" onClick={this.onChooseImage.bind(this)}/>
+            <div className={this.mediaButtonsClassName}>
+              <i className="btn fa fa-picture-o fa-lg fa-white" onClick={this.onChooseImage.bind(this)}/>
+            </div>
           </div>
           <div className={this.tweetLabelClassName} onClick={this.onTweetSubmitted.bind(this)}>
             Tweet
