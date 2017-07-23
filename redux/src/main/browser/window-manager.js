@@ -32,7 +32,12 @@ class WindowManager {
   }
 
   toggleDevTools() {
-    this._toAllWindows((window) => window.toggleDevTools());
+    this._toAllWindows((window) => {
+      if (window.isFocused()) {
+        window.toggleDevTools()
+      }
+    });
+
   }
 
   reload() {

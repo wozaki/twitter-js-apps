@@ -35,6 +35,10 @@ class BaseWindow {
     this.browserWindow.focus();
   }
 
+  isFocused() {
+    return this.browserWindow.isFocused();
+  }
+
   show() {
     this.browserWindow.show();
   }
