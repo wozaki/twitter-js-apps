@@ -19,6 +19,7 @@
   "author": "Shun Ozaki <ozaki.shun5@gmail.com> (https://github.com/wozaki)",
   "license": "MIT",
   "dependencies": {
+    "HTML5-Reset": "git://github.com/r7kamura/HTML5-Reset.git",
     "classnames": "^2.1.2",
     "eventemitter2": "^0.4.14",
     "font-awesome": "^4.4.0",
