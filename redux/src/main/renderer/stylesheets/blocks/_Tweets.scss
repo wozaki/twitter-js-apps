@@ -91,6 +91,7 @@
   flex: 1;
   overflow-y: scroll;
   overflow-x: hidden;
+  border-left: 1px solid $color-border;
 
   &-hidden {
     display: none;
