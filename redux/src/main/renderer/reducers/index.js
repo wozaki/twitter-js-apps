@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import accounts from './accounts';
+import columns from './columns';
 import errorMessage from './error-message';
 import favorites from './favorites';
 import followers from './followers';
@@ -13,6 +14,7 @@ import userTimeline from './user-timeline';
 
 const rootReducer = combineReducers({
   accounts,
+  columns,
   errorMessage,
   favorites,
   followers,

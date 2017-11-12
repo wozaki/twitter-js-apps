@@ -6,6 +6,7 @@ import * as appActions from '../actions/app';
 import SideMenuContainer from '../containers/SideMenuContainer';
 import * as dialogService from '../registries/dialogService';
 import { Accounts } from '../../domain/models/Accounts';
+import TweetsInListContainer from './TweetsInListContainer'
 
 class AppContainer extends Component {
 
@@ -28,6 +29,22 @@ class AppContainer extends Component {
     }
   }
 
+  get renderColumns() {
+    const { columns } = this.props;
+
+    // TODO: window幅をカラムに合わせて調節する
+    // windowService.expand(columns.length * 500);
+
+    return columns.map((c) => {
+      if (c.columnType === 'COLUMN_TYPE_LIST') {
+        return <TweetsInListContainer listId={c.detail.listId} name={c.detail.listName}
+                                      deleteColumnButton={<DeleteColumn columnId={c.id}/>}/>
+      } else {
+        null
+      }
+    });
+  }
+
   render() {
     const { children } = this.props;
 
@@ -35,8 +52,10 @@ class AppContainer extends Component {
 
     return (
       <div className="Application">
-        <SideMenuContainer />
+        <ModalRoot/>
+        <SideMenuContainer/>
         {children}
+        {this.renderColumns}
       </div>
     );
   }
@@ -55,12 +74,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const { accounts, errorMessage } = state;
-  const _accounts                  = Accounts.fromObjects(accounts);
+  const { accounts, errorMessage, columns } = state;
+  const _accounts                           = Accounts.fromObjects(accounts);
 
   return {
     accounts: _accounts,
-    errorMessage: errorMessage
+    errorMessage: errorMessage,
+    columns: columns,
   };
 }
 
