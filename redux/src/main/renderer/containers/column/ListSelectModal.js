@@ -17,14 +17,6 @@ const customStyles = {
     bottom: 0,
     backgroundColor: 'rgba(60, 60, 60, 0.75)'
   },
-  // content: {
-  //   top: '50%',
-  //   left: '50%',
-  //   right: 'auto',
-  //   bottom: 'auto',
-  //   marginRight: '-50%',
-  //   transform: 'translate(-50%, -50%)'
-  // }
 };
 
 class ListSelectModal extends Component {
@@ -34,7 +26,7 @@ class ListSelectModal extends Component {
   }
 
   render() {
-    const { showModal, hideModal, lists, addColumn } = this.props
+    const { showModal, hideModal, lists, addColumn } = this.props;
 
     return (
       <Modal
