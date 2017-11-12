@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const SideMenu = ({ account, onClickSubAccount, subAccounts }) => {
+const SideMenu = ({ account, onClickSubAccount, subAccounts, onClickColumn }) => {
 
   const renderSubAccounts = () => {
     return subAccounts.map((account) => {
@@ -38,6 +38,9 @@ const SideMenu = ({ account, onClickSubAccount, subAccounts }) => {
           <Link to="/lists">
             <i className="fa fa-list SideMenu-item-icon"></i>
           </Link>
+        </li>
+        <li className="SideMenu-item" onClick={() => onClickColumn()}>
+          <i className="fa fa-columns aria-hidden SideMenu-item-icon"></i>
         </li>
         {renderSubAccounts()}
       </ul>

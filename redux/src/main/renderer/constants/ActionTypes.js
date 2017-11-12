@@ -52,3 +52,7 @@ export const REMOVE_MEDIA_TO_TWEET = 'REMOVE_MEDIA_TO_TWEET';
 export const ADD_COLUMN = 'ADD_COLUMN';
 export const DELETE_COLUMN = 'DELETE_COLUMN';
 
+//modal
+export const UPDATE_MODAL = 'UPDATE_MODAL';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
