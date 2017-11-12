@@ -7,6 +7,8 @@ import SideMenuContainer from '../containers/SideMenuContainer';
 import * as dialogService from '../registries/dialogService';
 import { Accounts } from '../../domain/models/Accounts';
 import TweetsInListContainer from './TweetsInListContainer'
+import ModalRoot from './ModalRoot'
+import DeleteColumn from './DeleteColumn'
 
 class AppContainer extends Component {
 
