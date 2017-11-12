@@ -1,11 +1,24 @@
+@import "../variables";
+
 .Header {
   display: flex;
   background-color: #F1F1F1;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid $color-border;
   height: 45px;
   justify-content: center;
+  border-left: 1px solid $color-border;
+  position: relative;
+
   line-height: 45px;
   -webkit-app-region: drag;
+
+  &-rightMenu {
+    font-size: 2em;
+    position: absolute;
+    right: 0;
+    //  http://kuroko-role.co.jp/css-html/align-center-and-side/
+    // https://stackoverflow.com/questions/33444666/how-to-center-align-one-flex-item-and-right-align-another-using-flexbox
+  }
 
   &-search {
     &-box {

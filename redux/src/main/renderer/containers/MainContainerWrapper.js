@@ -15,13 +15,13 @@ export default function (InnerComponent) {
     }
 
     render() {
-      const { title, isLoading } = this.props;
+      const { title, isLoading, deleteColumnButton } = this.props;
 
       return (
         <div
           className="Main"
           ref={(node) => { this.mainDOM = node }}>
-          <Header title={title}/>
+          <Header title={title} deleteColumnButton={deleteColumnButton} />
           {isLoading ? <Spinner /> : null}
           <InnerComponent {...this.props} />
         </div>
@@ -32,7 +32,8 @@ export default function (InnerComponent) {
   MainContainerWrapper.propTypes = {
     title: PropTypes.string.isRequired,
     isLoading: PropTypes.bool,
-    navigatableBySwipe: PropTypes.bool
+    navigatableBySwipe: PropTypes.bool,
+    deleteColumnButton: PropTypes.element
   };
 
   MainContainerWrapper.defaultProps = {
