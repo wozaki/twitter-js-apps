@@ -37,8 +37,10 @@ TweetsInListContainer.propTypes = {
 
 function mapStateToProps(state, props) {
   const tweetsInList = new TweetsInList(state.tweetsInList);
-  const { listId }   = props.params;
-  const { name }     = props.location.query;
+
+  // Link navigation or MultiColumn
+  const listId       = _.get(props, 'params.listId') || props.listId;
+  const name         = _.get(props, 'location.query.name') || props.name;
   const tweets       = tweetsInList.tweets(listId);
 
   return {
@@ -46,7 +48,8 @@ function mapStateToProps(state, props) {
     listId: listId,
     title: name,
     isLoading: tweets.length == 0,
-    navigatableBySwipe: true
+    navigatableBySwipe: true,
+    deleteColumnButton: props.deleteColumnButton
   };
 }
 
