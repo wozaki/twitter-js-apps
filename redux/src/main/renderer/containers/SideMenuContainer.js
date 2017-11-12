@@ -5,12 +5,18 @@ import { bindActionCreators } from 'redux';
 import SideMenu from '../components/SideMenu';
 import { Accounts } from '../../domain/models/Accounts';
 import * as accountActions from '../actions/account';
+import * as modalActions from '../actions/modal';
 
 class SideMenuContainer extends Component {
 
   onClickSubAccount(account) {
     const { switchPrimaryAccountTo } = this.props.actions;
     switchPrimaryAccountTo(account)
+  }
+
+  onClickColumn() {
+    const { showModal } = this.props.actions;
+    showModal('ListSelectModal')
   }
 
   render() {
@@ -21,6 +27,7 @@ class SideMenuContainer extends Component {
         account={account}
         subAccounts={subAccounts}
         onClickSubAccount={(account) => this.onClickSubAccount(account)}
+        onClickColumn={() => this.onClickColumn()}
       />
     );
   }
@@ -32,7 +39,7 @@ SideMenuContainer.propTypes = {
 };
 
 function mapDispatchToProps(dispatch) {
-  const actions = _.assign({}, accountActions);
+  const actions = _.assign({}, accountActions, modalActions);
   return {
     actions: bindActionCreators(actions, dispatch)
   };
