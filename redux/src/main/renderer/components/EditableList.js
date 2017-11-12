@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import classNames from 'classnames';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * ref https://github.com/nylas/N1/blob/39e5a2ee962238648af945260280d62541417434/src/components/editable-list.jsx

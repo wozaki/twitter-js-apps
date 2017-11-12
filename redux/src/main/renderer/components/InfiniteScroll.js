@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 
@@ -59,9 +60,9 @@ InfiniteScroll.defaultProps = {
 };
 
 InfiniteScroll.propTypes = {
-  onLoad: React.PropTypes.func.isRequired,
+  onLoad: PropTypes.func.isRequired,
   children: PropTypes.node,
-  className: React.PropTypes.string,
-  thresholdInPx: React.PropTypes.number,
-  interval: React.PropTypes.number
+  className: PropTypes.string,
+  thresholdInPx: PropTypes.number,
+  interval: PropTypes.number
 };
