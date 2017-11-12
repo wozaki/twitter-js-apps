@@ -7,7 +7,7 @@ import twitterConfig from '../../browser/twitter-config'
 import { replaceAccounts } from '../actions/account';
 
 const KEY_REDUX_LOCAL_STORAGE = "persistent_states";
-const persistentStates = ['accounts'];
+const persistentStates = ['accounts', 'columns'];
 
 export default function configureStore() {
   const enhancer = compose(
