@@ -86,7 +86,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state, props) {
   const { users }  = state;
-  const { userId } = props.params;
+  const { userId } = props.match.params;
   const user       = Users.fromObjects(users).find(userId);
 
   return {

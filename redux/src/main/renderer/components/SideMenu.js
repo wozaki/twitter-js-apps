@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { BrowserRouter as Link } from 'react-router-dom'
 
 const SideMenu = ({ account, onClickSubAccount, subAccounts, onClickColumn }) => {
 
